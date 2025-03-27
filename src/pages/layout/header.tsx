@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import globalStyles from '@/styles/styles.module.scss';
 
 const Header = () => {
     return (
-        <header>
+        <header className={globalStyles.container}>
             <nav>
                 <ul>
                     <li>
