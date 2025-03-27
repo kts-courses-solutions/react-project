@@ -1,4 +1,4 @@
-@import '@/styles/variables';
+@use '@/styles/variables';
 
 .multiDropdown {
     position: relative;
@@ -20,7 +20,7 @@
         margin-top: 8px;
         padding: 0;
         list-style: none;
-        background: $dropdown-options-bg;
+        background: variables.$dropdown-options-bg;
         box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
         animation: fadeIn 0.2s ease-out;
     }
@@ -37,14 +37,14 @@
             color 0.2s;
 
         &:hover {
-            color: $text-secondary;
+            color: variables.$text-secondary;
         }
 
         &.selected {
-            color: $text-accent;
+            color: variables.$text-accent;
 
             &:hover {
-                color: $text-primary;
+                color: variables.$text-primary;
             }
         }
     }

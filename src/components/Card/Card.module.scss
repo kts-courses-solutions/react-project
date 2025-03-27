@@ -1,9 +1,9 @@
-@import '@/styles/variables';
+@use '@/styles/variables';
 
 .ktsCard {
     display: flex;
     flex-direction: column;
-    background-color: $card-bg;
+    background-color: variables.$card-bg;
     width: 348px;
 
     &:hover {
@@ -12,7 +12,7 @@
 }
 
 .ktsCardImage {
-    background-color: $card-image-bg;
+    background-color: variables.$card-image-bg;
     min-width: 348px;
     min-height: 348px;
     width: 348px;
@@ -40,14 +40,14 @@
 }
 
 .ktsCardCaption {
-    color: $text-secondary;
+    color: variables.$text-secondary;
     font-weight: 500;
     font-size: 14px;
     line-height: 18px;
 }
 
 .ktsCardTitle {
-    color: $text-primary;
+    color: variables.$text-primary;
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
@@ -59,7 +59,7 @@
 }
 
 .ktsCardSubtitle {
-    color: $text-secondary;
+    color: variables.$text-secondary;
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
@@ -71,7 +71,7 @@
 }
 
 .ktsCardContent {
-    color: $text-primary;
+    color: variables.$text-primary;
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;

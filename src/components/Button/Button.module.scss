@@ -1,4 +1,4 @@
-@import '@/styles/variables';
+@use '@/styles/variables';
 
 button {
     background: none;
@@ -12,35 +12,35 @@ button {
     font-weight: 400;
     font-size: 18px;
     letter-spacing: 0;
-    color: $button-primary-text;
-    background-color: $button-primary-bg;
+    color: variables.$button-primary-text;
+    background-color: variables.$button-primary-bg;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     &:hover {
-        color: $button-primary-text-hover;
-        background-color: $button-primary-bg-hover;
+        color: variables.$button-primary-text-hover;
+        background-color: variables.$button-primary-bg-hover;
     }
 
     &.ktsBtnLoading:hover {
-        color: $button-primary-text;
-        background-color: $button-primary-bg;
+        color: variables.$button-primary-text;
+        background-color: variables.$button-primary-bg;
     }
 
     &.ktsBtnDisabled {
-        color: $button-primary-text-disabled;
-        background-color: $button-primary-bg-disabled;
+        color: variables.$button-primary-text-disabled;
+        background-color: variables.$button-primary-bg-disabled;
 
         &:hover {
-            color: $button-primary-text-disabled;
-            background-color: $button-primary-bg-disabled;
+            color: variables.$button-primary-text-disabled;
+            background-color: variables.$button-primary-bg-disabled;
         }
     }
 
     .ktsLoader {
         margin-right: 8px;
-        fill: $button-primary-text;
+        fill: variables.$button-primary-text;
     }
 }

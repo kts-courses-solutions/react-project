@@ -1,4 +1,4 @@
-@import '@/styles/variables';
+@use '@/styles/variables';
 
 .ktsArrowDownIcon {
     path {
@@ -8,14 +8,14 @@
 
 .ktsArrowIcon {
     &--primary path {
-        fill: $text-primary;
+        fill: variables.$text-primary;
     }
 
     &--secondary path {
-        fill: $text-secondary;
+        fill: variables.$text-secondary;
     }
 
     &--accent path {
-        fill: $text-accent;
+        fill: variables.$text-accent;
     }
 }

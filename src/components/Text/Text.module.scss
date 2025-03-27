@@ -1,4 +1,4 @@
-@import '@/styles/variables';
+@use '@/styles/variables';
 
 .kts-text {
     font-family: inherit;
@@ -42,14 +42,14 @@
     }
 
     &--primary {
-        color: $text-primary;
+        color: variables.$text-primary;
     }
 
     &--secondary {
-        color: $text-secondary;
+        color: variables.$text-secondary;
     }
 
     &--accent {
-        color: $text-accent;
+        color: variables.$text-accent;
     }
 }

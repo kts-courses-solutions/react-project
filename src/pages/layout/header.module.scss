@@ -1,4 +1,4 @@
-@import '@/styles/variables';
+@use '@/styles/variables';
 
 .header {
     // позиционирование
@@ -9,7 +9,7 @@
 
     // стилизация
     padding: 24px 0;
-    background-color: $header-bg;
+    background-color: variables.$header-bg;
 }
 
 .logo {
