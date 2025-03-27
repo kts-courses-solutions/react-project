@@ -1,11 +1,11 @@
 import { Header } from '@/pages/layout';
 import { Outlet } from 'react-router-dom';
 import { layoutStyles } from '@/pages/layout';
-import { globalStyles } from '@/styles';
+import '@/styles/styles.module.scss';
 
 const Layout = () => {
     return (
-        <div className={globalStyles.layout}>
+        <div>
             <Header />
             <main className={layoutStyles.main}>
                 <Outlet />
