@@ -1,54 +1,42 @@
-# React + TypeScript + Vite
+# E-commerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Проект для [курса KTS по React'у](https://metaclass.kts.studio/beginner_react).
+Представляет из себя интернет магазин.
 
-Currently, two official plugins are available:
+## Описание проекта
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Макет
 
-## Expanding the ESLint configuration
+[Ссылка на Figma](https://www.figma.com/file/V105wd67bkF2X7oOzCLPEG/E-commerce?type=design&mode=design&t=9HPHdd9OSiqVsoSo-0)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### API
 
-```js
-export default tseslint.config({
-    extends: [
-        // Remove ...tseslint.configs.recommended and replace with this
-        ...tseslint.configs.recommendedTypeChecked,
-        // Alternatively, use this for stricter rules
-        ...tseslint.configs.strictTypeChecked,
-        // Optionally, add this for stylistic rules
-        ...tseslint.configs.stylisticTypeChecked,
-    ],
-    languageOptions: {
-        // other options...
-        parserOptions: {
-            project: ['./tsconfig.node.json', './tsconfig.app.json'],
-            tsconfigRootDir: import.meta.dirname,
-        },
-    },
-});
+Документация
+
+[Получение списка товаров](https://api.escuelajs.co/api/v1/products)
+
+[Получение информации об одном товаре](https://api.escuelajs.co/api/v1/products/{id товара})
+
+В макетах также есть отображение количества всех товаров и количества страниц.
+Для получения этой информации нужно использовать метод получения списка товаров без параметров фильтрации и пагинации
+
+## Запуск локально
+
+### 1. Клонирование Github репозитория
+
+```bash
+git clone https://github.com/kts-courses-solutions/react-project.git
+cd react-project
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Установка зависимостей
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+```bash
+npm install
+```
 
-export default tseslint.config({
-    plugins: {
-        // Add the react-x and react-dom plugins
-        'react-x': reactX,
-        'react-dom': reactDom,
-    },
-    rules: {
-        // other rules...
-        // Enable its recommended typescript rules
-        ...reactX.configs['recommended-typescript'].rules,
-        ...reactDom.configs.recommended.rules,
-    },
-});
+### 3. Запуск
+
+```bash
+npm run dev
 ```
