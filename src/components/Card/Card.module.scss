@@ -1,0 +1,78 @@
+@import '@/styles/variables';
+
+.ktsCard {
+    display: flex;
+    flex-direction: column;
+    background-color: $card-bg;
+    width: 348px;
+
+    &:hover {
+        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+    }
+}
+
+.ktsCardImage {
+    background-color: $card-image-bg;
+    min-width: 348px;
+    min-height: 348px;
+    width: 348px;
+    height: 348px;
+    object-fit: cover;
+}
+
+.ktsCardData {
+    padding: 24px 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ktsCardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ktsCardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.ktsCardCaption {
+    color: $text-secondary;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.ktsCardTitle {
+    color: $text-primary;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    width: 100%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.ktsCardSubtitle {
+    color: $text-secondary;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    width: 100%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+.ktsCardContent {
+    color: $text-primary;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+}
