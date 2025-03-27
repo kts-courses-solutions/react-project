@@ -1,9 +1,15 @@
 import { RouteObject } from 'react-router-dom';
-import App from '@/App.tsx';
+import { Layout } from '@/pages/layout';
+import { Root } from '@/pages/root';
 
 export const routesConfig: RouteObject[] = [
     {
-        path: '/',
-        element: <App />,
+        element: <Layout />,
+        children: [
+            {
+                element: <Root />,
+                path: '/',
+            },
+        ],
     },
 ];
