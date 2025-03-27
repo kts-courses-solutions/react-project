@@ -1,0 +1,57 @@
+@import '@/styles/variables';
+
+.ktsInputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid $input-border;
+    padding: 14px 12px;
+    background: $input-bg;
+    transition: border-color 0.3s;
+
+    &:focus-within {
+        background-color: $input-bg-focus;
+        border-color: $input-border-focus;
+    }
+
+    &.disabled {
+        background: $input-bg-disabled;
+        border-color: $input-border-disabled;
+        pointer-events: none;
+    }
+
+    &.default {
+        border-color: #ccc;
+    }
+
+    &.focus {
+        border-color: #4a90e2;
+    }
+}
+
+.ktsInputField {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0;
+    font-weight: 400;
+    line-height: 20px;
+    font-size: 16px;
+    color: $input-text;
+    background: transparent;
+
+    &::placeholder {
+        color: $input-placeholder;
+    }
+
+    &:disabled {
+        color: $input-text-disabled;
+    }
+}
+
+.ktsInputAfterSlot {
+    width: 24px;
+    height: 24px;
+    margin-left: 8px;
+    color: $text-secondary;
+}

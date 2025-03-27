@@ -1,7 +1,6 @@
 import React from 'react';
-import './Loader.css';
 import clsx from 'clsx';
-import { loaderStyles } from '@/components/Loader/index.ts';
+import { loaderStyles } from '@/components/Loader';
 
 export type LoaderProps = {
     /** Размер */

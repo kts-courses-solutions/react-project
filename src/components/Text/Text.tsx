@@ -1,6 +1,6 @@
 import * as React from 'react';
 import clsx from 'clsx';
-import { textStyles } from '@/components/Text/index.ts';
+import { textStyles } from '@/components/Text';
 
 export type TextProps = {
     /** Дополнительный класс */
