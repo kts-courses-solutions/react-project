@@ -1,0 +1,8 @@
+@import '@/styles/variables';
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 48px;
+}

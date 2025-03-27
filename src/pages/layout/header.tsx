@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import globalStyles from '@/styles/styles.module.scss';
+import { headerStyles } from '@/pages/layout';
 
 const Header = () => {
     return (
         <header className={globalStyles.container}>
             <nav>
-                <ul>
+                <ul className={headerStyles.navbar}>
                     <li>
                         <Link to="/">Products</Link>
                     </li>
