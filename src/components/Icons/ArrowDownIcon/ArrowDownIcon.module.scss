@@ -1,0 +1,21 @@
+@import '@/styles/variables';
+
+.ktsArrowDownIcon {
+    path {
+        fill: currentColor;
+    }
+}
+
+.ktsArrowIcon {
+    &--primary path {
+        fill: $text-primary;
+    }
+
+    &--secondary path {
+        fill: $text-secondary;
+    }
+
+    &--accent path {
+        fill: $text-accent;
+    }
+}

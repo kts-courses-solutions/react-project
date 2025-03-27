@@ -1,0 +1,30 @@
+@import '@/styles/variables';
+
+.ktsCheckIcon {
+    &--primary path {
+        stroke: $text-primary;
+    }
+
+    &--secondary path {
+        stroke: $text-secondary;
+    }
+
+    &--check {
+        path {
+            stroke: $checkbox-check;
+        }
+
+        &:hover path {
+            stroke: $checkbox-check-hover;
+        }
+    }
+
+    &--check-disabled path {
+        stroke: $checkbox-check-disabled;
+    }
+
+    &--accent path {
+        color: $text-accent;
+        stroke: $text-accent;
+    }
+}
