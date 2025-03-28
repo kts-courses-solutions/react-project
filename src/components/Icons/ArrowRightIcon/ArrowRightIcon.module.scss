@@ -1,0 +1,30 @@
+@use '@/styles/variables';
+
+.ktsArrowRightIcon {
+    &--primary path {
+        stroke: variables.$text-primary;
+    }
+
+    &--secondary path {
+        stroke: variables.$text-secondary;
+    }
+
+    &--check {
+        path {
+            stroke: variables.$checkbox-check;
+        }
+
+        &:hover path {
+            stroke: variables.$checkbox-check-hover;
+        }
+    }
+
+    &--check-disabled path {
+        stroke: variables.$checkbox-check-disabled;
+    }
+
+    &--accent path {
+        color: variables.$text-accent;
+        stroke: variables.$text-accent;
+    }
+}

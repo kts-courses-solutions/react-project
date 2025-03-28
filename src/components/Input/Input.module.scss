@@ -1,31 +1,32 @@
 @use '@/styles/variables';
 
 .ktsInputContainer {
+    width: 100%;
     position: relative;
     display: flex;
     align-items: center;
-    border: 1px solid variables.$input-border;
+    outline: 1px solid variables.$input-border;
     padding: 14px 12px;
     background: variables.$input-bg;
-    transition: border-color 0.3s;
+    transition: outline-color 0.3s;
 
     &:focus-within {
         background-color: variables.$input-bg-focus;
-        border-color: variables.$input-border-focus;
+        outline-color: variables.$input-border-focus;
     }
 
     &.disabled {
         background: variables.$input-bg-disabled;
-        border-color: variables.$input-border-disabled;
+        outline-color: variables.$input-border-disabled;
         pointer-events: none;
     }
 
     &.default {
-        border-color: #ccc;
+        outline-color: #ccc;
     }
 
     &.focus {
-        border-color: #4a90e2;
+        outline-color: #4a90e2;
     }
 }
 
