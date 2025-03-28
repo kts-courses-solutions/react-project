@@ -3,6 +3,7 @@ import { Layout } from '@/pages/layout';
 import { Categories } from '@/pages/categories';
 import { About } from '@/pages/about';
 import { Products } from '@/pages/products';
+import { Product } from '@/pages/product';
 
 export const routesConfig: RouteObject[] = [
     {
@@ -11,6 +12,10 @@ export const routesConfig: RouteObject[] = [
             {
                 element: <Products />,
                 path: '/products',
+            },
+            {
+                element: <Product />,
+                path: '/product/:productId',
             },
             {
                 element: <Categories />,

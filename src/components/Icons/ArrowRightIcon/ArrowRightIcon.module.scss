@@ -9,6 +9,10 @@
         stroke: variables.$text-secondary;
     }
 
+    &--white path {
+        stroke: white;
+    }
+
     &--check {
         path {
             stroke: variables.$checkbox-check;
