@@ -16,7 +16,7 @@ const Header = () => {
             <header
                 className={clsx(globalStyles.container, headerStyles.header)}
             >
-                <Link to="/" className={headerStyles.logo}>
+                <Link to="/public" className={headerStyles.logo}>
                     <img
                         src={`${import.meta.env.BASE_URL}logo.svg`}
                         alt="logo"
