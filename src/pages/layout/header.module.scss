@@ -1,11 +1,16 @@
 @use '@/styles/variables';
 
+.headerWrapper {
+    border-bottom: 2px solid rgba(243, 243, 243, 1);
+}
+
 .header {
     // позиционирование
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 
     // стилизация
     padding: 24px 0;
@@ -33,7 +38,38 @@
     list-style-type: none;
 }
 
-.navbar-elem-active {
+.navbarElem {
+    color: variables.$text-primary;
+
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0;
+
+    position: relative;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.navbarElemActive {
+    color: variables.$text-accent;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0;
+}
+
+.navbarActiveBorder {
+    width: 100%;
+    height: 2px;
+    background-color: variables.$text-accent;
+
+    position: absolute;
+    bottom: -2.9rem;
 }
 
 .navbarIcons {

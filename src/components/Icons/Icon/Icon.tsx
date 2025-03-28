@@ -9,6 +9,7 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
     className,
     width,
     height,
+    viewBox = '0 0 24 24',
     children,
     ...props
 }: IconProps) => {
@@ -17,7 +18,7 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
             className={className}
             width={width}
             height={height}
-            viewBox="0 0 24 24"
+            viewBox={viewBox}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             {...props}
