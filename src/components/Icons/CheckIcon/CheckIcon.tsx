@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Icon, IconProps } from '@/components/Icons/Icon';
-import { checkIconStyles } from '@/components/Icons/CheckIcon';
-import clsx from 'clsx';
+import { memo } from 'react';
 
 const CheckIcon: React.FC<IconProps> = ({
     width = 24,
@@ -14,16 +13,17 @@ const CheckIcon: React.FC<IconProps> = ({
         <Icon
             width={width}
             height={height}
-            className={clsx(
-                checkIconStyles.ktsCheckIcon,
-                color && checkIconStyles[`ktsCheckIcon--${color}`],
-                className,
-            )}
+            color={color}
+            className={className}
             {...props}
         >
-            <path d="M4 11.6129L9.87755 18L20 7" strokeWidth="2" />
+            <path
+                d="M4 11.6129L9.87755 18L20 7"
+                strokeWidth="2"
+                fill="currentColor"
+            />
         </Icon>
     );
 };
 
-export default CheckIcon;
+export default memo(CheckIcon);
