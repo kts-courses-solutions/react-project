@@ -1,13 +1,6 @@
 @use '@/styles/variables';
 
-button {
-    background: none;
-    border: none;
-    outline: none;
-    box-shadow: none;
-}
-
-.ktsBtn {
+.btn {
     padding: 14px 20px;
     font-weight: 400;
     font-size: 18px;
@@ -24,12 +17,12 @@ button {
         background-color: variables.$button-primary-bg-hover;
     }
 
-    &.ktsBtnLoading:hover {
+    &_loading:hover {
         color: variables.$button-primary-text;
         background-color: variables.$button-primary-bg;
     }
 
-    &.ktsBtnDisabled {
+    &_disabled {
         color: variables.$button-primary-text-disabled;
         background-color: variables.$button-primary-bg-disabled;
 
@@ -39,7 +32,7 @@ button {
         }
     }
 
-    .ktsLoader {
+    &__loader {
         margin-right: 8px;
         fill: variables.$button-primary-text;
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Loader } from '@/components/Loader';
-import { buttonStyles } from '@/components/Button';
+import s from './Button.module.scss';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     /** Состояние загрузки */
@@ -18,19 +18,21 @@ const Button: React.FC<ButtonProps> = ({
     onClick,
     ...props
 }: ButtonProps) => {
+    const isDisabled = loading || disabled;
+
     return (
         <button
             className={clsx(
-                buttonStyles.ktsBtn,
-                disabled && buttonStyles.ktsBtnDisabled,
-                loading && buttonStyles.ktsBtnLoading,
+                s.btn,
+                disabled && s.btn_disabled,
+                loading && s.btn_loading,
                 className,
             )}
-            disabled={loading ? true : disabled}
+            disabled={isDisabled}
             onClick={loading ? undefined : onClick}
             {...props}
         >
-            {loading && <Loader size="s" className={buttonStyles.ktsLoader} />}
+            {loading && <Loader size="s" className={s.btn__loader} />}
             <span>{children}</span>
         </button>
     );
