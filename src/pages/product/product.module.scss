@@ -1,0 +1,144 @@
+@use '@/styles/variables';
+
+.back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 60px;
+    margin-bottom: 32px;
+
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0;
+    color: variables.$text-primary;
+}
+
+.product {
+    display: flex;
+    gap: 48px;
+    align-items: start;
+    justify-content: center;
+
+    .imgWrapper {
+        position: relative;
+
+        .leftImgBtn {
+            position: absolute;
+            top: 50%;
+            left: 24px;
+            transform: translateY(-50%);
+            width: 64px;
+            height: 64px;
+
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 100%;
+        }
+
+        img {
+            min-width: 600px;
+            width: 600px;
+            min-height: 600px;
+            height: 600px;
+            object-fit: cover;
+        }
+
+        .rightImgBtn {
+            position: absolute;
+            top: 50%;
+            right: 24px;
+            transform: translateY(-50%) scaleX(-1);
+            width: 64px;
+            height: 64px;
+
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 100%;
+        }
+    }
+}
+
+.productDesc {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+
+    .text {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        h1 {
+            color: variables.$text-primary;
+            font-weight: 700;
+            font-size: 44px;
+            line-height: 48px;
+            letter-spacing: 0;
+        }
+
+        span {
+            color: variables.$text-secondary;
+            width: 100%;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0;
+        }
+    }
+}
+
+.productAction {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    h2 {
+        color: variables.$text-primary;
+        font-weight: 700;
+        font-size: 44px;
+        line-height: 48px;
+        letter-spacing: 0;
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        gap: 48px;
+
+        .buyBtn {
+        }
+
+        .cartBtn {
+            background-color: variables.$content-bg;
+            border: 1px solid variables.$text-secondary;
+            color: variables.$text-primary;
+
+            &:hover {
+                background-color: variables.$button-primary-bg-disabled;
+            }
+        }
+    }
+}
+
+.related {
+    margin-top: 48px;
+    margin-bottom: 146px;
+
+    h3 {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 48px;
+        letter-spacing: 0;
+        color: variables.$text-primary;
+
+        margin-bottom: 32px;
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 30px 79px;
+    }
+}

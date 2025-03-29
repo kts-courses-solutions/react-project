@@ -1,0 +1,39 @@
+@use '@/styles/variables';
+
+.btn {
+    padding: 14px 20px;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0;
+    color: variables.$button-primary-text;
+    background-color: variables.$button-primary-bg;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        color: variables.$button-primary-text-hover;
+        background-color: variables.$button-primary-bg-hover;
+    }
+
+    &_loading:hover {
+        color: variables.$button-primary-text;
+        background-color: variables.$button-primary-bg;
+    }
+
+    &_disabled {
+        color: variables.$button-primary-text-disabled;
+        background-color: variables.$button-primary-bg-disabled;
+
+        &:hover {
+            color: variables.$button-primary-text-disabled;
+            background-color: variables.$button-primary-bg-disabled;
+        }
+    }
+
+    &__loader {
+        margin-right: 8px;
+        fill: variables.$button-primary-text;
+    }
+}

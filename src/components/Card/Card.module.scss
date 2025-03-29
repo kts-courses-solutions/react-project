@@ -1,0 +1,74 @@
+@use '@/styles/variables';
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: variables.$card-bg;
+    width: 348px;
+
+    &:hover {
+        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    &__image {
+        background-color: variables.$card-image-bg;
+        min-width: 348px;
+        min-height: 348px;
+        width: 348px;
+        height: 348px;
+        object-fit: cover;
+    }
+
+    &__data {
+        padding: 24px 12px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 20px;
+    }
+
+    &__caption {
+        color: variables.$text-secondary;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    &__title {
+        color: variables.$text-primary;
+        line-height: 24px;
+        width: 100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    &__subtitle {
+        color: variables.$text-secondary;
+        line-height: 20px;
+        width: 100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
+
+    &__content {
+        color: variables.$text-primary;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 22px;
+    }
+}
