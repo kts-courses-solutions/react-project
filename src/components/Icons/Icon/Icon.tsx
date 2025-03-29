@@ -12,6 +12,7 @@ export type IconProps = React.SVGAttributes<SVGElement> & {
         | 'check-disabled'
         | 'check'
         | 'white';
+    colorType?: 'fill' | 'stroke';
 };
 
 const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
@@ -19,17 +20,21 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
     width,
     height,
     color,
+    colorType = 'fill',
     viewBox = '0 0 24 24',
     children,
     ...props
 }: IconProps) => {
     return (
         <svg
-            className={clsx(color && s[`icon_${color}`], className)}
+            className={clsx(
+                color && s[`icon_${colorType}_${color}`],
+                className,
+            )}
             width={width}
             height={height}
             viewBox={viewBox}
-            fill="currentColor"
+            fill={colorType === 'fill' ? 'currentColor' : 'none'}
             xmlns="http://www.w3.org/2000/svg"
             {...props}
         >

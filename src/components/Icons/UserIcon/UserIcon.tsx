@@ -6,7 +6,7 @@ const UserIcon: React.FC<IconProps> = ({
     width = 30,
     height = 30,
     className,
-    color = 'primary',
+    color = 'secondary',
     ...props
 }: IconProps) => {
     return (
@@ -14,6 +14,7 @@ const UserIcon: React.FC<IconProps> = ({
             width={width}
             height={height}
             color={color}
+            colorType="stroke"
             className={className}
             viewBox="0 0 30 30"
             {...props}
@@ -23,14 +24,12 @@ const UserIcon: React.FC<IconProps> = ({
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                fill="currentColor"
             />
             <path
                 d="M25.7374 27.5C25.7374 22.6625 20.9249 18.75 14.9999 18.75C9.07495 18.75 4.26245 22.6625 4.26245 27.5"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                fill="currentColor"
             />
         </Icon>
     );
