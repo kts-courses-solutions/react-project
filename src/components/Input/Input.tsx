@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import clsx from 'clsx';
-import { inputStyles } from '@/components/Input';
+import s from './Input.module.scss';
 
 export type InputProps = Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -17,25 +17,19 @@ export type InputProps = Omit<
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ({ value, onChange, afterSlot, className, ...props }, ref) => {
         return (
-            <div className={clsx(inputStyles.ktsInputContainer, className)}>
+            <div className={clsx(s.input, className)}>
                 <input
                     ref={ref}
                     type="text"
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
-                    className={inputStyles.ktsInputField}
+                    className={s.input__field}
                     {...props}
                 />
-                {afterSlot && (
-                    <div className={inputStyles.ktsInputAfterSlot}>
-                        {afterSlot}
-                    </div>
-                )}
+                {afterSlot && <div className={s.input__after}>{afterSlot}</div>}
             </div>
         );
     },
 );
 
-Input.displayName = 'Input';
-
-export default Input;
+export default memo(Input);
