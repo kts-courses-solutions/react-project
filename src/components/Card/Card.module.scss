@@ -1,6 +1,6 @@
 @use '@/styles/variables';
 
-.ktsCard {
+.card {
     display: flex;
     flex-direction: column;
     background-color: variables.$card-bg;
@@ -9,70 +9,66 @@
     &:hover {
         box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
     }
-}
 
-.ktsCardImage {
-    background-color: variables.$card-image-bg;
-    min-width: 348px;
-    min-height: 348px;
-    width: 348px;
-    height: 348px;
-    object-fit: cover;
-}
+    &__image {
+        background-color: variables.$card-image-bg;
+        min-width: 348px;
+        min-height: 348px;
+        width: 348px;
+        height: 348px;
+        object-fit: cover;
+    }
 
-.ktsCardData {
-    padding: 24px 12px;
-    display: flex;
-    flex-direction: column;
-}
+    &__data {
+        padding: 24px 12px;
+        display: flex;
+        flex-direction: column;
+    }
 
-.ktsCardBody {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
 
-.ktsCardFooter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 20px;
-}
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 20px;
+    }
 
-.ktsCardCaption {
-    color: variables.$text-secondary;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-}
+    &__caption {
+        color: variables.$text-secondary;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+    }
 
-.ktsCardTitle {
-    color: variables.$text-primary;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-    width: 100%;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-}
+    &__title {
+        color: variables.$text-primary;
+        line-height: 24px;
+        width: 100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
 
-.ktsCardSubtitle {
-    color: variables.$text-secondary;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    width: 100%;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-}
+    &__subtitle {
+        color: variables.$text-secondary;
+        line-height: 20px;
+        width: 100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
 
-.ktsCardContent {
-    color: variables.$text-primary;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
+    &__content {
+        color: variables.$text-primary;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 22px;
+    }
 }

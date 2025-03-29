@@ -1,6 +1,6 @@
 import * as React from 'react';
 import clsx from 'clsx';
-import { textStyles } from '@/components/Text';
+import s from './Text.module.scss';
 
 export type TextProps = {
     /** Дополнительный класс */
@@ -29,10 +29,10 @@ const Text: React.FC<TextProps> = ({
     maxLines,
 }) => {
     const baseClasses = clsx(
-        textStyles['kts-text'],
-        view && textStyles[`kts-text--${view}`],
-        weight && textStyles[`kts-text--${weight}`],
-        color && textStyles[`kts-text--${color}`],
+        s['kts-text'],
+        view && s[`kts-text--${view}`],
+        weight && s[`kts-text--${weight}`],
+        color && s[`kts-text--${color}`],
         className,
     );
 

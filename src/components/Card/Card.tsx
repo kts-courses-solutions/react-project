@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 import { Text } from '@/components/Text';
-import { cardStyles } from '@/components/Card/index.ts';
+import s from './Card.module.scss';
 
 export type CardProps = {
     /** Дополнительный classname */
@@ -33,27 +33,33 @@ const Card: React.FC<CardProps> = ({
     actionSlot,
 }) => {
     return (
-        <div className={clsx(cardStyles.ktsCard, className)} onClick={onClick}>
-            <img src={image} alt="Card" className={cardStyles.ktsCardImage} />
-            <div className={cardStyles.ktsCardData}>
-                <div className={cardStyles.ktsCardBody}>
+        <div className={clsx(s.card, className)} onClick={onClick}>
+            <img src={image} alt="Card" className={s.card__image} />
+            <div className={s.card__data}>
+                <div className={s.card__body}>
                     {captionSlot && (
-                        <div className={cardStyles.ktsCardCaption}>
-                            {captionSlot}
-                        </div>
+                        <div className={s.card__caption}>{captionSlot}</div>
                     )}
-                    <Text tag="h3" className={cardStyles.ktsCardTitle}>
+                    <Text
+                        tag="h3"
+                        className={s.card__title}
+                        weight="medium"
+                        view="p-20"
+                    >
                         {title}
                     </Text>
-                    <Text tag="p" className={cardStyles.ktsCardSubtitle}>
+                    <Text
+                        tag="p"
+                        className={s.card__subtitle}
+                        weight="normal"
+                        view="p-16"
+                    >
                         {subtitle}
                     </Text>
                 </div>
-                <div className={cardStyles.ktsCardFooter}>
+                <div className={s.card__footer}>
                     {contentSlot && (
-                        <div className={cardStyles.ktsCardContent}>
-                            {contentSlot}
-                        </div>
+                        <div className={s.card__content}>{contentSlot}</div>
                     )}
                     {actionSlot && <div>{actionSlot}</div>}
                 </div>
