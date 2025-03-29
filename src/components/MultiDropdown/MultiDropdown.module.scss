@@ -5,7 +5,7 @@
     cursor: pointer;
     font-family: sans-serif;
 
-    &Header {
+    &__header {
         padding: 12px 14px;
         background: white;
         display: flex;
@@ -13,7 +13,7 @@
         justify-content: space-between;
     }
 
-    &List {
+    &__list {
         position: absolute;
         width: 100%;
         margin-top: 8px;
@@ -24,7 +24,7 @@
         animation: fadeIn 0.2s ease-out;
     }
 
-    &Item {
+    &__item {
         font-weight: 400;
         font-size: 16px;
         line-height: 20px;
@@ -39,7 +39,7 @@
             color: variables.$text-secondary;
         }
 
-        &.selected {
+        &_selected {
             color: variables.$text-accent;
 
             &:hover {

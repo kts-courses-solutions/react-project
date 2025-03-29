@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo } from 'react';
 import clsx from 'clsx';
 import { ArrowDownIcon } from '@/components/Icons/ArrowDownIcon';
 import { Input } from '@/components/Input';
-import { multiDropdownStyles } from '@/components/MultiDropdown';
+import s from './MultiDropdown.module.scss';
 
 export type Option = {
     /** Ключ варианта, используется для отправки на бек/использования в коде */
@@ -85,12 +85,9 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     }, [isOpen]);
 
     return (
-        <div
-            className={clsx(multiDropdownStyles.multiDropdown, className)}
-            ref={dropdownRef}
-        >
+        <div className={clsx(s.multiDropdown, className)} ref={dropdownRef}>
             <Input
-                className={multiDropdownStyles.multiDropdownHeader}
+                className={s.multiDropdown__header}
                 onClick={toggleDropdown}
                 onChange={handleInputChange}
                 value={filterText || (value.length > 0 ? getTitle(value) : '')}
@@ -100,24 +97,29 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
             />
 
             {isOpen && !disabled && (
-                <ul className={multiDropdownStyles.multiDropdownList}>
-                    {filteredOptions.map((option) => (
-                        <li
-                            key={option.key}
-                            className={clsx(
-                                multiDropdownStyles.multiDropdownItem,
-                                value.some((v) => v.key === option.key)
-                                    ? 'selected'
-                                    : '',
-                            )}
-                            onClick={() => handleSelect(option)}
-                        >
-                            {option.value}
-                        </li>
-                    ))}
+                <ul className={s.multiDropdown__list}>
+                    {filteredOptions.map((option) => {
+                        const hasSelected = value.some(
+                            (v) => v.key === option.key,
+                        );
+
+                        return (
+                            <li
+                                key={option.key}
+                                className={clsx(
+                                    s.multiDropdown__item,
+                                    hasSelected &&
+                                        s.multiDropdown__item_selected,
+                                )}
+                                onClick={() => handleSelect(option)}
+                            >
+                                {option.value}
+                            </li>
+                        );
+                    })}
                 </ul>
             )}
         </div>
     );
 };
-export default MultiDropdown;
+export default memo(MultiDropdown);
