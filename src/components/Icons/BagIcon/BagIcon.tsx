@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Icon, IconProps } from '@/components/Icons/Icon';
+import { memo } from 'react';
 
 const BagIcon: React.FC<IconProps> = ({
     width = 30,
@@ -52,4 +53,4 @@ const BagIcon: React.FC<IconProps> = ({
     );
 };
 
-export default BagIcon;
+export default memo(BagIcon);
