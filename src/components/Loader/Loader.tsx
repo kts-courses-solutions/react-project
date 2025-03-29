@@ -2,11 +2,19 @@ import React from 'react';
 import clsx from 'clsx';
 import { loaderStyles } from '@/components/Loader';
 
+type LOADER_SIZE = 's' | 'm' | 'l';
+
 export type LoaderProps = {
     /** Размер */
-    size?: 's' | 'm' | 'l';
+    size?: LOADER_SIZE;
     /** Дополнительный класс */
     className?: string;
+};
+
+const LOADER_SIZES_MAP: Record<LOADER_SIZE, string> = {
+    s: '24',
+    m: '48',
+    l: '60',
 };
 
 const Loader: React.FC<LoaderProps> = ({
@@ -14,41 +22,11 @@ const Loader: React.FC<LoaderProps> = ({
     className,
     ...props
 }: LoaderProps) => {
-    if (size === 's') {
-        return (
-            <svg
-                className={clsx(loaderStyles.ktsLoader, className)}
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                {...props}
-            >
-                <path d="M13.3497 17.8462C10.1209 18.5916 6.89917 16.5785 6.15374 13.3497C5.40832 10.1209 7.42148 6.89919 10.6503 6.15377C13.879 5.40835 17.1008 7.42151 17.8462 10.6503L19.7949 10.2004C18.801 5.89534 14.5054 3.21113 10.2004 4.20503C5.89532 5.19893 3.21111 9.49456 4.205 13.7996C5.1989 18.1046 9.49454 20.7888 13.7996 19.795L13.3497 17.8462Z" />
-            </svg>
-        );
-    }
-
-    if (size === 'm') {
-        return (
-            <svg
-                className={clsx(loaderStyles.ktsLoader, className)}
-                width="48"
-                height="48"
-                viewBox="0 0 48 48"
-                xmlns="http://www.w3.org/2000/svg"
-                {...props}
-            >
-                <path d="M26.6993 35.6924C20.2418 37.1833 13.7983 33.157 12.3075 26.6994C10.8166 20.2418 14.843 13.7984 21.3005 12.3075C27.7581 10.8167 34.2015 14.843 35.6924 21.3006L39.5898 20.4008C37.6021 11.7907 29.0108 6.42227 20.4007 8.41006C11.7906 10.3979 6.42222 18.9891 8.41001 27.5992C10.3978 36.2093 18.9891 41.5777 27.5991 39.5899L26.6993 35.6924Z" />
-            </svg>
-        );
-    }
-
     return (
         <svg
             className={clsx(loaderStyles.ktsLoader, className)}
-            width="60"
-            height="60"
+            width={LOADER_SIZES_MAP[size]}
+            height={LOADER_SIZES_MAP[size]}
             viewBox="0 0 60 60"
             xmlns="http://www.w3.org/2000/svg"
             {...props}
