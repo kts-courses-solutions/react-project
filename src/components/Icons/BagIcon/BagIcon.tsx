@@ -1,24 +1,20 @@
 import * as React from 'react';
-import clsx from 'clsx';
 import { Icon, IconProps } from '@/components/Icons/Icon';
-import { bagIconStyles } from '@/components/Icons/BagIcon/index.ts';
 
-const CheckIcon: React.FC<IconProps> = ({
+const BagIcon: React.FC<IconProps> = ({
     width = 30,
     height = 30,
     className,
     color = 'primary',
     ...props
 }: IconProps) => {
+    // TODO: fix fill and stroke
     return (
         <Icon
             width={width}
             height={height}
-            className={clsx(
-                bagIconStyles.ktsCheckIcon,
-                color && bagIconStyles[`ktsBagIcon--${color}`],
-                className,
-            )}
+            color={color}
+            className={className}
             viewBox="0 0 30 30"
             {...props}
         >
@@ -28,6 +24,7 @@ const CheckIcon: React.FC<IconProps> = ({
                 stroke-miterlimit="10"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                fill="currentColor"
             />
             <path
                 d="M11.25 27.5H18.75C23.775 27.5 24.675 25.4875 24.9375 23.0375L25.875 15.5375C26.2125 12.4875 25.3375 10 20 10H10C4.66253 10 3.78753 12.4875 4.12503 15.5375L5.06253 23.0375C5.32503 25.4875 6.22503 27.5 11.25 27.5Z"
@@ -35,21 +32,24 @@ const CheckIcon: React.FC<IconProps> = ({
                 stroke-miterlimit="10"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                fill="currentColor"
             />
             <path
                 d="M19.3694 15H19.3806"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                fill="currentColor"
             />
             <path
                 d="M10.6181 15H10.6294"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                fill="currentColor"
             />
         </Icon>
     );
 };
 
-export default CheckIcon;
+export default BagIcon;
