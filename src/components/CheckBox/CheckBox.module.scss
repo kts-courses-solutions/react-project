@@ -1,17 +1,17 @@
 @use '@/styles/variables';
 
-.ktsCheckBox {
+.checkBox {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
     width: 40px;
     height: 40px;
 
-    &Input {
+    &__input {
         display: none;
     }
 
-    &Box {
+    &__box {
         width: 40px;
         height: 40px;
         background-color: variables.$checkbox-bg;
@@ -26,12 +26,12 @@
         }
     }
 
-    &:has(&Input:disabled) &Box {
+    &:has(&__input:disabled) &Box {
         background-color: variables.$checkbox-bg-disabled;
         border: 1px solid variables.$checkbox-border-disabled;
     }
 
-    &Icon {
+    &__icon {
         width: 40px;
         height: 40px;
         margin: -1px;

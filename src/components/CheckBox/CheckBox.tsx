@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import clsx from 'clsx';
-import { checkBoxStyles } from '@/components/CheckBox';
 import { CheckIcon } from '@/components/Icons/CheckIcon';
+import s from './CheckBox.module.scss';
 
 export type CheckBoxProps = Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -19,19 +19,19 @@ const CheckBox: React.FC<CheckBoxProps> = ({
     ...props
 }) => {
     return (
-        <label className={clsx(checkBoxStyles.ktsCheckBox, className)}>
+        <label className={clsx(s.checkBox, className)}>
             <input
                 type="checkbox"
-                className={checkBoxStyles.ktsCheckBoxInput}
+                className={s.checkBox__input}
                 checked={checked}
                 disabled={disabled}
                 onChange={(e) => onChange(e.target.checked)}
                 {...props}
             />
-            <span className={checkBoxStyles.ktsCheckBoxBox}>
+            <span className={s.checkBox__box}>
                 {checked && (
                     <CheckIcon
-                        className={checkBoxStyles.ktsCheckBoxIcon}
+                        className={s.checkBox__icon}
                         color={disabled ? 'check-disabled' : 'check'}
                         width={40}
                         height={40}
@@ -42,4 +42,4 @@ const CheckBox: React.FC<CheckBoxProps> = ({
     );
 };
 
-export default CheckBox;
+export default memo(CheckBox);
