@@ -1,9 +1,8 @@
 import * as React from 'react';
-import clsx from 'clsx';
 import { Icon, IconProps } from '@/components/Icons/Icon';
-import { userIconStyles } from '@/components/Icons/UserIcon/index.ts';
+import { memo } from 'react';
 
-const CheckIcon: React.FC<IconProps> = ({
+const UserIcon: React.FC<IconProps> = ({
     width = 30,
     height = 30,
     className,
@@ -14,11 +13,8 @@ const CheckIcon: React.FC<IconProps> = ({
         <Icon
             width={width}
             height={height}
-            className={clsx(
-                userIconStyles.ktsCheckIcon,
-                color && userIconStyles[`ktsUserIcon--${color}`],
-                className,
-            )}
+            color={color}
+            className={className}
             viewBox="0 0 30 30"
             {...props}
         >
@@ -27,15 +23,17 @@ const CheckIcon: React.FC<IconProps> = ({
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                fill="currentColor"
             />
             <path
                 d="M25.7374 27.5C25.7374 22.6625 20.9249 18.75 14.9999 18.75C9.07495 18.75 4.26245 22.6625 4.26245 27.5"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                fill="currentColor"
             />
         </Icon>
     );
 };
 
-export default CheckIcon;
+export default memo(UserIcon);
