@@ -15,7 +15,7 @@ export function useGetProduct(productId: number) {
                 setProduct(undefined);
                 setError(r);
             });
-    }, []);
+    }, [productId]);
 
     return {
         isLoading: product === null,
