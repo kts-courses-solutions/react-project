@@ -1,8 +1,7 @@
 import * as React from 'react';
-import clsx from 'clsx';
 import { Icon } from '@/components/Icons/Icon';
 import { IconProps } from '@/components/Icons/Icon';
-import { arrowDownIconStyles } from '@/components/Icons/ArrowDownIcon';
+import { memo } from 'react';
 
 const ArrowDownIcon: React.FC<IconProps> = ({
     className,
@@ -15,11 +14,8 @@ const ArrowDownIcon: React.FC<IconProps> = ({
         <Icon
             width={width}
             height={height}
-            className={clsx(
-                arrowDownIconStyles.ktsArrowDownIcon,
-                color && arrowDownIconStyles[`ktsArrowIcon--${color}`],
-                className,
-            )}
+            color={color}
+            className={className}
             {...props}
         >
             <path
@@ -31,4 +27,4 @@ const ArrowDownIcon: React.FC<IconProps> = ({
     );
 };
 
-export default ArrowDownIcon;
+export default memo(ArrowDownIcon);

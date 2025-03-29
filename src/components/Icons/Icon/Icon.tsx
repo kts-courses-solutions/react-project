@@ -1,4 +1,6 @@
 import * as React from 'react';
+import clsx from 'clsx';
+import s from './Icon.module.scss';
 
 export type IconProps = React.SVGAttributes<SVGElement> & {
     className?: string;
@@ -15,17 +17,18 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
     className,
     width,
     height,
+    color,
     viewBox = '0 0 24 24',
     children,
     ...props
 }: IconProps) => {
     return (
         <svg
-            className={className}
+            className={clsx(color && s[`icon_${color}`], className)}
             width={width}
             height={height}
             viewBox={viewBox}
-            fill="none"
+            fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
             {...props}
         >

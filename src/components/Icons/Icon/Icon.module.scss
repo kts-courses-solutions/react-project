@@ -1,0 +1,19 @@
+@use '@/styles/variables';
+
+.icon {
+    &_primary path {
+        color: variables.$text-primary;
+    }
+
+    &_secondary path {
+        color: variables.$text-secondary;
+    }
+
+    &_accent path {
+        color: variables.$text-accent;
+    }
+
+    &_white path {
+        color: white;
+    }
+}
