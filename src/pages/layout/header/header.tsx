@@ -11,7 +11,7 @@ const Header = () => {
     return (
         <div className={s.headerWrapper}>
             <header className={clsx(globalStyles.container, s.header)}>
-                <Link to="/public" className={s.logo}>
+                <Link to="/" className={s.logo}>
                     <img
                         src={`${import.meta.env.BASE_URL}logo.svg`}
                         alt="logo"

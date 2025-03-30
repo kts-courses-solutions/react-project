@@ -1,4 +1,4 @@
-import { RouteObject } from 'react-router-dom';
+import { Navigate, RouteObject } from 'react-router-dom';
 import { Layout } from '@/pages/layout';
 import { Categories } from '@/pages/categories';
 import { About } from '@/pages/about';
@@ -9,6 +9,10 @@ export const routesConfig: RouteObject[] = [
     {
         element: <Layout />,
         children: [
+            {
+                path: '/',
+                element: <Navigate to="/products" replace />,
+            },
             {
                 element: <Products />,
                 path: '/products',
