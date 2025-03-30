@@ -1,0 +1,123 @@
+@use '@/styles/variables' as *;
+
+.back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 60px;
+    margin-bottom: 32px;
+
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0;
+    color: $text-primary;
+}
+
+.product {
+    display: flex;
+    gap: 48px;
+    align-items: start;
+    justify-content: center;
+
+    &__image {
+        &__wrapper {
+            position: relative;
+        }
+
+        &__content {
+            min-width: 600px;
+            width: 600px;
+            min-height: 600px;
+            height: 600px;
+            object-fit: cover;
+        }
+
+        &__btn {
+            &__left {
+                position: absolute;
+                top: 50%;
+                left: 24px;
+                transform: translateY(-50%);
+                width: 64px;
+                height: 64px;
+
+                background-color: rgba(0, 0, 0, 0.7);
+                border-radius: 100%;
+            }
+
+            &__right {
+                position: absolute;
+                top: 50%;
+                right: 24px;
+                transform: translateY(-50%) scaleX(-1);
+                width: 64px;
+                height: 64px;
+
+                background-color: rgba(0, 0, 0, 0.7);
+                border-radius: 100%;
+            }
+        }
+    }
+}
+
+.productDesc {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+
+    &__text {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    &__title {
+        color: $text-primary;
+        font-size: 44px;
+        line-height: 48px;
+        letter-spacing: 0;
+    }
+
+    &__subtitle {
+        color: $text-secondary;
+        width: 100%;
+        line-height: 24px;
+        letter-spacing: 0;
+    }
+}
+
+.productAction {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    &__title {
+        color: $text-primary;
+        font-size: 44px;
+        line-height: 48px;
+        letter-spacing: 0;
+    }
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        gap: 48px;
+
+        &__buy {
+        }
+
+        &__cart {
+            background-color: $content-bg;
+            border: 1px solid $text-secondary;
+            color: $text-primary;
+
+            &:hover {
+                background-color: $button-primary-bg-disabled;
+            }
+        }
+    }
+}
