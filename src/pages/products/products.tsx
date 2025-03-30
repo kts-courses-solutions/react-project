@@ -1,16 +1,15 @@
 import { Text } from '@/components/Text';
-import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
-import { MultiDropdown } from '@/components/MultiDropdown';
 import { Card } from '@/components/Card';
-import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowRightIcon } from '@/components/Icons/ArrowRightIcon';
+import { useSearchParams } from 'react-router-dom';
 import { useGetProducts } from '@/pages/products/useGetProducts.ts';
 import { Loader } from '@/components/Loader';
-import clsx from 'clsx';
 import s from './products.module.scss';
 import { useEffect, useState } from 'react';
 import { getPagination, PaginationInfo } from '@/utuls/pagination.ts';
+import Pagination from '@/pages/products/pagination.tsx';
+import Headline from './headline';
+import Search from './search';
 
 const Products = () => {
     const [searchParams] = useSearchParams();
@@ -35,40 +34,9 @@ const Products = () => {
 
     return (
         <div>
-            <div className={s.headerBlock}>
-                <Text tag="h1" className={s.headerBlockTitle}>
-                    Products
-                </Text>
-                <Text tag="p" className={s.headerBlockSubtitle}>
-                    We display products based on the latest products we have, if
-                    you want to see our old products please enter the name of
-                    the item
-                </Text>
-            </div>
+            <Headline />
 
-            <div>
-                <div className={s.inputWithButton}>
-                    <Input
-                        value=""
-                        placeholder="Search product"
-                        onChange={() => {}}
-                    />
-                    <Button>Find now</Button>
-                </div>
-
-                <MultiDropdown
-                    options={[]}
-                    value={[]}
-                    onChange={() => {}}
-                    getTitle={() => 'Filter'}
-                    className={s.multiDropdown}
-                />
-
-                <div className={s.totalProducts}>
-                    <Text tag="h2">Total products</Text>
-                    <Text tag="span">{products.length}</Text>
-                </div>
-            </div>
+            <Search products={products} />
 
             <div className={s.productCards}>
                 {products
@@ -85,58 +53,7 @@ const Products = () => {
                     ))}
             </div>
 
-            {pagination && (
-                <div className={s.pageSelector}>
-                    {pagination.hasPrevPage ? (
-                        <Link
-                            to={`/products?page=${pagination.currentPage - 1}`}
-                            className={s.arrowLeft}
-                        >
-                            <ArrowRightIcon />
-                        </Link>
-                    ) : (
-                        <div className={s.arrowLeft}>
-                            <ArrowRightIcon />
-                        </div>
-                    )}
-
-                    {pagination.visiblePages.map((page, index) =>
-                        page === null ? (
-                            <div
-                                key={`ellipsis-${index}`}
-                                className={clsx(s.pageSelectorBtn)}
-                            >
-                                ...
-                            </div>
-                        ) : (
-                            <Link
-                                key={`page-${page}`}
-                                to={`/products?page=${page}`}
-                                className={clsx(
-                                    s.pageSelectorBtn,
-                                    page === pagination.currentPage &&
-                                        s.pageSelectorBtnActive,
-                                )}
-                            >
-                                {page}
-                            </Link>
-                        ),
-                    )}
-
-                    {pagination.hasNextPage ? (
-                        <Link
-                            to={`/products?page=${pagination.currentPage + 1}`}
-                            className={s.arrowRight}
-                        >
-                            <ArrowRightIcon />
-                        </Link>
-                    ) : (
-                        <div className={s.arrowRight}>
-                            <ArrowRightIcon />
-                        </div>
-                    )}
-                </div>
-            )}
+            <Pagination pagination={pagination} />
         </div>
     );
 };

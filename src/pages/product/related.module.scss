@@ -1,0 +1,21 @@
+@use '@/styles/variables' as *;
+
+.related {
+    margin-top: 48px;
+    margin-bottom: 146px;
+
+    &__title {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 48px;
+        letter-spacing: 0;
+        color: $text-primary;
+        margin-bottom: 32px;
+    }
+
+    &__cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 30px 79px;
+    }
+}

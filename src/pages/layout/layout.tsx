@@ -1,14 +1,14 @@
 import { Header } from '@/pages/layout';
 import { Outlet } from 'react-router-dom';
-import { layoutStyles } from '@/pages/layout';
 import '@/styles/styles.module.scss';
 import { globalStyles } from '@/styles';
+import s from './layout.module.scss';
 
 const Layout = () => {
     return (
-        <div className={layoutStyles.wrapper}>
+        <div className={s.wrapper}>
             <Header />
-            <main className={layoutStyles.main}>
+            <main className={s.main}>
                 <div className={globalStyles.container}>
                     <Outlet />
                 </div>
