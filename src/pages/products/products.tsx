@@ -1,7 +1,7 @@
 import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useGetProducts } from '@/pages/products/useGetProducts.ts';
 import { Loader } from '@/components/Loader';
 import s from './products.module.scss';
@@ -42,14 +42,28 @@ const Products = () => {
                 {products
                     .slice((pageNumber - 1) * 9, (pageNumber - 1) * 9 + 9)
                     .map((product) => (
-                        <Card
-                            key={product.id}
-                            image={product.images[0]}
-                            title={product.title}
-                            subtitle={product.description}
-                            contentSlot={`$${product.price}`}
-                            actionSlot={<Button>Buy now</Button>}
-                        />
+                        <Link
+                            to={`/product/${product.id}`}
+                            className={s.productCards__card}
+                        >
+                            <Card
+                                key={product.id}
+                                image={product.images[0]}
+                                title={product.title}
+                                subtitle={product.description}
+                                contentSlot={`$${product.price}`}
+                                actionSlot={
+                                    <Button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            alert('Вы это купили! Поздравляю!');
+                                        }}
+                                    >
+                                        Buy now
+                                    </Button>
+                                }
+                            />
+                        </Link>
                     ))}
             </div>
 
