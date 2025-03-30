@@ -1,6 +1,7 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import s from './Text.module.scss';
+import { memo } from 'react';
 
 export type TextProps = {
     /** Дополнительный класс */
@@ -36,23 +37,20 @@ const Text: React.FC<TextProps> = ({
         className,
     );
 
+    const styleMap: React.CSSProperties = maxLines
+        ? {
+              WebkitLineClamp: maxLines,
+              display: '-webkit-box',
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+          }
+        : {};
+
     return (
-        <Tag
-            className={baseClasses}
-            style={
-                maxLines
-                    ? {
-                          WebkitLineClamp: maxLines,
-                          display: '-webkit-box',
-                          WebkitBoxOrient: 'vertical',
-                          overflow: 'hidden',
-                      }
-                    : {}
-            }
-        >
+        <Tag className={baseClasses} style={styleMap}>
             {children}
         </Tag>
     );
 };
 
-export default Text;
+export default memo(Text);

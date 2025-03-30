@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { memo } from 'react';
 import { Text } from '@/components/Text';
 import s from './Card.module.scss';
 
@@ -68,4 +68,4 @@ const Card: React.FC<CardProps> = ({
     );
 };
 
-export default Card;
+export default memo(Card);
