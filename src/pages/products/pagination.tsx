@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRightIcon } from '@/components/Icons/ArrowRightIcon';
 import clsx from 'clsx';
-import { PaginationInfo } from '@/utuls/pagination.ts';
+import { PaginationInfo } from '@/utils/pagination.ts';
 import { memo } from 'react';
 import s from './pagination.module.scss';
 

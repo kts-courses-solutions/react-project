@@ -6,7 +6,7 @@ import { useGetProducts } from '@/pages/products/useGetProducts.ts';
 import { Loader } from '@/components/Loader';
 import s from './products.module.scss';
 import { useEffect, useState } from 'react';
-import { getPagination, PaginationInfo } from '@/utuls/pagination.ts';
+import { getPagination, PaginationInfo } from '@/utils/pagination.ts';
 import Pagination from '@/pages/products/pagination.tsx';
 import Headline from './headline';
 import Search from './search';
