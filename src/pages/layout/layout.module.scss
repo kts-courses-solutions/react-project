@@ -1,4 +1,4 @@
-@use '@/styles/variables';
+@use '@/styles/variables' as *;
 
 .wrapper {
     display: flex;
@@ -10,5 +10,5 @@
 .main {
     flex-grow: 1;
 
-    background-color: variables.$content-bg;
+    background-color: $content-bg;
 }

@@ -24,7 +24,7 @@ const Loader: React.FC<LoaderProps> = ({
 }: LoaderProps) => {
     return (
         <svg
-            className={clsx(loaderStyles.ktsLoader, className)}
+            className={clsx(loaderStyles.loader, className)}
             width={LOADER_SIZES_MAP[size]}
             height={LOADER_SIZES_MAP[size]}
             viewBox="0 0 60 60"

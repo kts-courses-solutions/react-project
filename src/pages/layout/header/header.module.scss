@@ -1,27 +1,27 @@
-@use '../../../styles/variables';
-
-.headerWrapper {
-    border-bottom: 2px solid rgba(243, 243, 243, 1);
-}
+@use '@/styles/variables' as *;
 
 .header {
-    // позиционирование
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
+    border-bottom: 2px solid rgba(243, 243, 243, 1);
 
-    // стилизация
-    padding: 24px 0;
-    background-color: variables.$header-bg;
-}
+    &__content {
+        // позиционирование
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
 
-.logo {
-    // позиционирование
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
+        // стилизация
+        padding: 24px 0;
+        background-color: $header-bg;
+    }
+
+    &__logo {
+        // позиционирование
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
 }

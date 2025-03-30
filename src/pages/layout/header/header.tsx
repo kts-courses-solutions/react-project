@@ -9,9 +9,9 @@ import { memo } from 'react';
 
 const Header = () => {
     return (
-        <div className={s.headerWrapper}>
-            <header className={clsx(globalStyles.container, s.header)}>
-                <Link to="/" className={s.logo}>
+        <div className={s.header}>
+            <header className={clsx(globalStyles.container, s.header__content)}>
+                <Link to="/" className={s.header__logo}>
                     <img
                         src={`${import.meta.env.BASE_URL}logo.svg`}
                         alt="logo"

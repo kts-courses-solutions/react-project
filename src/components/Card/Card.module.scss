@@ -1,9 +1,9 @@
-@use '@/styles/variables';
+@use '@/styles/variables' as *;
 
 .card {
     display: flex;
     flex-direction: column;
-    background-color: variables.$card-bg;
+    background-color: $card-bg;
     width: 348px;
 
     &:hover {
@@ -11,7 +11,7 @@
     }
 
     &__image {
-        background-color: variables.$card-image-bg;
+        background-color: $card-image-bg;
         min-width: 348px;
         min-height: 348px;
         width: 348px;
@@ -39,14 +39,14 @@
     }
 
     &__caption {
-        color: variables.$text-secondary;
+        color: $text-secondary;
         font-weight: 500;
         font-size: 14px;
         line-height: 18px;
     }
 
     &__title {
-        color: variables.$text-primary;
+        color: $text-primary;
         line-height: 24px;
         width: 100%;
         display: -webkit-box;
@@ -56,7 +56,7 @@
     }
 
     &__subtitle {
-        color: variables.$text-secondary;
+        color: $text-secondary;
         line-height: 20px;
         width: 100%;
         display: -webkit-box;
@@ -66,7 +66,7 @@
     }
 
     &__content {
-        color: variables.$text-primary;
+        color: $text-primary;
         font-weight: 700;
         font-size: 18px;
         line-height: 22px;

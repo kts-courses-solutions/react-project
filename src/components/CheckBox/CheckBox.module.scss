@@ -1,4 +1,4 @@
-@use '@/styles/variables';
+@use '@/styles/variables' as *;
 
 .checkBox {
     display: inline-flex;
@@ -14,7 +14,7 @@
     &__box {
         width: 40px;
         height: 40px;
-        background-color: variables.$checkbox-bg;
+        background-color: $checkbox-bg;
         border: 1px solid white;
         display: flex;
         align-items: center;
@@ -22,13 +22,13 @@
         position: relative;
 
         &:hover {
-            border: 1px solid variables.$checkbox-border-hover;
+            border: 1px solid $checkbox-border-hover;
         }
     }
 
-    &:has(&__input:disabled) &Box {
-        background-color: variables.$checkbox-bg-disabled;
-        border: 1px solid variables.$checkbox-border-disabled;
+    &:has(&__input:disabled) &__box {
+        background-color: $checkbox-bg-disabled;
+        border: 1px solid $checkbox-border-disabled;
     }
 
     &__icon {
