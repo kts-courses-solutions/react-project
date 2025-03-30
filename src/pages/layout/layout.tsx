@@ -6,9 +6,9 @@ import s from './layout.module.scss';
 
 const Layout = () => {
     return (
-        <div className={s.wrapper}>
+        <div className={s.layout}>
             <Header />
-            <main className={s.main}>
+            <main className={s.layout__content}>
                 <div className={globalStyles.container}>
                     <Outlet />
                 </div>

@@ -30,15 +30,16 @@ const ProductPage = () => {
                 <ArrowRightIcon />
                 Back
             </Link>
+
             <div className={s.product}>
-                <div className={s.imgWrapper}>
+                <div className={s.product__image__wrapper}>
                     <Button
-                        className={s.leftImgBtn}
+                        className={s.product__image__btn__left}
                         onClick={() => {
                             if (currentImage === 0) {
                                 setCurrentImage(product.images.length - 1);
                             } else {
-                                setCurrentImage(1);
+                                setCurrentImage(currentImage - 1);
                             }
                         }}
                     >
@@ -47,9 +48,10 @@ const ProductPage = () => {
                     <img
                         src={product.images[currentImage]}
                         alt={product.title}
+                        className={s.product__image__content}
                     />
                     <Button
-                        className={s.rightImgBtn}
+                        className={s.product__image__btn__right}
                         onClick={() => {
                             if (currentImage === product.images.length - 1) {
                                 setCurrentImage(0);
@@ -61,17 +63,41 @@ const ProductPage = () => {
                         <ArrowRightIcon color="white" />
                     </Button>
                 </div>
+
                 <div className={s.productDesc}>
-                    <div className={s.text}>
-                        <Text tag="h1">{product.title}</Text>
-                        <Text tag="span">{product.description}</Text>
+                    <div className={s.productDesc__text}>
+                        <Text
+                            tag="h1"
+                            weight="bold"
+                            className={s.productDesc__title}
+                        >
+                            {product.title}
+                        </Text>
+                        <Text
+                            tag="span"
+                            weight="normal"
+                            view="p-20"
+                            className={s.productDesc__subtitle}
+                        >
+                            {product.description}
+                        </Text>
                     </div>
 
                     <div className={s.productAction}>
-                        <Text tag="h2">${product.price}</Text>
-                        <div className={s.buttons}>
-                            <Button className={s.buyBtn}>Buy now</Button>
-                            <Button className={s.cartBtn}>Add to cart</Button>
+                        <Text
+                            tag="h2"
+                            weight="bold"
+                            className={s.productAction__title}
+                        >
+                            ${product.price}
+                        </Text>
+                        <div className={s.productAction__btn}>
+                            <Button className={s.productAction__btn__buy}>
+                                Buy now
+                            </Button>
+                            <Button className={s.productAction__btn__cart}>
+                                Add to cart
+                            </Button>
                         </div>
                     </div>
                 </div>
