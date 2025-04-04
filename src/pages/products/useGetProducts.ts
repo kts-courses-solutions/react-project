@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import lalasiaStore from '@/store/lalasia.ts';
+import { lalasiaStore } from '@/store';
 
 export function useGetProducts() {
     useEffect(() => {

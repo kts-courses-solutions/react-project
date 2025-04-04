@@ -57,6 +57,3 @@ export class LalasiaStore extends BaseStore<Product> {
         }
     }
 }
-
-const lalasiaStore = new LalasiaStore();
-export default lalasiaStore;
