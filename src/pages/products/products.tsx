@@ -10,17 +10,19 @@ import { getPagination, PaginationInfo } from '@/utils/pagination.ts';
 import Pagination from '@/pages/products/pagination.tsx';
 import Headline from './headline';
 import Search from './search';
+import { observer } from 'mobx-react-lite';
 
-const Products = () => {
+const Products = observer(() => {
     const [searchParams] = useSearchParams();
     const page = searchParams.get('page');
     const pageNumber = page ? Number(page) : 1;
 
     const [pagination, setPagination] = useState<PaginationInfo | null>(null);
 
-    const { products, isLoading, error } = useGetProducts();
+    const { products, isLoading } = useGetProducts();
 
     useEffect(() => {
+        console.log('products', products);
         if (products) {
             setPagination(getPagination(products.length, 9, pageNumber, 5));
         }
@@ -30,7 +32,7 @@ const Products = () => {
         return <Loader />;
     }
 
-    if (!products || error) return <Text>Oups...</Text>;
+    if (!products) return <Text>Oups...</Text>;
 
     return (
         <div>
@@ -43,6 +45,7 @@ const Products = () => {
                     .slice((pageNumber - 1) * 9, (pageNumber - 1) * 9 + 9)
                     .map((product) => (
                         <Link
+                            key={product.id}
                             to={`/product/${product.id}`}
                             className={s.productCards__card}
                         >
@@ -70,6 +73,6 @@ const Products = () => {
             <Pagination pagination={pagination} />
         </div>
     );
-};
+});
 
 export default Products;
