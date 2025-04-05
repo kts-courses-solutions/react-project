@@ -1,30 +1,16 @@
 import clsx from 'clsx';
 import { Link, useLocation } from 'react-router-dom';
-import s from './navigation.module.scss';
+import s from './Navigation.module.scss';
 import { memo } from 'react';
+import { NAV_LINKS } from './config';
 
 const Navigation = () => {
     const location = useLocation();
 
-    const navLinks = [
-        {
-            pathname: '/products',
-            title: 'Products',
-        },
-        {
-            pathname: '/categories',
-            title: 'Categories',
-        },
-        {
-            pathname: '/about',
-            title: 'About',
-        },
-    ];
-
     return (
         <nav>
             <ul className={s.navbar}>
-                {navLinks.map((item, i) => (
+                {NAV_LINKS.map((item, i) => (
                     <li
                         key={i}
                         className={clsx(
