@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { loaderStyles } from '@/components/Loader';
+import s from './Loader.module.scss';
 
 type LOADER_SIZE = 's' | 'm' | 'l';
 
@@ -24,7 +24,7 @@ const Loader: React.FC<LoaderProps> = ({
 }: LoaderProps) => {
     return (
         <svg
-            className={clsx(loaderStyles.loader, className)}
+            className={clsx(s.loader, className)}
             width={LOADER_SIZES_MAP[size]}
             height={LOADER_SIZES_MAP[size]}
             viewBox="0 0 60 60"
