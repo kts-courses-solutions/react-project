@@ -4,6 +4,7 @@ import { MultiDropdown } from '@/components/MultiDropdown';
 import { Text } from '@/components/Text';
 import { Product } from '@/types/products';
 import s from './Search.module.scss';
+import { memo } from 'react';
 
 interface SearchProps {
     products: Product[];
@@ -46,4 +47,4 @@ const Search = ({ products }: SearchProps) => {
     );
 };
 
-export default Search;
+export default memo(Search);

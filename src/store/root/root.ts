@@ -1,3 +1,5 @@
+import QueryParamsStore from '@/store/QueryParams/QueryParams.ts';
+
 export default class RootStore {
-    constructor() {}
+    readonly query = new QueryParamsStore();
 }

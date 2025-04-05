@@ -2,46 +2,43 @@ import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Link, useSearchParams } from 'react-router-dom';
-import { useGetProducts } from '@/pages/products/hooks/useGetProducts.ts';
 import { Loader } from '@/components/Loader';
 import s from './Products.module.scss';
-import { useEffect, useState } from 'react';
-import { getPagination, PaginationInfo } from '@/utils/pagination.ts';
+import { useEffect } from 'react';
 import Pagination from '@/pages/products/components/Pagination/Pagination.tsx';
 import Headline from './components/Headline/Headline.tsx';
 import Search from './components/Search/Search.tsx';
 import { observer } from 'mobx-react-lite';
+import { useProductsPageStore } from '@/store/ProductsPage/context/ProductsPageStoreContext.tsx';
+import { Meta } from '@/store/base.ts';
+import ProductsPageStoreProvider from '@/store/ProductsPage/context/ProductsPageStoreProvider.tsx';
 
-const Products = observer(() => {
+const ProductsPageContent = observer(() => {
     const [searchParams] = useSearchParams();
     const page = searchParams.get('page');
     const pageNumber = page ? Number(page) : 1;
 
-    const [pagination, setPagination] = useState<PaginationInfo | null>(null);
-
-    const { products, isLoading } = useGetProducts();
+    const store = useProductsPageStore();
 
     useEffect(() => {
-        console.log('products', products);
-        if (products) {
-            setPagination(getPagination(products.length, 9, pageNumber, 5));
-        }
-    }, [pageNumber, products]);
+        store.load();
+        return () => store.destroy();
+    }, [store]);
 
-    if (isLoading) {
+    if (store.meta === Meta.initial || store.meta === Meta.loading) {
         return <Loader />;
     }
 
-    if (!products) return <Text>Oups...</Text>;
+    if (!store.list) return <Text>Oups...</Text>;
 
     return (
         <div>
             <Headline />
 
-            <Search products={products} />
+            <Search products={store.list} />
 
             <div className={s.productCards}>
-                {products
+                {store.list
                     .slice((pageNumber - 1) * 9, (pageNumber - 1) * 9 + 9)
                     .map((product) => (
                         <Link
@@ -70,9 +67,15 @@ const Products = observer(() => {
                     ))}
             </div>
 
-            <Pagination pagination={pagination} />
+            <Pagination pagination={store.pagination} />
         </div>
     );
 });
+
+const Products = () => (
+    <ProductsPageStoreProvider>
+        <ProductsPageContent />
+    </ProductsPageStoreProvider>
+);
 
 export default Products;
