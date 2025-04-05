@@ -2,7 +2,7 @@ import { ArrowRightIcon } from '@/components/Icons/ArrowRightIcon';
 import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 import { Link, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useGetProduct } from './hooks/useGetProduct.ts';
 import { Loader } from '@/components/Loader';
 import s from './Product.module.scss';
@@ -15,6 +15,32 @@ const ProductPage = () => {
     const [currentImage, setCurrentImage] = useState(0);
 
     const { product, isLoading } = useGetProduct(productNumber);
+
+    const handlerPrevImage = useCallback(() => {
+        if (!product) {
+            return;
+        }
+
+        if (currentImage === 0) {
+            setCurrentImage(product.images.length - 1);
+            return;
+        }
+
+        setCurrentImage(currentImage - 1);
+    }, [currentImage, product]);
+
+    const handlerNextImage = useCallback(() => {
+        if (!product) {
+            return;
+        }
+
+        if (currentImage === product.images.length - 1) {
+            setCurrentImage(0);
+            return;
+        }
+
+        setCurrentImage(currentImage + 1);
+    }, [currentImage, product]);
 
     if (isLoading) {
         return <Loader />;
@@ -35,13 +61,7 @@ const ProductPage = () => {
                 <div className={s.product__image__wrapper}>
                     <Button
                         className={s.product__image__btn__left}
-                        onClick={() => {
-                            if (currentImage === 0) {
-                                setCurrentImage(product.images.length - 1);
-                            } else {
-                                setCurrentImage(currentImage - 1);
-                            }
-                        }}
+                        onClick={handlerPrevImage}
                     >
                         <ArrowRightIcon color="white" />
                     </Button>
@@ -52,13 +72,7 @@ const ProductPage = () => {
                     />
                     <Button
                         className={s.product__image__btn__right}
-                        onClick={() => {
-                            if (currentImage === product.images.length - 1) {
-                                setCurrentImage(0);
-                            } else {
-                                setCurrentImage(currentImage + 1);
-                            }
-                        }}
+                        onClick={handlerNextImage}
                     >
                         <ArrowRightIcon color="white" />
                     </Button>
