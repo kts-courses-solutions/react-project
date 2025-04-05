@@ -1,7 +1,7 @@
 import { Text } from '@/components/Text';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
-import s from './related.module.scss';
+import s from './Related.module.scss';
 
 const Related = () => {
     return (

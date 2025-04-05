@@ -1,5 +1,5 @@
 import { Text } from '@/components/Text';
-import s from './headline.module.scss';
+import s from './Headline.module.scss';
 
 const Headline = () => {
     return (

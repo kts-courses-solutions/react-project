@@ -3,10 +3,10 @@ import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { useGetProduct } from './useGetProduct.ts';
+import { useGetProduct } from './hooks/useGetProduct.ts';
 import { Loader } from '@/components/Loader';
-import s from './product.module.scss';
-import Related from '@/pages/product/related.tsx';
+import s from './Product.module.scss';
+import Related from '@/pages/product/components/Related/Related.tsx';
 
 const ProductPage = () => {
     const { productId } = useParams();

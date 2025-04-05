@@ -3,7 +3,7 @@ import { ArrowRightIcon } from '@/components/Icons/ArrowRightIcon';
 import clsx from 'clsx';
 import { PaginationInfo } from '@/utils/pagination.ts';
 import { memo } from 'react';
-import s from './pagination.module.scss';
+import s from './Pagination.module.scss';
 
 interface PaginationProps {
     pagination: PaginationInfo | null;

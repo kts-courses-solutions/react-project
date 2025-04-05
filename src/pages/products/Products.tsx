@@ -2,14 +2,14 @@ import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Link, useSearchParams } from 'react-router-dom';
-import { useGetProducts } from '@/pages/products/useGetProducts.ts';
+import { useGetProducts } from '@/pages/products/hooks/useGetProducts.ts';
 import { Loader } from '@/components/Loader';
-import s from './products.module.scss';
+import s from './Products.module.scss';
 import { useEffect, useState } from 'react';
 import { getPagination, PaginationInfo } from '@/utils/pagination.ts';
-import Pagination from '@/pages/products/pagination.tsx';
-import Headline from './headline';
-import Search from './search';
+import Pagination from '@/pages/products/components/Pagination/Pagination.tsx';
+import Headline from './components/Headline/Headline.tsx';
+import Search from './components/Search/Search.tsx';
 import { observer } from 'mobx-react-lite';
 
 const Products = observer(() => {

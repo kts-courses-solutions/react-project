@@ -3,7 +3,7 @@ import { Button } from '@/components/Button';
 import { MultiDropdown } from '@/components/MultiDropdown';
 import { Text } from '@/components/Text';
 import { Product } from '@/types/products';
-import s from './search.module.scss';
+import s from './Search.module.scss';
 
 interface SearchProps {
     products: Product[];
