@@ -1,0 +1,44 @@
+@use '@/styles/variables' as *;
+
+.input {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    outline: 1px solid $input-border;
+    padding: 14px 12px;
+    background: $input-bg;
+    transition: outline-color 0.3s;
+
+    &:focus-within {
+        background-color: $input-bg-focus;
+        outline-color: $input-border-focus;
+    }
+
+    &__field {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 0;
+        font-weight: 400;
+        line-height: 20px;
+        font-size: 16px;
+        color: $input-text;
+        background: transparent;
+
+        &::placeholder {
+            color: $input-placeholder;
+        }
+
+        &:disabled {
+            color: $input-text-disabled;
+        }
+    }
+
+    &__after {
+        width: 24px;
+        height: 24px;
+        margin-left: 8px;
+        color: $text-secondary;
+    }
+}

@@ -1,0 +1,55 @@
+@use '@/styles/variables' as *;
+
+.kts-text {
+    font-family: inherit;
+
+    &--title {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    &--button {
+        font-size: 1.125rem;
+        font-weight: 600;
+    }
+
+    &--p-20 {
+        font-size: 1.5rem;
+    }
+
+    &--p-18 {
+        font-size: 1.25rem;
+    }
+
+    &--p-16 {
+        font-size: 1.125rem;
+    }
+
+    &--p-14 {
+        font-size: 1rem;
+    }
+
+    &--normal {
+        font-weight: 400;
+    }
+
+    &--medium {
+        font-weight: 500;
+    }
+
+    &--bold {
+        font-weight: 700;
+    }
+
+    &--primary {
+        color: $text-primary;
+    }
+
+    &--secondary {
+        color: $text-secondary;
+    }
+
+    &--accent {
+        color: $text-accent;
+    }
+}

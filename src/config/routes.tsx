@@ -1,14 +1,33 @@
-import { RouteObject } from 'react-router-dom';
+import { Navigate, RouteObject } from 'react-router-dom';
 import { Layout } from '@/pages/layout';
-import { Root } from '@/pages/root';
+import { Categories } from '@/pages/categories';
+import { About } from '@/pages/about';
+import { Products } from '@/pages/products';
+import { Product } from '@/pages/product';
 
 export const routesConfig: RouteObject[] = [
     {
         element: <Layout />,
         children: [
             {
-                element: <Root />,
                 path: '/',
+                element: <Navigate to="/products" replace />,
+            },
+            {
+                element: <Products />,
+                path: '/products',
+            },
+            {
+                element: <Product />,
+                path: '/product/:productId',
+            },
+            {
+                element: <Categories />,
+                path: '/categories',
+            },
+            {
+                element: <About />,
+                path: '/about',
             },
         ],
     },

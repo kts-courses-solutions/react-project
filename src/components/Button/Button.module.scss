@@ -1,0 +1,39 @@
+@use '@/styles/variables' as *;
+
+.btn {
+    padding: 14px 20px;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0;
+    color: $button-primary-text;
+    background-color: $button-primary-bg;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        color: $button-primary-text-hover;
+        background-color: $button-primary-bg-hover;
+    }
+
+    &_loading:hover {
+        color: $button-primary-text;
+        background-color: $button-primary-bg;
+    }
+
+    &_disabled {
+        color: $button-primary-text-disabled;
+        background-color: $button-primary-bg-disabled;
+
+        &:hover {
+            color: $button-primary-text-disabled;
+            background-color: $button-primary-bg-disabled;
+        }
+    }
+
+    &__loader {
+        margin-right: 8px;
+        fill: $button-primary-text;
+    }
+}
