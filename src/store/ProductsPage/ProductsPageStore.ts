@@ -15,9 +15,20 @@ export class ProductsPageStore extends BaseStore<Product> {
         this.rootStore = rootStore;
 
         this._searchReaction = reaction(
-            () => this.rootStore.query,
-            (title) => {
-                console.log('a: ', title);
+            () => [
+                this.rootStore.query.getParam('page'),
+                this.rootStore.query.getParam('search'),
+                this.rootStore.query.getParam('category'),
+            ],
+            ([page, search, category]) => {
+                console.log(
+                    'page: ',
+                    page,
+                    'search: ',
+                    search,
+                    'category: ',
+                    category,
+                );
                 this.load();
             },
         );
