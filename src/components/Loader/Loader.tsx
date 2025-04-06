@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import clsx from 'clsx';
 import s from './Loader.module.scss';
 
@@ -37,4 +37,4 @@ const Loader: React.FC<LoaderProps> = ({
     );
 };
 
-export default Loader;
+export default memo(Loader);
