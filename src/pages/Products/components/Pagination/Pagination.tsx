@@ -1,24 +1,18 @@
 import { Link } from 'react-router-dom';
 import { ArrowRightIcon } from '@/components/Icons/ArrowRightIcon';
 import clsx from 'clsx';
-import { PaginationInfo } from '@/utils/pagination.ts';
-import { memo } from 'react';
 import s from './Pagination.module.scss';
+import { useProductsPageStore } from '@/store/ProductsPage/context/ProductsPageStoreContext.tsx';
+import { observer } from 'mobx-react-lite';
 
-interface PaginationProps {
-    pagination: PaginationInfo | null;
-}
-
-const Pagination = ({ pagination }: PaginationProps) => {
-    if (pagination === null) {
-        return null;
-    }
+const Pagination = observer(() => {
+    const store = useProductsPageStore();
 
     return (
         <div className={s.pagination}>
-            {pagination.hasPrevPage ? (
+            {store.pagination.hasPrevPage ? (
                 <Link
-                    to={`/products?page=${pagination.currentPage - 1}`}
+                    to={`/products?page=${store.pagination.currentPage - 1}`}
                     className={s.pagination__arrowLeft}
                 >
                     <ArrowRightIcon />
@@ -29,7 +23,7 @@ const Pagination = ({ pagination }: PaginationProps) => {
                 </div>
             )}
 
-            {pagination.visiblePages.map((page, index) =>
+            {store.pagination.visiblePages.map((page, index) =>
                 page === null ? (
                     <div
                         key={`ellipsis-${index}`}
@@ -43,7 +37,7 @@ const Pagination = ({ pagination }: PaginationProps) => {
                         to={`/products?page=${page}`}
                         className={clsx(
                             s.pagination__btn,
-                            page === pagination.currentPage &&
+                            page === store.pagination.currentPage &&
                                 s.pagination__btn_active,
                         )}
                     >
@@ -52,9 +46,9 @@ const Pagination = ({ pagination }: PaginationProps) => {
                 ),
             )}
 
-            {pagination.hasNextPage ? (
+            {store.pagination.hasNextPage ? (
                 <Link
-                    to={`/products?page=${pagination.currentPage + 1}`}
+                    to={`/products?page=${store.pagination.currentPage + 1}`}
                     className={s.pagination__arrowRight}
                 >
                     <ArrowRightIcon />
@@ -66,6 +60,6 @@ const Pagination = ({ pagination }: PaginationProps) => {
             )}
         </div>
     );
-};
+});
 
-export default memo(Pagination);
+export default Pagination;

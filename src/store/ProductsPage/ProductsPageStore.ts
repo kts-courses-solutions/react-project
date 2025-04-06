@@ -34,7 +34,7 @@ export class ProductsPageStore extends BaseStore<ProductType> {
         );
     }
 
-    get pagination(): PaginationInfo | null {
+    get pagination(): PaginationInfo {
         const pageParam = this.rootStore.query.getParam('page');
         const pageNumber = pageParam ? Number(pageParam) : 1;
         return getPagination(this.list.length, 9, pageNumber, 5);

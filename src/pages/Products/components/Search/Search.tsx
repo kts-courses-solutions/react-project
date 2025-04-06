@@ -2,15 +2,14 @@ import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { MultiDropdown } from '@/components/MultiDropdown';
 import { Text } from '@/components/Text';
-import { ProductType } from '@/types/products';
 import s from './Search.module.scss';
 import { memo } from 'react';
+import { useProductsPageStore } from '@/store/ProductsPage/context/ProductsPageStoreContext.tsx';
+import { observer } from 'mobx-react-lite';
 
-interface SearchProps {
-    products: ProductType[];
-}
+const Search = observer(() => {
+    const store = useProductsPageStore();
 
-const Search = ({ products }: SearchProps) => {
     return (
         <div>
             <div className={s.inputWithButton}>
@@ -40,11 +39,11 @@ const Search = ({ products }: SearchProps) => {
                     view="p-20"
                     className={s.totalProducts__subtitle}
                 >
-                    {products.length}
+                    {store.list.length}
                 </Text>
             </div>
         </div>
     );
-};
+});
 
 export default memo(Search);

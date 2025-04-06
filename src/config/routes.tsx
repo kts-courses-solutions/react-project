@@ -1,7 +1,7 @@
 import { Navigate, RouteObject } from 'react-router-dom';
 import { Layout } from '@/pages/Layout';
-import { Products } from 'src/pages/Products';
-import { Product } from 'src/pages/Product';
+import { Products } from '@/pages/Products';
+import { Product } from '@/pages/Product';
 import { Categories } from '@/pages/Categories';
 import { About } from '@/pages/About';
 
