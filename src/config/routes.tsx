@@ -1,7 +1,7 @@
 import { Navigate, RouteObject } from 'react-router-dom';
 import { Layout } from '@/pages/Layout';
-import { Products } from '@/pages/products';
-import { Product } from '@/pages/product';
+import { Products } from 'src/pages/Products';
+import { Product } from 'src/pages/Product';
 import { Categories } from '@/pages/Categories';
 import { About } from '@/pages/About';
 
@@ -15,11 +15,11 @@ export const routesConfig: RouteObject[] = [
             },
             {
                 element: <Products />,
-                path: '/products',
+                path: '/Products',
             },
             {
                 element: <Product />,
-                path: '/product/:productId',
+                path: '/Product/:productId',
             },
             {
                 element: <Categories />,

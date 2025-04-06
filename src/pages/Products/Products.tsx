@@ -5,7 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Loader } from '@/components/Loader';
 import s from './Products.module.scss';
 import { useEffect } from 'react';
-import Pagination from '@/pages/products/components/Pagination/Pagination.tsx';
+import Pagination from '@/pages/Products/components/Pagination/Pagination.tsx';
 import Headline from './components/Headline/Headline.tsx';
 import Search from './components/Search/Search.tsx';
 import { observer } from 'mobx-react-lite';

@@ -6,7 +6,7 @@ import { useCallback, useState } from 'react';
 import { useGetProduct } from './hooks/useGetProduct.ts';
 import { Loader } from '@/components/Loader';
 import s from './Product.module.scss';
-import Related from '@/pages/product/components/Related/Related.tsx';
+import Related from '@/pages/Product/components/Related/Related.tsx';
 
 const Product = () => {
     const { productId } = useParams();

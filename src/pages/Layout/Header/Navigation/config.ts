@@ -1,6 +1,6 @@
 export const NAV_LINKS = [
     {
-        pathname: '/products',
+        pathname: '/Products',
         title: 'Products',
     },
     {
