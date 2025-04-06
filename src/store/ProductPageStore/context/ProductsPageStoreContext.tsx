@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { ProductsPageStore } from '@/store/ProductsPageStore';
+import { ProductsPageStore } from '@/store/ProductPageStore';
 
 export const ProductsPageStoreContext = createContext<ProductsPageStore | null>(
     null,

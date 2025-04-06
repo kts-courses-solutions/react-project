@@ -4,10 +4,10 @@ import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
-import { Meta } from '@/store/base.ts';
 import { Loader } from '@/components/Loader';
 import { Text } from '@/components/Text';
-import { useProductsPageStore } from '@/store/ProductsPageStore';
+import { useProductsPageStore } from '@/store/ProductPageStore';
+import { Meta } from '@/store/DataStore/types.ts';
 
 const Content = observer(() => {
     const [searchParams] = useSearchParams();
@@ -24,11 +24,11 @@ const Content = observer(() => {
         return <Loader />;
     }
 
-    if (!store.list) return <Text>Oups...</Text>;
+    if (!store.data) return <Text>Oups...</Text>;
 
     return (
         <div className={s.productCards}>
-            {store.list
+            {store.data
                 .slice((pageNumber - 1) * 9, (pageNumber - 1) * 9 + 9)
                 .map((product) => (
                     <Link

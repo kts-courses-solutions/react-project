@@ -1,38 +1,36 @@
 import { action, computed, makeObservable, observable } from 'mobx';
-import { ILocalStore } from './LocalStore';
 import { AxiosError } from 'axios';
+import { ILocalStore } from '@/store/LocalStore';
+import { Meta } from './types';
 
-export enum Meta {
-    initial = 'initial',
-    loading = 'loading',
-    success = 'success',
-    error = 'error',
-}
+type PrivateFields = '_data' | '_meta' | '_error';
 
-type PrivateFields = '_list' | '_meta' | '_error';
-
-export class BaseStore<T> implements ILocalStore {
-    protected _list: T[] = [];
+export default class DataStore<T> implements ILocalStore {
+    protected readonly _dataInitializer: T;
+    protected _data: T;
     protected _meta: Meta = Meta.initial;
     protected _error: AxiosError | null = null;
 
-    constructor() {
-        makeObservable<BaseStore<T>, PrivateFields>(this, {
-            _list: observable.ref,
+    constructor(initializer: T) {
+        makeObservable<DataStore<T>, PrivateFields>(this, {
+            _data: observable.ref,
             _meta: observable,
             _error: observable,
-            list: computed,
+            data: computed,
             meta: computed,
             error: computed,
-            setList: action,
+            setData: action,
             setMeta: action,
             setError: action,
             reset: action,
         });
+
+        this._data = initializer;
+        this._dataInitializer = initializer;
     }
 
-    get list(): T[] {
-        return this._list;
+    get data(): T {
+        return this._data;
     }
 
     get meta(): Meta {
@@ -43,8 +41,8 @@ export class BaseStore<T> implements ILocalStore {
         return this._error;
     }
 
-    setList(data: T[]) {
-        this._list = data;
+    setData(data: T) {
+        this._data = data;
     }
 
     setMeta(meta: Meta) {
@@ -56,7 +54,7 @@ export class BaseStore<T> implements ILocalStore {
     }
 
     reset() {
-        this._list = [];
+        this._data = this._dataInitializer;
         this._meta = Meta.initial;
     }
 

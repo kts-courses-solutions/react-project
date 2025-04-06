@@ -3,7 +3,7 @@ import { ArrowRightIcon } from '@/components/Icons/ArrowRightIcon';
 import clsx from 'clsx';
 import s from './Pagination.module.scss';
 import { observer } from 'mobx-react-lite';
-import { useProductsPageStore } from '@/store/ProductsPageStore';
+import { useProductsPageStore } from '@/store/ProductPageStore';
 
 const Pagination = observer(() => {
     const store = useProductsPageStore();

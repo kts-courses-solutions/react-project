@@ -5,7 +5,7 @@ import { Text } from '@/components/Text';
 import s from './Search.module.scss';
 import { memo } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useProductsPageStore } from '@/store/ProductsPageStore';
+import { useProductsPageStore } from '@/store/ProductPageStore';
 
 const Search = observer(() => {
     const store = useProductsPageStore();
@@ -39,7 +39,7 @@ const Search = observer(() => {
                     view="p-20"
                     className={s.totalProducts__subtitle}
                 >
-                    {store.list.length}
+                    {store.data.length}
                 </Text>
             </div>
         </div>

@@ -1,16 +1,17 @@
 import { IReactionDisposer, reaction, runInAction } from 'mobx';
-import { BaseStore, Meta } from '@/store/base.ts';
 import { ProductType } from '@/types/products';
 import { apiClient } from '@/config';
 import { getPagination, PaginationInfo } from '@/utils/pagination.ts';
 import { RootStore } from '@/store/RootStore';
+import { DataStore } from '@/store/DataStore';
+import { Meta } from '@/store/DataStore/types.ts';
 
-export default class ProductsPageStore extends BaseStore<ProductType> {
+export default class ProductsPageStore extends DataStore<ProductType[]> {
     private readonly rootStore: RootStore;
     private readonly _searchReaction: IReactionDisposer;
 
     constructor(rootStore: RootStore) {
-        super();
+        super([]);
 
         this.rootStore = rootStore;
 
@@ -37,7 +38,7 @@ export default class ProductsPageStore extends BaseStore<ProductType> {
     get pagination(): PaginationInfo {
         const pageParam = this.rootStore.query.getParam('page');
         const pageNumber = pageParam ? Number(pageParam) : 1;
-        return getPagination(this.list.length, 9, pageNumber, 5);
+        return getPagination(this.data.length, 9, pageNumber, 5);
     }
 
     async load() {
@@ -46,7 +47,7 @@ export default class ProductsPageStore extends BaseStore<ProductType> {
             const response = await apiClient.get<ProductType[]>('/products');
 
             runInAction(() => {
-                this.setList(response.data);
+                this.setData(response.data);
                 this.setMeta(Meta.success);
             });
         } catch {

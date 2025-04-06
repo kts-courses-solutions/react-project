@@ -1,1 +1,1 @@
-export type { BaseStore } from './base';
+export type { DataStore } from './DataStore/DataStore.ts';
