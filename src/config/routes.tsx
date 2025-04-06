@@ -1,9 +1,9 @@
 import { Navigate, RouteObject } from 'react-router-dom';
-import { Layout } from '@/pages/layout';
-import { Categories } from '@/pages/categories';
-import { About } from '@/pages/about';
+import { Layout } from '@/pages/Layout';
 import { Products } from '@/pages/products';
 import { Product } from '@/pages/product';
+import { Categories } from '@/pages/Categories';
+import { About } from '@/pages/About';
 
 export const routesConfig: RouteObject[] = [
     {
@@ -23,11 +23,11 @@ export const routesConfig: RouteObject[] = [
             },
             {
                 element: <Categories />,
-                path: '/categories',
+                path: '/Categories',
             },
             {
                 element: <About />,
-                path: '/about',
+                path: '/About',
             },
         ],
     },

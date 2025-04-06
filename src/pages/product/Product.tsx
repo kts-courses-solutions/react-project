@@ -8,7 +8,7 @@ import { Loader } from '@/components/Loader';
 import s from './Product.module.scss';
 import Related from '@/pages/product/components/Related/Related.tsx';
 
-const ProductPage = () => {
+const Product = () => {
     const { productId } = useParams();
     const productNumber = productId ? Number(productId) : -1;
 
@@ -122,4 +122,4 @@ const ProductPage = () => {
     );
 };
 
-export default ProductPage;
+export default Product;

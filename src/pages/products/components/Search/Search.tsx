@@ -2,12 +2,12 @@ import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { MultiDropdown } from '@/components/MultiDropdown';
 import { Text } from '@/components/Text';
-import { Product } from '@/types/products';
+import { ProductType } from '@/types/products';
 import s from './Search.module.scss';
 import { memo } from 'react';
 
 interface SearchProps {
-    products: Product[];
+    products: ProductType[];
 }
 
 const Search = ({ products }: SearchProps) => {

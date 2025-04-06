@@ -1,8 +1,8 @@
-import { Header } from '@/pages/layout';
+import { Header } from '@/pages/Layout';
 import { Outlet } from 'react-router-dom';
 import '@/styles/styles.module.scss';
 import { globalStyles } from '@/styles';
-import s from './layout.module.scss';
+import s from './Layout.module.scss';
 import { useQueryParamsStoreInit } from '@/store/QueryParams/useQueryParamsStoreInit.ts';
 
 const Layout = () => {

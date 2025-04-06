@@ -4,11 +4,11 @@ export const NAV_LINKS = [
         title: 'Products',
     },
     {
-        pathname: '/categories',
+        pathname: '/Categories',
         title: 'Categories',
     },
     {
-        pathname: '/about',
+        pathname: '/About',
         title: 'About',
     },
 ];
