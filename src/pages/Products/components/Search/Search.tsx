@@ -3,22 +3,33 @@ import { Button } from '@/components/Button';
 import { MultiDropdown } from '@/components/MultiDropdown';
 import { Text } from '@/components/Text';
 import s from './Search.module.scss';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useProductsPageStore } from '@/store/ProductsPageStore';
+import { useSearchParams } from 'react-router-dom';
 
 const Search = observer(() => {
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const store = useProductsPageStore();
+
+    const [searchValue, setSearchValue] = useState('');
+
+    const handleSearchClick = () => {
+        const newParams = new URLSearchParams(searchParams.toString());
+        newParams.set('title', searchValue);
+        setSearchParams(newParams);
+    };
 
     return (
         <div>
             <div className={s.inputWithButton}>
                 <Input
-                    value=""
+                    value={searchValue}
                     placeholder="Search product"
-                    onChange={() => {}}
+                    onChange={(value) => setSearchValue(value)}
                 />
-                <Button>Find now</Button>
+                <Button onClick={handleSearchClick}>Find now</Button>
             </div>
 
             <MultiDropdown

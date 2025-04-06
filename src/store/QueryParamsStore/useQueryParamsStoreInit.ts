@@ -1,14 +1,14 @@
-import { useLocation } from 'react-router';
 import { useEffect } from 'react';
 import { useRootStore } from '@/store/RootStore';
+import { useSearchParams } from 'react-router-dom';
 
 const useQueryParamsStoreInit = (): void => {
     const rootStore = useRootStore();
-    const { search } = useLocation();
+    const [searchParams] = useSearchParams();
 
     useEffect(() => {
-        rootStore.query.setSearch(search);
-    }, [search, rootStore]);
+        rootStore.query.setSearch(searchParams);
+    }, [searchParams, rootStore]);
 };
 
 export default useQueryParamsStoreInit;

@@ -3,7 +3,6 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { observer } from 'mobx-react-lite';
-import { useEffect } from 'react';
 import { Loader } from '@/components/Loader';
 import { Text } from '@/components/Text';
 import { useProductsPageStore } from '@/store/ProductsPageStore';
@@ -15,10 +14,6 @@ const Content = observer(() => {
     const pageNumber = page ? Number(page) : 1;
 
     const store = useProductsPageStore();
-
-    useEffect(() => {
-        store.load();
-    }, [store]);
 
     if (store.meta === Meta.initial || store.meta === Meta.loading) {
         return <Loader />;

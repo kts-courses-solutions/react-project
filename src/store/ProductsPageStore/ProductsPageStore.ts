@@ -17,19 +17,11 @@ export default class ProductsPageStore extends DataStore<ProductType[]> {
         this._searchReaction = reaction(
             () => [
                 this.rootStore.query.getParam('page'),
-                this.rootStore.query.getParam('search'),
-                this.rootStore.query.getParam('category'),
+                this.rootStore.query.getParam('title'),
             ],
-            ([page, search, category]) => {
-                console.log(
-                    'page: ',
-                    page,
-                    'search: ',
-                    search,
-                    'category: ',
-                    category,
-                );
-                this.load();
+            ([page, title]) => {
+                console.log('page: ', page, 'title: ', title);
+                this.load(title?.toString());
             },
         );
     }
@@ -40,11 +32,17 @@ export default class ProductsPageStore extends DataStore<ProductType[]> {
         return getPagination(this.data.length, 9, pageNumber, 5);
     }
 
-    async load() {
+    async load(title?: string) {
         this.setMeta(Meta.loading);
         try {
-            const response =
-                await this.rootStore.apiClient.get<ProductType[]>('/products');
+            const response = await this.rootStore.apiClient.get<ProductType[]>(
+                '/products',
+                {
+                    params: {
+                        title: title,
+                    },
+                },
+            );
 
             runInAction(() => {
                 this.setData(response.data);
