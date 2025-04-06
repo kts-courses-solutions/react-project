@@ -1,22 +1,21 @@
 import { runInAction } from 'mobx';
 import { ProductType } from '@/types/products';
-import { apiClient } from '@/config';
 import { DataStore } from '@/store/DataStore';
 import { Meta } from '@/store/DataStore/types.ts';
+import { RootStore } from '@/store/RootStore';
 
 export default class ProductPageStore extends DataStore<null | ProductType> {
-    // private readonly rootStore: RootStore;
+    private readonly rootStore: RootStore;
 
-    constructor() {
+    constructor(rootStore: RootStore) {
         super(null);
-
-        // this.rootStore = rootStore;
+        this.rootStore = rootStore;
     }
 
     async load(productId: number) {
         this.setMeta(Meta.loading);
         try {
-            const response = await apiClient.get<ProductType>(
+            const response = await this.rootStore.apiClient.get<ProductType>(
                 `/products/${productId}`,
             );
 

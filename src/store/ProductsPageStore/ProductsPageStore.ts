@@ -1,6 +1,5 @@
 import { IReactionDisposer, reaction, runInAction } from 'mobx';
 import { ProductType } from '@/types/products';
-import { apiClient } from '@/config';
 import { getPagination, PaginationInfo } from '@/utils/pagination.ts';
 import { RootStore } from '@/store/RootStore';
 import { DataStore } from '@/store/DataStore';
@@ -44,7 +43,8 @@ export default class ProductsPageStore extends DataStore<ProductType[]> {
     async load() {
         this.setMeta(Meta.loading);
         try {
-            const response = await apiClient.get<ProductType[]>('/products');
+            const response =
+                await this.rootStore.apiClient.get<ProductType[]>('/products');
 
             runInAction(() => {
                 this.setData(response.data);
