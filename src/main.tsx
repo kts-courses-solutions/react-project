@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '@/config/mobX';
-import App from '@/App.tsx';
+import App from './App';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>

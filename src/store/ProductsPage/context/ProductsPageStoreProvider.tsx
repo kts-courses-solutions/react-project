@@ -1,7 +1,8 @@
 import { ProductsPageStore } from '@/store/ProductsPage/ProductsPageStore.ts';
 import { useRootStore } from '@/store/root/context/RootStoreContext.tsx';
 import { ProductsPageStoreContext } from './ProductsPageStoreContext.tsx';
-import React, { useMemo } from 'react';
+import React from 'react';
+import { useLocalStore } from '@/store/local';
 
 export const ProductsPageStoreProvider = ({
     children,
@@ -9,7 +10,7 @@ export const ProductsPageStoreProvider = ({
     children: React.ReactNode;
 }) => {
     const rootStore = useRootStore();
-    const store = useMemo(() => new ProductsPageStore(rootStore), [rootStore]);
+    const store = useLocalStore(() => new ProductsPageStore(rootStore));
 
     return (
         <ProductsPageStoreContext.Provider value={store}>
