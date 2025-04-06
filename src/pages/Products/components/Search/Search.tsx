@@ -5,7 +5,7 @@ import { Text } from '@/components/Text';
 import s from './Search.module.scss';
 import { memo } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useProductsPageStore } from '@/store/ProductPageStore';
+import { useProductsPageStore } from '@/store/ProductsPageStore';
 
 const Search = observer(() => {
     const store = useProductsPageStore();

@@ -2,7 +2,7 @@ import { ProductsPageStoreContext } from './ProductsPageStoreContext.tsx';
 import React from 'react';
 import { useLocalStore } from '@/store/LocalStore';
 import { useRootStore } from '@/store/RootStore';
-import { ProductsPageStore } from '@/store/ProductPageStore';
+import { ProductsPageStore } from '@/store/ProductsPageStore';
 
 export const ProductsPageStoreProvider = ({
     children,

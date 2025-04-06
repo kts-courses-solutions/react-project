@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { Loader } from '@/components/Loader';
 import { Text } from '@/components/Text';
-import { useProductsPageStore } from '@/store/ProductPageStore';
+import { useProductsPageStore } from '@/store/ProductsPageStore';
 import { Meta } from '@/store/DataStore/types.ts';
 
 const Content = observer(() => {
