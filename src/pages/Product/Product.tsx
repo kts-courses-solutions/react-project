@@ -2,51 +2,58 @@ import { ArrowRightIcon } from '@/components/Icons/ArrowRightIcon';
 import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 import { Link, useParams } from 'react-router-dom';
-import { useCallback, useState } from 'react';
-import { useGetProduct } from './hooks/useGetProduct.ts';
+import { useCallback, useEffect, useState } from 'react';
 import { Loader } from '@/components/Loader';
 import s from './Product.module.scss';
 import Related from '@/pages/Product/components/Related/Related.tsx';
+import { ProductPageStoreProvider } from '@/store/ProductPageStore';
+import { observer } from 'mobx-react-lite';
+import { useProductPageStore } from '@/store/ProductPageStore';
+import { Meta } from '@/store/DataStore/types.ts';
 
-const Product = () => {
+const ProductContent = observer(() => {
     const { productId } = useParams();
     const productNumber = productId ? Number(productId) : -1;
 
     const [currentImage, setCurrentImage] = useState(0);
 
-    const { product, isLoading } = useGetProduct(productNumber);
+    const store = useProductPageStore();
+
+    useEffect(() => {
+        store.load(productNumber);
+    }, [productNumber, store]);
 
     const handlerPrevImage = useCallback(() => {
-        if (!product) {
+        if (!store.data) {
             return;
         }
 
         if (currentImage === 0) {
-            setCurrentImage(product.images.length - 1);
+            setCurrentImage(store.data.images.length - 1);
             return;
         }
 
         setCurrentImage(currentImage - 1);
-    }, [currentImage, product]);
+    }, [currentImage, store.data]);
 
     const handlerNextImage = useCallback(() => {
-        if (!product) {
+        if (!store.data) {
             return;
         }
 
-        if (currentImage === product.images.length - 1) {
+        if (currentImage === store.data.images.length - 1) {
             setCurrentImage(0);
             return;
         }
 
         setCurrentImage(currentImage + 1);
-    }, [currentImage, product]);
+    }, [currentImage, store.data]);
 
-    if (isLoading) {
+    if (store.meta === Meta.initial || store.meta === Meta.loading) {
         return <Loader />;
     }
 
-    if (!product) {
+    if (!store.data) {
         return <Text>Oups</Text>;
     }
 
@@ -66,8 +73,8 @@ const Product = () => {
                         <ArrowRightIcon color="white" />
                     </Button>
                     <img
-                        src={product.images[currentImage]}
-                        alt={product.title}
+                        src={store.data.images[currentImage]}
+                        alt={store.data.title}
                         className={s.product__image__content}
                     />
                     <Button
@@ -85,7 +92,7 @@ const Product = () => {
                             weight="bold"
                             className={s.productDesc__title}
                         >
-                            {product.title}
+                            {store.data.title}
                         </Text>
                         <Text
                             tag="span"
@@ -93,7 +100,7 @@ const Product = () => {
                             view="p-20"
                             className={s.productDesc__subtitle}
                         >
-                            {product.description}
+                            {store.data.description}
                         </Text>
                     </div>
 
@@ -103,7 +110,7 @@ const Product = () => {
                             weight="bold"
                             className={s.productAction__title}
                         >
-                            ${product.price}
+                            ${store.data.price}
                         </Text>
                         <div className={s.productAction__btn}>
                             <Button className={s.productAction__btn__buy}>
@@ -119,6 +126,14 @@ const Product = () => {
 
             <Related />
         </div>
+    );
+});
+
+const Product = () => {
+    return (
+        <ProductPageStoreProvider>
+            <ProductContent />
+        </ProductPageStoreProvider>
     );
 };
 
