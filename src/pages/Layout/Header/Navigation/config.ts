@@ -1,14 +1,14 @@
 export const NAV_LINKS = [
     {
-        pathname: '/Products',
+        pathname: '/products',
         title: 'Products',
     },
     {
-        pathname: '/Categories',
+        pathname: '/categories',
         title: 'Categories',
     },
     {
-        pathname: '/About',
+        pathname: '/about',
         title: 'About',
     },
 ];
