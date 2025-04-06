@@ -4,8 +4,8 @@ import { MultiDropdown } from '@/components/MultiDropdown';
 import { Text } from '@/components/Text';
 import s from './Search.module.scss';
 import { memo } from 'react';
-import { useProductsPageStore } from '@/store/ProductsPage/context/ProductsPageStoreContext.tsx';
 import { observer } from 'mobx-react-lite';
+import { useProductsPageStore } from '@/store/ProductsPageStore';
 
 const Search = observer(() => {
     const store = useProductsPageStore();

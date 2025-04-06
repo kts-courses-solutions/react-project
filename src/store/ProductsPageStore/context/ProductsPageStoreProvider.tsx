@@ -1,8 +1,8 @@
-import { ProductsPageStore } from '@/store/ProductsPage/ProductsPageStore.ts';
-import { useRootStore } from '@/store/root/context/RootStoreContext.tsx';
 import { ProductsPageStoreContext } from './ProductsPageStoreContext.tsx';
 import React from 'react';
-import { useLocalStore } from '@/store/local';
+import { useLocalStore } from '@/store/LocalStore';
+import { useRootStore } from '@/store/RootStore';
+import { ProductsPageStore } from '@/store/ProductsPageStore';
 
 export const ProductsPageStoreProvider = ({
     children,

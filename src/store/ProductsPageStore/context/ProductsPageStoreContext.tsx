@@ -1,11 +1,11 @@
 import { createContext, useContext } from 'react';
-import { ProductsPageStore } from '@/store/ProductsPage/ProductsPageStore.ts';
+import { ProductsPageStore } from '@/store/ProductsPageStore';
 
 export const ProductsPageStoreContext = createContext<ProductsPageStore | null>(
     null,
 );
 
-export const useProductsPageStore = (): ProductsPageStore => {
+const useProductsPageStore = (): ProductsPageStore => {
     const store = useContext(ProductsPageStoreContext);
     if (!store)
         throw new Error(
@@ -13,3 +13,5 @@ export const useProductsPageStore = (): ProductsPageStore => {
         );
     return store;
 };
+
+export default useProductsPageStore;

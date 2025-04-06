@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable } from 'mobx';
-import { ILocalStore } from './local';
+import { ILocalStore } from './LocalStore';
 import { AxiosError } from 'axios';
 
 export enum Meta {

@@ -2,12 +2,12 @@ import s from './Content.module.scss';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
-import { useProductsPageStore } from '@/store/ProductsPage/context/ProductsPageStoreContext.tsx';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { Meta } from '@/store/base.ts';
 import { Loader } from '@/components/Loader';
 import { Text } from '@/components/Text';
+import { useProductsPageStore } from '@/store/ProductsPageStore';
 
 const Content = observer(() => {
     const [searchParams] = useSearchParams();

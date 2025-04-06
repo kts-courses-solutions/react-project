@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import '@/styles/styles.module.scss';
 import { globalStyles } from '@/styles';
 import s from './Layout.module.scss';
-import { useQueryParamsStoreInit } from '@/store/QueryParams/useQueryParamsStoreInit.ts';
+import { useQueryParamsStoreInit } from '@/store/QueryParamsStore';
 
 const Layout = () => {
     useQueryParamsStoreInit();

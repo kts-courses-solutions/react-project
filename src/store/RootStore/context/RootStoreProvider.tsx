@@ -1,7 +1,7 @@
 import React from 'react';
-import RootStore from '@/store/root/root';
 import { RootStoreContext } from './RootStoreContext.tsx';
-import { useLocalStore } from '@/store/local';
+import { useLocalStore } from '@/store/LocalStore';
+import { RootStore } from '@/store/RootStore';
 
 const RootStoreProvider = ({ children }: { children: React.ReactNode }) => {
     const rootStore = useLocalStore<RootStore>(() => new RootStore());

@@ -1,13 +1,13 @@
 import { IReactionDisposer, reaction, runInAction } from 'mobx';
-import RootStore from '@/store/root/root.ts';
 import { BaseStore, Meta } from '@/store/base.ts';
 import { ProductType } from '@/types/products';
 import { apiClient } from '@/config';
 import { getPagination, PaginationInfo } from '@/utils/pagination.ts';
+import { RootStore } from '@/store/RootStore';
 
-export class ProductsPageStore extends BaseStore<ProductType> {
+export default class ProductsPageStore extends BaseStore<ProductType> {
     private readonly rootStore: RootStore;
-    private _searchReaction: IReactionDisposer;
+    private readonly _searchReaction: IReactionDisposer;
 
     constructor(rootStore: RootStore) {
         super();

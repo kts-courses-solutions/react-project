@@ -1,5 +1,5 @@
 import React from 'react';
-import { ILocalStore } from './local';
+import { ILocalStore } from './types.ts';
 
 export const useLocalStore = <T extends ILocalStore>(creator: () => T): T => {
     const container = React.useRef<null | T>(null);

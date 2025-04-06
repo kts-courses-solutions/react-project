@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { ArrowRightIcon } from '@/components/Icons/ArrowRightIcon';
 import clsx from 'clsx';
 import s from './Pagination.module.scss';
-import { useProductsPageStore } from '@/store/ProductsPage/context/ProductsPageStoreContext.tsx';
 import { observer } from 'mobx-react-lite';
+import { useProductsPageStore } from '@/store/ProductsPageStore';
 
 const Pagination = observer(() => {
     const store = useProductsPageStore();

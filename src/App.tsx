@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { routesConfig } from '@/config';
-import RootStoreProvider from '@/store/root/context/RootStoreProvider.tsx';
+import { RootStoreProvider } from '@/store/RootStore';
 
 const router = createBrowserRouter(routesConfig);
 

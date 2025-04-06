@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router';
-import { useRootStore } from '@/store/root/context/RootStoreContext.tsx';
 import { useEffect } from 'react';
+import { useRootStore } from '@/store/RootStore';
 
-export const useQueryParamsStoreInit = (): void => {
+const useQueryParamsStoreInit = (): void => {
     const rootStore = useRootStore();
     const { search } = useLocation();
 
@@ -10,3 +10,5 @@ export const useQueryParamsStoreInit = (): void => {
         rootStore.query.setSearch(search);
     }, [search, rootStore]);
 };
+
+export default useQueryParamsStoreInit;
