@@ -7,7 +7,6 @@ import { Loader } from '@/components/Loader';
 import { Text } from '@/components/Text';
 import { useProductsPageStore } from '@/store/ProductsPageStore';
 import { Meta } from '@/store/DataStore/types.ts';
-import { useEffect } from 'react';
 
 const Content = observer(() => {
     const [searchParams] = useSearchParams();
@@ -15,10 +14,6 @@ const Content = observer(() => {
     const pageNumber = page ? Number(page) : 1;
 
     const store = useProductsPageStore();
-
-    useEffect(() => {
-        store.load();
-    }, [store]);
 
     if (store.meta === Meta.initial || store.meta === Meta.loading) {
         return <Loader />;

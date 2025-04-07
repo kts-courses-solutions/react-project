@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRightIcon } from '@/components/Icons/ArrowRightIcon';
 import clsx from 'clsx';
 import s from './Pagination.module.scss';
@@ -7,12 +7,25 @@ import { useProductsPageStore } from '@/store/ProductsPageStore';
 
 const Pagination = observer(() => {
     const store = useProductsPageStore();
+    const [searchParams] = useSearchParams();
+
+    const limit = store.limit;
+    const offset = store.offset;
+
+    const createOffsetLink = (newOffset: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set('offset', newOffset.toString());
+        params.set('limit', limit.toString());
+        return `/products?${params.toString()}`;
+    };
+
+    const currentPage = Math.floor(offset / limit) + 1;
 
     return (
         <div className={s.pagination}>
-            {store.pagination.hasPrevPage ? (
+            {offset >= limit ? (
                 <Link
-                    to={`/products?page=${store.pagination.currentPage - 1}`}
+                    to={createOffsetLink(offset - limit)}
                     className={s.pagination__arrowLeft}
                 >
                     <ArrowRightIcon />
@@ -23,32 +36,13 @@ const Pagination = observer(() => {
                 </div>
             )}
 
-            {store.pagination.visiblePages.map((page, index) =>
-                page === null ? (
-                    <div
-                        key={`ellipsis-${index}`}
-                        className={s.pagination__btn}
-                    >
-                        ...
-                    </div>
-                ) : (
-                    <Link
-                        key={`page-${page}`}
-                        to={`/products?page=${page}`}
-                        className={clsx(
-                            s.pagination__btn,
-                            page === store.pagination.currentPage &&
-                                s.pagination__btn_active,
-                        )}
-                    >
-                        {page}
-                    </Link>
-                ),
-            )}
+            <div className={clsx(s.pagination__btn, s.pagination__btn_active)}>
+                {currentPage}
+            </div>
 
-            {store.pagination.hasNextPage ? (
+            {store.hasMore ? (
                 <Link
-                    to={`/products?page=${store.pagination.currentPage + 1}`}
+                    to={createOffsetLink(offset + limit)}
                     className={s.pagination__arrowRight}
                 >
                     <ArrowRightIcon />

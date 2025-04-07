@@ -1,6 +1,5 @@
 import { IReactionDisposer, reaction, runInAction } from 'mobx';
 import { ProductType } from '@/types/products';
-import { getPagination, PaginationInfo } from '@/utils';
 import { RootStore } from '@/store/RootStore';
 import { DataStore } from '@/store/DataStore';
 import { Meta } from '@/store/DataStore/types.ts';
@@ -11,6 +10,8 @@ interface LoadProps {
     price?: string;
     price_min?: string;
     price_max?: string;
+    offset?: string;
+    limit?: string;
 }
 
 export default class ProductsPageStore extends DataStore<ProductType[]> {
@@ -32,20 +33,35 @@ export default class ProductsPageStore extends DataStore<ProductType[]> {
             ],
             ([title, category, price, price_min, price_max]) => {
                 this.load({
-                    title: title,
+                    offset: this.offset.toString(),
+                    limit: this.limit.toString(),
                     category: category,
                     price: price,
                     price_min: price_min,
                     price_max: price_max,
+                    title: title,
                 });
             },
         );
     }
 
-    get pagination(): PaginationInfo {
+    get currentPage(): number {
         const pageParam = this.rootStore.query.getParam('page');
-        const pageNumber = pageParam ? Number(pageParam) : 1;
-        return getPagination(this.data.length, 9, pageNumber, 5);
+        return pageParam ? Number(pageParam) : 1;
+    }
+
+    get offset(): number {
+        const offset = Number(this.rootStore.query.getParam('offset'));
+        return !isNaN(offset) && offset >= 0 ? offset : 0;
+    }
+
+    get limit(): number {
+        const limit = Number(this.rootStore.query.getParam('limit'));
+        return !isNaN(limit) && limit > 0 ? limit : 9;
+    }
+
+    get hasMore(): boolean {
+        return this.data.length === this.limit;
     }
 
     async load(params: LoadProps) {
