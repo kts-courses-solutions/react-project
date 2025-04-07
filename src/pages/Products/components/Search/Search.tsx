@@ -18,14 +18,10 @@ const FILTER_MAP: Option[] = [
         key: 'price',
         value: 'Точная цена',
     },
-    // {
-    //     key: 'price_min',
-    //     value: 'Минимальная цена'
-    // },
-    // {
-    //     key: 'price_max',
-    //     value: 'Максимальная цена'
-    // }
+    {
+        key: 'price_range',
+        value: 'Диапазон цен',
+    },
 ];
 
 const Search = observer(() => {
@@ -45,10 +41,20 @@ const Search = observer(() => {
         const inputs: Record<string, string> = {};
 
         FILTER_MAP.forEach((option) => {
-            const paramValue = searchParams.get(option.key);
-            if (paramValue !== null) {
-                activeFilters.push(option);
-                inputs[option.key] = paramValue;
+            if (option.key === 'price_range') {
+                const min = searchParams.get('price_min');
+                const max = searchParams.get('price_max');
+                if (min || max) {
+                    activeFilters.push(option);
+                    if (min) inputs['price_min'] = min;
+                    if (max) inputs['price_max'] = max;
+                }
+            } else {
+                const paramValue = searchParams.get(option.key);
+                if (paramValue !== null) {
+                    activeFilters.push(option);
+                    inputs[option.key] = paramValue;
+                }
             }
         });
 
@@ -61,9 +67,18 @@ const Search = observer(() => {
         newParams.set('title', searchValue);
 
         dropdownValue.forEach(({ key }) => {
-            const value = filterInputs[key];
-            if (value) {
-                newParams.set(key, value);
+            if (key === 'price_range') {
+                if (filterInputs['price_min']) {
+                    newParams.set('price_min', filterInputs['price_min']);
+                }
+                if (filterInputs['price_max']) {
+                    newParams.set('price_max', filterInputs['price_max']);
+                }
+            } else {
+                const value = filterInputs[key];
+                if (value) {
+                    newParams.set(key, value);
+                }
             }
         });
 
@@ -100,15 +115,54 @@ const Search = observer(() => {
             />
 
             <div className={s.inputFilters}>
-                {dropdownValue.map(({ key, value }) => (
-                    <Input
-                        type="number"
-                        key={key}
-                        value={filterInputs[key] || ''}
-                        placeholder={value}
-                        onChange={(val) => handleFilterInputChange(key, val)}
-                    />
-                ))}
+                {dropdownValue.map(({ key }) => {
+                    if (key === 'price_range') {
+                        return (
+                            <div
+                                key="price_range"
+                                className={s.inputFilters__priceRange}
+                            >
+                                <Input
+                                    type="number"
+                                    value={filterInputs['price_min'] || ''}
+                                    placeholder="Минимальная цена"
+                                    onChange={(val) =>
+                                        handleFilterInputChange(
+                                            'price_min',
+                                            val,
+                                        )
+                                    }
+                                />
+                                <Input
+                                    type="number"
+                                    value={filterInputs['price_max'] || ''}
+                                    placeholder="Максимальная цена"
+                                    onChange={(val) =>
+                                        handleFilterInputChange(
+                                            'price_max',
+                                            val,
+                                        )
+                                    }
+                                />
+                            </div>
+                        );
+                    }
+
+                    return (
+                        <Input
+                            key={key}
+                            type="number"
+                            value={filterInputs[key] || ''}
+                            placeholder={
+                                FILTER_MAP.find((f) => f.key === key)?.value ||
+                                ''
+                            }
+                            onChange={(val) =>
+                                handleFilterInputChange(key, val)
+                            }
+                        />
+                    );
+                })}
             </div>
 
             <div className={s.totalProducts}>

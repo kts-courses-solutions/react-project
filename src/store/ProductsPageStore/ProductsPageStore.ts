@@ -6,7 +6,7 @@ import { Meta } from '@/store/DataStore/types.ts';
 
 interface LoadProps {
     title?: string;
-    category?: string;
+    categoryId?: string;
     price?: string;
     price_min?: string;
     price_max?: string;
@@ -35,10 +35,10 @@ export default class ProductsPageStore extends DataStore<ProductType[]> {
                 this.load({
                     offset: this.offset.toString(),
                     limit: this.limit.toString(),
-                    category: category,
-                    price: price,
                     price_min: price_min,
                     price_max: price_max,
+                    price: price,
+                    categoryId: category,
                     title: title,
                 });
             },
