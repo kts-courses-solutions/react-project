@@ -24,6 +24,7 @@ export type MultiDropdownProps = {
     disabled?: boolean;
     /** Возвращает строку которая будет выводится в инпуте. В случае если опции не выбраны, строка должна отображаться как placeholder. */
     getTitle: (value: Option[]) => string;
+    placeholder?: string;
 };
 
 const MultiDropdown: React.FC<MultiDropdownProps> = ({
@@ -33,6 +34,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     onChange,
     disabled,
     getTitle,
+    placeholder,
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [filterText, setFilterText] = useState('');
@@ -91,7 +93,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
                 onClick={toggleDropdown}
                 onChange={handleInputChange}
                 value={filterText || (value.length > 0 ? getTitle(value) : '')}
-                placeholder={getTitle([])}
+                placeholder={placeholder}
                 disabled={disabled}
                 afterSlot={<ArrowDownIcon color="secondary" />}
             />

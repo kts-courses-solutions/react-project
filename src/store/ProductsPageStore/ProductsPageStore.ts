@@ -1,9 +1,17 @@
 import { IReactionDisposer, reaction, runInAction } from 'mobx';
 import { ProductType } from '@/types/products';
-import { getPagination, PaginationInfo } from '@/utils/pagination.ts';
+import { getPagination, PaginationInfo } from '@/utils';
 import { RootStore } from '@/store/RootStore';
 import { DataStore } from '@/store/DataStore';
 import { Meta } from '@/store/DataStore/types.ts';
+
+interface LoadProps {
+    title?: string;
+    category?: string;
+    price?: string;
+    price_min?: string;
+    price_max?: string;
+}
 
 export default class ProductsPageStore extends DataStore<ProductType[]> {
     private readonly rootStore: RootStore;
@@ -16,12 +24,20 @@ export default class ProductsPageStore extends DataStore<ProductType[]> {
 
         this._searchReaction = reaction(
             () => [
-                this.rootStore.query.getParam('page'),
                 this.rootStore.query.getParam('title'),
+                this.rootStore.query.getParam('category'),
+                this.rootStore.query.getParam('price'),
+                this.rootStore.query.getParam('price_min'),
+                this.rootStore.query.getParam('price_max'),
             ],
-            ([page, title]) => {
-                console.log('page: ', page, 'title: ', title);
-                this.load(title?.toString());
+            ([title, category, price, price_min, price_max]) => {
+                this.load({
+                    title: title,
+                    category: category,
+                    price: price,
+                    price_min: price_min,
+                    price_max: price_max,
+                });
             },
         );
     }
@@ -32,15 +48,13 @@ export default class ProductsPageStore extends DataStore<ProductType[]> {
         return getPagination(this.data.length, 9, pageNumber, 5);
     }
 
-    async load(title?: string) {
+    async load(params: LoadProps) {
         this.setMeta(Meta.loading);
         try {
             const response = await this.rootStore.apiClient.get<ProductType[]>(
                 '/products',
                 {
-                    params: {
-                        title: title,
-                    },
+                    params: params,
                 },
             );
 

@@ -12,9 +12,9 @@
 }
 
 .multiDropdown {
-    width: 300px;
+    width: 600px;
     padding-top: 24px;
-    padding-bottom: 48px;
+    padding-bottom: 16px;
 }
 
 .totalProducts {
@@ -34,4 +34,12 @@
         letter-spacing: 0;
         color: $text-accent;
     }
+}
+
+.inputFilters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 48px;
 }

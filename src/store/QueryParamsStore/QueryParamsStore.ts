@@ -1,4 +1,5 @@
 import { action, makeObservable, observable } from 'mobx';
+import { nullToUndefined } from '@/utils';
 
 type PrivateFields = '_params';
 
@@ -12,8 +13,8 @@ export default class QueryParamsStore {
         });
     }
 
-    getParam(key: string): string | null {
-        return this._params.get(key);
+    getParam(key: string): string | undefined {
+        return nullToUndefined(this._params.get(key));
     }
 
     setSearch(search: URLSearchParams) {

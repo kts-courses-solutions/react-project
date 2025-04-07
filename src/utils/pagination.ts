@@ -6,7 +6,7 @@ export interface PaginationInfo {
     visiblePages: (number | null)[];
 }
 
-export function getPagination(
+export default function getPagination(
     totalItems: number,
     itemsPerPage: number = 9,
     currentPage: number = 1,
