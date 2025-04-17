@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Icon, IconProps } from '@/components/Icons/Icon';
+import { Icon, IconProps } from '@/components/ui/Icons/Icon';
 import { memo } from 'react';
 
 const BagIcon: React.FC<IconProps> = ({

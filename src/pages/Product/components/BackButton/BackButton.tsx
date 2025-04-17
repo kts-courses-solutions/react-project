@@ -1,7 +1,7 @@
 import s from '@/pages/Product/Product.module.scss';
-import { ArrowRightIcon } from '@/components/Icons/ArrowRightIcon';
 import { Link, useNavigate } from 'react-router-dom';
 import React from 'react';
+import { ArrowRightIcon } from '@/components/ui/Icons/ArrowRightIcon';
 
 const BackButton = () => {
     const navigate = useNavigate();

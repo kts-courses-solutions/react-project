@@ -1,9 +1,5 @@
-import { ArrowRightIcon } from '@/components/Icons/ArrowRightIcon';
-import { Text } from '@/components/Text';
-import { Button } from '@/components/Button';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
-import { Loader } from '@/components/Loader';
 import s from './Product.module.scss';
 import { ProductPageStoreProvider } from '@/store/ProductPageStore';
 import { observer } from 'mobx-react-lite';
@@ -11,6 +7,10 @@ import { useProductPageStore } from '@/store/ProductPageStore';
 import { Meta } from '@/store/DataStore/types.ts';
 import { BackButton } from './components/BackButton';
 import { Related } from './components/Related';
+import { Loader } from '@/components/ui/Loader';
+import { Text } from '@/components/ui/Text';
+import { Button } from '@/components/ui/Button';
+import { ArrowRightIcon } from '@/components/ui/Icons/ArrowRightIcon';
 
 const ProductContent = observer(() => {
     const { productId } = useParams();

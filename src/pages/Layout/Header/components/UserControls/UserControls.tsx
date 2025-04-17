@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { BagIcon } from '@/components/Icons/BagIcon';
-import { UserIcon } from '@/components/Icons/UserIcon';
 import s from './UserControls.module.scss';
+import { BagIcon } from '@/components/ui/Icons/BagIcon';
+import { UserIcon } from '@/components/ui/Icons/UserIcon';
 
 const UserControls = () => {
     return (

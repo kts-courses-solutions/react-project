@@ -1,13 +1,13 @@
-import { Input } from '@/components/Input';
-import { Button } from '@/components/Button';
-import { Text } from '@/components/Text';
 import s from './Search.module.scss';
 import { memo, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useProductsPageStore } from '@/store/ProductsPageStore';
 import { useSearchParams } from 'react-router-dom';
-import { Option } from '@/components/MultiDropdown';
-import { CheckBox } from '@/components/CheckBox';
+import { Text } from '@/components/ui/Text';
+import { Option } from '@/components/ui/MultiDropdown';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { CheckBox } from '@/components/ui/CheckBox';
 
 const FILTER_MAP: Option[] = [
     { key: 'category', value: 'Категория' },

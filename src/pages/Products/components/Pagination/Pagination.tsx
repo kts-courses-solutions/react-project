@@ -1,9 +1,9 @@
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowRightIcon } from '@/components/Icons/ArrowRightIcon';
 import clsx from 'clsx';
 import s from './Pagination.module.scss';
 import { observer } from 'mobx-react-lite';
 import { useProductsPageStore } from '@/store/ProductsPageStore';
+import { ArrowRightIcon } from '@/components/ui/Icons/ArrowRightIcon';
 
 const Pagination = observer(() => {
     const store = useProductsPageStore();

@@ -1,9 +1,9 @@
-import { Text } from '@/components/Text';
-import { Card } from '@/components/Card';
-import { Button } from '@/components/Button';
 import s from './Related.module.scss';
 import { ProductWithRelatedType } from '@/types/products';
 import { Link } from 'react-router-dom';
+import { Text } from '@/components/ui/Text';
+import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/Card';
 
 interface RelatedProps {
     product: ProductWithRelatedType;

@@ -1,15 +1,19 @@
-import { Text } from '@/components/Text';
+import { Text } from '@/components/ui/Text';
 import s from './Headline.module.scss';
 
-const Headline = () => {
+interface HeadlineProps {
+    title: string;
+    subtitle: string;
+}
+
+const Headline = ({ title, subtitle }: HeadlineProps) => {
     return (
         <div className={s.headline}>
             <Text tag="h1" weight="bold" className={s.headline__title}>
-                Products
+                {title}
             </Text>
             <Text tag="p" weight="normal" className={s.headline__subtitle}>
-                We display products based on the latest products we have, if you
-                want to see our old products please enter the name of the item
+                {subtitle}
             </Text>
         </div>
     );

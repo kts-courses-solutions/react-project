@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import clsx from 'clsx';
-import { CheckIcon } from '@/components/Icons/CheckIcon';
+import { CheckIcon } from '@/components/ui/Icons/CheckIcon';
 import s from './CheckBox.module.scss';
 
 export type CheckBoxProps = Omit<

@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import clsx from 'clsx';
-import { Loader } from '@/components/Loader';
 import s from './Button.module.scss';
 import { Slot, Slottable } from '@radix-ui/react-slot';
+import { Loader } from '@/components/ui/Loader';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     /** Состояние загрузки */

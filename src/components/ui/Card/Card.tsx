@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { memo } from 'react';
-import { Text } from '@/components/Text';
+import { Text } from '@/components/ui/Text';
 import s from './Card.module.scss';
 
 export type CardProps = {
