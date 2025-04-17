@@ -32,7 +32,6 @@ const CheckBox: React.FC<CheckBoxProps> = ({
                 {checked && (
                     <CheckIcon
                         className={s.checkBox__icon}
-                        color={disabled ? 'check-disabled' : 'check'}
                         width={40}
                         height={40}
                     />
