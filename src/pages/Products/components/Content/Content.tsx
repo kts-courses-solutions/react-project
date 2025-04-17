@@ -16,6 +16,7 @@ const Content = observer(() => {
     const store = useProductsPageStore();
 
     if (store.meta === Meta.initial || store.meta === Meta.loading) {
+        console.log(store.meta);
         return <Loader />;
     }
 

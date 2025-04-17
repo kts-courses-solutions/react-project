@@ -1,4 +1,4 @@
-import { IReactionDisposer, reaction, runInAction } from 'mobx';
+import { autorun, IReactionDisposer, reaction, runInAction } from 'mobx';
 import { ProductType } from '@/types/products';
 import { RootStore } from '@/store/RootStore';
 import { DataStore } from '@/store/DataStore';
@@ -43,6 +43,20 @@ export default class ProductsPageStore extends DataStore<ProductType[]> {
                 });
             },
         );
+
+        autorun(() => {
+            if (this.meta === Meta.initial) {
+                this.load({
+                    offset: ((this.currentPage - 1) * this.limit).toString(),
+                    limit: this.limit.toString(),
+                    title: this.rootStore.query.getParam('title'),
+                    categoryId: this.rootStore.query.getParam('category'),
+                    price: this.rootStore.query.getParam('price'),
+                    price_min: this.rootStore.query.getParam('price_min'),
+                    price_max: this.rootStore.query.getParam('price_max'),
+                });
+            }
+        });
     }
 
     get currentPage(): number {
