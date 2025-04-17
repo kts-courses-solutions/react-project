@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import clsx from 'clsx';
 import { Loader } from '@/components/Loader';
 import s from './Button.module.scss';
+import { Slot, Slottable } from '@radix-ui/react-slot';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     /** Состояние загрузки */
     loading?: boolean;
     /** Текст кнопки */
     children: React.ReactNode;
+    asChild?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -16,12 +18,16 @@ const Button: React.FC<ButtonProps> = ({
     disabled,
     className,
     onClick,
+    asChild,
     ...props
 }: ButtonProps) => {
     const isDisabled = loading || disabled;
 
+    const Comp = asChild ? Slot : 'button';
+    const CompChildren = asChild ? Fragment : 'span';
+
     return (
-        <button
+        <Comp
             className={clsx(
                 s.btn,
                 disabled && s.btn_disabled,
@@ -32,9 +38,13 @@ const Button: React.FC<ButtonProps> = ({
             onClick={loading ? undefined : onClick}
             {...props}
         >
-            {loading && <Loader size="s" className={s.btn__loader} />}
-            <span>{children}</span>
-        </button>
+            <div>
+                {loading && <Loader size="s" className={s.btn__loader} />}
+                <CompChildren>
+                    <Slottable>{children}</Slottable>
+                </CompChildren>
+            </div>
+        </Comp>
     );
 };
 
