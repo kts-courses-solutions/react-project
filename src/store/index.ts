@@ -1,1 +1,1 @@
-export type { DataStore } from './DataStore/DataStore.ts';
+export type { DataStore } from './DataStore';

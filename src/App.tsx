@@ -1,8 +1,8 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { routesConfig } from '@/config';
 import { RootStoreProvider } from '@/store/RootStore';
 
-const router = createBrowserRouter(routesConfig);
+const router = createHashRouter(routesConfig);
 
 const App = () => {
     return (

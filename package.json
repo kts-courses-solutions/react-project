@@ -2,6 +2,7 @@
     "name": "react-project",
     "private": true,
     "version": "0.0.0",
+    "homepage": "https://dmhd6219-additional-projects.github.io/kts-react-project",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -9,7 +10,9 @@
         "lint": "eslint .",
         "preview": "vite preview",
         "prepare": "husky",
-        "format": "eslint . --fix --no-warn-ignored && npx prettier . --write"
+        "format": "eslint . --fix --no-warn-ignored && npx prettier . --write",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d dist"
     },
     "lint-staged": {
         "**/*.*": [
@@ -36,6 +39,7 @@
         "eslint": "^9.21.0",
         "eslint-plugin-react-hooks": "^5.1.0",
         "eslint-plugin-react-refresh": "^0.4.19",
+        "gh-pages": "^6.3.0",
         "globals": "^15.15.0",
         "husky": "^9.1.7",
         "lint-staged": "^15.5.0",
