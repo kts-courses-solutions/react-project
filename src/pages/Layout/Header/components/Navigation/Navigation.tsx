@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { Link, useLocation } from 'react-router-dom';
 import s from './Navigation.module.scss';
 import { memo } from 'react';
-import { NAV_LINKS } from './config';
+import { NAV_LINKS } from './config/links.ts';
 
 const Navigation = () => {
     const location = useLocation();

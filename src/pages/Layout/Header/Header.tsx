@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import globalStyles from '@/styles/styles.module.scss';
 import Lalasia from '@/assets/Lalasia.svg';
-import Navigation from '@/pages/Layout/Header/Navigation/Navigation.tsx';
 import s from './Header.module.scss';
-import UserControls from './UserControls/UserControls.tsx';
 import { memo } from 'react';
+import { UserControls } from './components/UserControls';
+import { Navigation } from './components/Navigation';
 
 const Header = () => {
     return (

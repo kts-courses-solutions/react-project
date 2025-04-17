@@ -1,8 +1,8 @@
-import Pagination from '@/pages/Products/components/Pagination/Pagination.tsx';
-import Headline from './components/Headline/Headline.tsx';
-import Search from './components/Search/Search.tsx';
-import Content from '@/pages/Products/components/Content/Content.tsx';
 import { ProductsPageStoreProvider } from '@/store/ProductsPageStore';
+import { Headline } from './components/Headline';
+import { Search } from './components/Search';
+import { Content } from './components/Content';
+import { Pagination } from './components/Pagination';
 
 const Products = () => (
     <ProductsPageStoreProvider>

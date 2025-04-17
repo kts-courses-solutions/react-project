@@ -5,12 +5,12 @@ import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import { Loader } from '@/components/Loader';
 import s from './Product.module.scss';
-import Related from '@/pages/Product/components/Related/Related.tsx';
 import { ProductPageStoreProvider } from '@/store/ProductPageStore';
 import { observer } from 'mobx-react-lite';
 import { useProductPageStore } from '@/store/ProductPageStore';
 import { Meta } from '@/store/DataStore/types.ts';
-import BackButton from '@/pages/Layout/Header/Navigation/BackButton.tsx';
+import { BackButton } from './components/BackButton';
+import { Related } from './components/Related';
 
 const ProductContent = observer(() => {
     const { productId } = useParams();
