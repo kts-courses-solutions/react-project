@@ -122,7 +122,7 @@ const ProductContent = observer(() => {
                 </div>
             </div>
 
-            <Related />
+            <Related product={store.data} />
         </div>
     );
 });

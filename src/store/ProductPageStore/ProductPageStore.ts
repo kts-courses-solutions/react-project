@@ -1,10 +1,10 @@
 import { runInAction } from 'mobx';
-import { ProductType } from '@/types/products';
+import { ProductType, ProductWithRelatedType } from '@/types/products';
 import { DataStore } from '@/store/DataStore';
 import { Meta } from '@/store/DataStore/types.ts';
 import { RootStore } from '@/store/RootStore';
 
-export default class ProductPageStore extends DataStore<null | ProductType> {
+export default class ProductPageStore extends DataStore<null | ProductWithRelatedType> {
     private readonly rootStore: RootStore;
 
     constructor(rootStore: RootStore) {
@@ -15,12 +15,15 @@ export default class ProductPageStore extends DataStore<null | ProductType> {
     async load(productId: number) {
         this.setMeta(Meta.loading);
         try {
-            const response = await this.rootStore.apiClient.get<ProductType>(
+            const response1 = await this.rootStore.apiClient.get<ProductType>(
                 `/products/${productId}`,
+            );
+            const response2 = await this.rootStore.apiClient.get<ProductType[]>(
+                `/products/${productId}/related`,
             );
 
             runInAction(() => {
-                this.setData(response.data);
+                this.setData({ ...response1.data, related: response2.data });
                 this.setMeta(Meta.success);
             });
         } catch {

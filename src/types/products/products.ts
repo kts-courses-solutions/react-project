@@ -16,3 +16,7 @@ export interface ProductType {
     creationAt: string;
     updatedAt: string;
 }
+
+export interface ProductWithRelatedType extends ProductType {
+    related: ProductType[];
+}
