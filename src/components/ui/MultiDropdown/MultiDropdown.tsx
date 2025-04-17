@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, memo } from 'react';
 import clsx from 'clsx';
-import { ArrowDownIcon } from '@/components/Icons/ArrowDownIcon';
-import { Input } from '@/components/Input';
+import { ArrowDownIcon } from '@/components/ui/Icons/ArrowDownIcon';
+import { Input } from '@/components/ui/Input';
 import s from './MultiDropdown.module.scss';
 
 export type Option = {
