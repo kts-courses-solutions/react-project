@@ -3,7 +3,6 @@ import { useSearchParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useProductsPageStore } from '@/store/ProductsPageStore';
 import { Meta } from '@/store/DataStore/types.ts';
-import { Text } from '@/components/ui/Text';
 import { Loader } from '@/components/ui/Loader';
 import { Card } from '@/components/ui/Card';
 import { PaymentDialog } from '@/components/shared/PaymentDialog';
@@ -35,7 +34,7 @@ const Content = observer(() => {
         return <Loader />;
     }
 
-    if (!store.data) return <Text>Oups...</Text>;
+    if (!store.data || store.meta === Meta.error) return;
 
     return (
         <div className={s.productCards}>

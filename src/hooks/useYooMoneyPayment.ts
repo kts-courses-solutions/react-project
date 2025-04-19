@@ -6,9 +6,14 @@ import {
     YOOMONEY_CONTAINER_NAME,
     YOOMONEY_RETURN_URL,
 } from '@/config/yoomoney';
+import { toast } from 'react-toastify';
 
 const useYooMoneyPayment = () => {
     const rootStore = useRootStore();
+    const notify = () =>
+        toast.error(
+            'There was a problem in communication with the payment backend...',
+        );
 
     const [token, setToken] = useState<string | null>(null);
     const [initialLoading, setInitialLoading] = useState<boolean | null>(null);
@@ -23,6 +28,9 @@ const useYooMoneyPayment = () => {
             .then((r: AxiosResponse<CreatePaymentResponse>) => {
                 setToken(r.data.confirmation_token);
                 setInitialLoading(false);
+            })
+            .catch(() => {
+                notify();
             });
     };
 

@@ -4,6 +4,7 @@ import '@/styles/styles.module.scss';
 import { globalStyles } from '@/styles';
 import s from './Layout.module.scss';
 import { useQueryParamsStoreInit } from '@/store/QueryParamsStore';
+import { ToastContainer } from 'react-toastify';
 
 const Layout = () => {
     useQueryParamsStoreInit();
@@ -15,6 +16,7 @@ const Layout = () => {
                     <Outlet />
                 </div>
             </main>
+            <ToastContainer limit={1} />
         </div>
     );
 };

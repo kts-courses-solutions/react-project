@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import s from './Content.module.scss';
 import { observer } from 'mobx-react-lite';
 import { Meta } from '@/store/DataStore/types.ts';
-import { Text } from '@/components/ui/Text';
 import { Loader } from '@/components/ui/Loader';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -20,7 +19,7 @@ const Content = observer(() => {
         return <Loader />;
     }
 
-    if (!store.data) return <Text>Oups...</Text>;
+    if (!store.data || store.meta === Meta.error) return;
 
     return (
         <div className={s.categories}>

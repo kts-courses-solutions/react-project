@@ -3,9 +3,12 @@ import { ProductType, ProductWithRelatedType } from '@/types/products';
 import { DataStore } from '@/store/DataStore';
 import { Meta } from '@/store/DataStore/types.ts';
 import { RootStore } from '@/store/RootStore';
+import { toast } from 'react-toastify';
 
 export default class ProductPageStore extends DataStore<null | ProductWithRelatedType> {
     private readonly rootStore: RootStore;
+    private notify = () =>
+        toast.error('There was a problem in getting product...');
 
     constructor(rootStore: RootStore) {
         super(null);
@@ -30,6 +33,7 @@ export default class ProductPageStore extends DataStore<null | ProductWithRelate
             runInAction(() => {
                 this.setMeta(Meta.error);
             });
+            this.notify();
         }
     }
 

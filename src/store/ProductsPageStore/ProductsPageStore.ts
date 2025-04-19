@@ -12,6 +12,7 @@ import { ProductType } from '@/types/products';
 import { RootStore } from '@/store/RootStore';
 import { DataStore } from '@/store/DataStore';
 import { Meta } from '@/store/DataStore/types.ts';
+import { toast } from 'react-toastify';
 
 interface LoadProps {
     title?: string;
@@ -49,6 +50,8 @@ class ProductsStoreWithTotal extends DataStore<ProductType[]> {
 export default class ProductsPageStore extends ProductsStoreWithTotal {
     private readonly rootStore: RootStore;
     private readonly _searchReaction: IReactionDisposer;
+    private notify = () =>
+        toast.error('There was a problem in getting products...');
 
     constructor(rootStore: RootStore) {
         super([]);
@@ -135,23 +138,22 @@ export default class ProductsPageStore extends ProductsStoreWithTotal {
 
     async load(params: LoadProps) {
         this.setMeta(Meta.loading);
-        try {
-            const response = await this.rootStore.apiClient.get<ProductType[]>(
-                '/products',
-                {
-                    params: params,
-                },
-            );
-
-            runInAction(() => {
-                this.setData(response.data);
-                this.setMeta(Meta.success);
+        this.rootStore.apiClient
+            .get<ProductType[]>('/products', {
+                params: params,
+            })
+            .then((response) => {
+                runInAction(() => {
+                    this.setData(response.data);
+                    this.setMeta(Meta.success);
+                });
+            })
+            .catch(() => {
+                runInAction(() => {
+                    this.setMeta(Meta.error);
+                    this.notify();
+                });
             });
-        } catch {
-            runInAction(() => {
-                this.setMeta(Meta.error);
-            });
-        }
     }
 
     destroy() {
