@@ -4,6 +4,7 @@ import { Products } from '@/pages/Products';
 import { Product } from '@/pages/Product';
 import { Categories } from '@/pages/Categories';
 import { About } from '@/pages/About';
+import { SuccessPayment } from '@/pages/SuccessPayment';
 
 export const routesConfig: RouteObject[] = [
     {
@@ -15,19 +16,23 @@ export const routesConfig: RouteObject[] = [
             },
             {
                 element: <Products />,
-                path: '/Products',
+                path: '/products',
             },
             {
                 element: <Product />,
-                path: '/Product/:productId',
+                path: '/product/:productId',
             },
             {
                 element: <Categories />,
-                path: '/Categories',
+                path: '/categories',
             },
             {
                 element: <About />,
-                path: '/About',
+                path: '/about',
+            },
+            {
+                element: <SuccessPayment />,
+                path: '/success',
             },
         ],
     },
