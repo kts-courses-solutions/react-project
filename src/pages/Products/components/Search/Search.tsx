@@ -34,10 +34,9 @@ const Search = observer(() => {
     const [price, setPrice] = useState('');
     const [priceMin, setPriceMin] = useState('');
     const [priceMax, setPriceMax] = useState('');
-    const [sort, setSort] = useState<{ key: string; value: string }>({
-        key: 'no',
-        value: 'Без сортировки',
-    });
+    const [sort, setSort] = useState<{ key: string; value: string }>(
+        SORT_MAP[0],
+    );
 
     useEffect(() => {
         setCategory(searchParams.get('category') || '');
