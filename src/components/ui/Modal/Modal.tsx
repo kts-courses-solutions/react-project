@@ -3,7 +3,7 @@ import s from './Modal.module.scss';
 
 interface ModalProps {
     isOpen: boolean;
-    onClose: () => void;
+    onClose: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
     children: React.ReactNode;
 }
 
@@ -12,7 +12,12 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
 
     return (
         <div onClick={onClose} className={s.modal__wrapper}>
-            <div className={s.modal__content}>{children}</div>
+            <div
+                onClick={(e) => e.stopPropagation()}
+                className={s.modal__content}
+            >
+                {children}
+            </div>
         </div>
     );
 };

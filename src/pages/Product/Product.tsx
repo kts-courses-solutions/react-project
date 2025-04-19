@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import s from './Product.module.scss';
 import { ProductPageStoreProvider } from '@/store/ProductPageStore';
 import { observer } from 'mobx-react-lite';
@@ -11,15 +11,12 @@ import { ImagesCarousel } from './components/ImagesCarousel';
 import { Loader } from '@/components/ui/Loader';
 import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
-import useYooMoneyPayment from '@/hooks/useYooMoneyPayment.ts';
-import { YOOMONEY_CONTAINER_NAME } from '@/config/yoomoney';
+import { PaymentDialog } from '@/components/shared/PaymentDialog';
 
 const ProductContent = observer(() => {
     const { productId } = useParams();
-    const { checkout } = useYooMoneyPayment();
-    const productNumber = productId ? Number(productId) : -1;
 
-    const [buyNow, setBuyNow] = useState(false);
+    const productNumber = productId ? Number(productId) : -1;
 
     const store = useProductPageStore();
     const data = store.data;
@@ -27,12 +24,6 @@ const ProductContent = observer(() => {
     useEffect(() => {
         store.load(productNumber);
     }, [productNumber, store]);
-
-    useEffect(() => {
-        if (data && buyNow) {
-            checkout(data.price, data.title);
-        }
-    }, [data, buyNow]);
 
     if (store.meta === Meta.initial || store.meta === Meta.loading) {
         return <Loader />;
@@ -76,25 +67,16 @@ const ProductContent = observer(() => {
                         >
                             ${data.price}
                         </Text>
-                        {!buyNow ? (
-                            <>
-                                <div className={s.productAction__btn}>
-                                    <Button
-                                        className={s.productAction__btn__buy}
-                                        onClick={() => setBuyNow(true)}
-                                    >
-                                        Buy now
-                                    </Button>
-                                    <Button
-                                        className={s.productAction__btn__cart}
-                                    >
-                                        Add to cart
-                                    </Button>
-                                </div>
-                            </>
-                        ) : (
-                            <div id={YOOMONEY_CONTAINER_NAME}></div>
-                        )}
+                        <div className={s.productAction__btn}>
+                            <PaymentDialog
+                                price={data.price}
+                                description={data.title}
+                            />
+
+                            <Button className={s.productAction__btn__cart}>
+                                Add to cart
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </div>

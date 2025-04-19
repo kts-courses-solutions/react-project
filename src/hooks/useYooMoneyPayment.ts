@@ -11,16 +11,19 @@ const useYooMoneyPayment = () => {
     const rootStore = useRootStore();
 
     const [token, setToken] = useState<string | null>(null);
+    const [initialLoading, setInitialLoading] = useState<boolean | null>(null);
 
     const checkout = async (price: number, description: string) => {
+        setInitialLoading(true);
         rootStore.paymentApiClient
             .post('/create-payment', {
                 amount: (price * 100).toString(),
                 description: description,
             })
-            .then((r: AxiosResponse<CreatePaymentResponse>) =>
-                setToken(r.data.confirmation_token),
-            );
+            .then((r: AxiosResponse<CreatePaymentResponse>) => {
+                setToken(r.data.confirmation_token);
+                setInitialLoading(false);
+            });
     };
 
     useEffect(() => {
@@ -43,6 +46,7 @@ const useYooMoneyPayment = () => {
 
     return {
         checkout,
+        initialLoading,
     };
 };
 

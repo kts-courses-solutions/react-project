@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import React, { memo } from 'react';
 import { Text } from '@/components/ui/Text';
 import s from './Card.module.scss';
+import { Link } from 'react-router-dom';
 
 export type CardProps = {
     /** Дополнительный classname */
@@ -20,6 +21,8 @@ export type CardProps = {
     onClick?: React.MouseEventHandler;
     /** Слот для действия */
     actionSlot?: React.ReactNode;
+    /** Ссылка */
+    link?: string;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -31,31 +34,47 @@ const Card: React.FC<CardProps> = ({
     contentSlot,
     onClick,
     actionSlot,
+    link,
 }) => {
+    const LinkWrapper = ({ children }: { children: React.ReactNode }) =>
+        link ? (
+            <Link to={link} style={{ textDecoration: 'none' }}>
+                {children}
+            </Link>
+        ) : (
+            <>{children}</>
+        );
+
     return (
         <div className={clsx(s.card, className)} onClick={onClick}>
-            <img src={image} alt="Card" className={s.card__image} />
+            <LinkWrapper>
+                <img src={image} alt="Card" className={s.card__image} />
+            </LinkWrapper>
             <div className={s.card__data}>
                 <div className={s.card__body}>
                     {captionSlot && (
                         <div className={s.card__caption}>{captionSlot}</div>
                     )}
-                    <Text
-                        tag="h3"
-                        className={s.card__title}
-                        weight="medium"
-                        view="p-20"
-                    >
-                        {title}
-                    </Text>
-                    <Text
-                        tag="p"
-                        className={s.card__subtitle}
-                        weight="normal"
-                        view="p-16"
-                    >
-                        {subtitle}
-                    </Text>
+                    <LinkWrapper>
+                        <Text
+                            tag="h3"
+                            className={s.card__title}
+                            weight="medium"
+                            view="p-20"
+                        >
+                            {title}
+                        </Text>
+                    </LinkWrapper>
+                    <LinkWrapper>
+                        <Text
+                            tag="p"
+                            className={s.card__subtitle}
+                            weight="normal"
+                            view="p-16"
+                        >
+                            {subtitle}
+                        </Text>
+                    </LinkWrapper>
                 </div>
                 <div className={s.card__footer}>
                     {contentSlot && (

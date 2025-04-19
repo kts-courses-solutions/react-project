@@ -1,9 +1,8 @@
 import s from './Related.module.scss';
 import { ProductWithRelatedType } from '@/types/products';
-import { Link } from 'react-router-dom';
 import { Text } from '@/components/ui/Text';
-import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { PaymentDialog } from '@/components/shared/PaymentDialog';
 
 interface RelatedProps {
     product: ProductWithRelatedType;
@@ -17,29 +16,27 @@ const Related = ({ product }: RelatedProps) => {
             </Text>
             <div className={s.related__cards}>
                 {product.related.slice(0, 3).map((item) => (
-                    <Link
+                    // <Link
+                    //     key={item.id}
+                    //     to={`/product/${item.id}`}
+                    //     className={s.related__cards__card}
+                    // >
+                    //
+                    // </Link>
+                    <Card
                         key={item.id}
-                        to={`/product/${item.id}`}
-                        className={s.related__cards__card}
-                    >
-                        <Card
-                            key={item.id}
-                            image={item.images[0]}
-                            title={item.title}
-                            subtitle={item.description}
-                            contentSlot={`$${item.price}`}
-                            actionSlot={
-                                <Button
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        alert('Вы это купили! Поздравляю!');
-                                    }}
-                                >
-                                    Buy now
-                                </Button>
-                            }
-                        />
-                    </Link>
+                        image={item.images[0]}
+                        title={item.title}
+                        subtitle={item.description}
+                        contentSlot={`$${item.price}`}
+                        actionSlot={
+                            <PaymentDialog
+                                price={item.price}
+                                description={item.title}
+                            />
+                        }
+                        link={`/product/${item.id}`}
+                    />
                 ))}
             </div>
         </div>
