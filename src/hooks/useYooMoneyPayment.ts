@@ -1,5 +1,5 @@
 import { useRootStore } from '@/store/RootStore';
-import { useEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import { CreatePaymentResponse } from '@/types/payment';
 import {
@@ -8,7 +8,9 @@ import {
 } from '@/config/yoomoney';
 import { toast } from 'react-toastify';
 
-const useYooMoneyPayment = () => {
+const useYooMoneyPayment = (
+    paymentFormRef: RefObject<HTMLDivElement | null>,
+) => {
     const rootStore = useRootStore();
     const notify = () =>
         toast.error(
@@ -44,10 +46,15 @@ const useYooMoneyPayment = () => {
                 },
             });
 
-            checkout.render(YOOMONEY_CONTAINER_NAME);
+            const refCurrent = paymentFormRef?.current;
+            if (refCurrent) {
+                checkout.render(YOOMONEY_CONTAINER_NAME);
+            }
 
             return () => {
-                checkout.destroy();
+                if (refCurrent) {
+                    checkout.destroy();
+                }
             };
         }
     }, [token]);

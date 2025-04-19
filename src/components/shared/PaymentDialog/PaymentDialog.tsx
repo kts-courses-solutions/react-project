@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { YOOMONEY_CONTAINER_NAME } from '@/config/yoomoney.ts';
 import useYooMoneyPayment from '@/hooks/useYooMoneyPayment.ts';
 import { Button } from '@/components/ui/Button';
@@ -11,7 +11,9 @@ interface PaymentDialogProps {
 }
 
 const PaymentDialog = ({ price, description }: PaymentDialogProps) => {
-    const { checkout, initialLoading } = useYooMoneyPayment();
+    const paymentFormRef = useRef<HTMLDivElement>(null);
+
+    const { checkout, initialLoading } = useYooMoneyPayment(paymentFormRef);
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
@@ -41,6 +43,7 @@ const PaymentDialog = ({ price, description }: PaymentDialogProps) => {
                 {initialLoading && <Loader />}
                 <div
                     id={YOOMONEY_CONTAINER_NAME}
+                    ref={paymentFormRef}
                     style={{ width: '100%', height: '100%' }}
                 />
             </Modal>
