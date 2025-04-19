@@ -4,16 +4,8 @@ import { observer } from 'mobx-react-lite';
 import { useProductsPageStore } from '@/store/ProductsPageStore';
 import { useSearchParams } from 'react-router-dom';
 import { Text } from '@/components/ui/Text';
-import { Option } from '@/components/ui/MultiDropdown';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
-import { CheckBox } from '@/components/ui/CheckBox';
-
-const FILTER_MAP: Option[] = [
-    { key: 'category', value: 'Категория' },
-    { key: 'price', value: 'Точная цена' },
-    { key: 'price_range', value: 'Диапазон цен' },
-];
 
 const Search = observer(() => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -22,133 +14,108 @@ const Search = observer(() => {
     const [searchValue, setSearchValue] = useState(
         searchParams.get('title') || '',
     );
-    const [activeFilters, setActiveFilters] = useState<Record<string, boolean>>(
-        {},
-    );
-    const [filterInputs, setFilterInputs] = useState<Record<string, string>>(
-        {},
-    );
+    const [category, setCategory] = useState('');
+    const [price, setPrice] = useState('');
+    const [priceMin, setPriceMin] = useState('');
+    const [priceMax, setPriceMax] = useState('');
 
     useEffect(() => {
-        const active: Record<string, boolean> = {};
-        const inputs: Record<string, string> = {};
-
-        FILTER_MAP.forEach(({ key }) => {
-            if (key === 'price_range') {
-                const min = searchParams.get('price_min');
-                const max = searchParams.get('price_max');
-                active[key] = Boolean(min || max);
-                if (min) inputs['price_min'] = min;
-                if (max) inputs['price_max'] = max;
-            } else {
-                const val = searchParams.get(key);
-                active[key] = val !== null;
-                if (val) inputs[key] = val;
-            }
-        });
-
-        setActiveFilters(active);
-        setFilterInputs(inputs);
+        setCategory(searchParams.get('category') || '');
+        setPrice(searchParams.get('price') || '');
+        setPriceMin(searchParams.get('price_min') || '');
+        setPriceMax(searchParams.get('price_max') || '');
     }, [searchParams]);
 
     const handleSearchClick = () => {
         const newParams = new URLSearchParams();
         newParams.set('title', searchValue);
 
-        Object.entries(activeFilters).forEach(([key, isActive]) => {
-            if (!isActive) return;
-
-            if (key === 'price_range') {
-                if (filterInputs['price_min'])
-                    newParams.set('price_min', filterInputs['price_min']);
-                if (filterInputs['price_max'])
-                    newParams.set('price_max', filterInputs['price_max']);
-            } else {
-                const value = filterInputs[key];
-                if (value) newParams.set(key, value);
-            }
-        });
+        if (category) newParams.set('category', category);
+        if (price) newParams.set('price', price);
+        if (priceMin) newParams.set('price_min', priceMin);
+        if (priceMax) newParams.set('price_max', priceMax);
 
         setSearchParams(newParams);
     };
 
-    const handleCheckboxChange = (key: string, checked: boolean) => {
-        setActiveFilters((prev) => ({ ...prev, [key]: checked }));
-    };
-
-    const handleInputChange = (key: string, value: string) => {
-        setFilterInputs((prev) => ({ ...prev, [key]: value }));
-    };
-
     return (
         <div>
-            <div className={s.inputWithButton}>
-                <Input
-                    value={searchValue}
-                    placeholder="Search product"
-                    onChange={(val) => setSearchValue(val)}
-                />
-                <Button onClick={handleSearchClick}>Find now</Button>
-            </div>
+            <div>
+                <div className={s.inputWithButton}>
+                    <Input
+                        value={searchValue}
+                        placeholder="Search product"
+                        onChange={(val) => setSearchValue(val)}
+                    />
+                    <Button onClick={handleSearchClick}>Find now</Button>
+                </div>
 
-            <div className={s.inputFilters}>
-                {FILTER_MAP.map(({ key, value }) => (
-                    <div key={key} className={s.inputFilters__item}>
-                        <label className={s.inputFilters__checkbox}>
-                            <CheckBox
-                                checked={activeFilters[key]}
-                                onChange={(e) => handleCheckboxChange(key, e)}
-                            />
-                            {value}
+                <div className={s.inputFilters}>
+                    <div className={s.inputFilters__item}>
+                        <label className={s.inputFilters__label}>
+                            Категория
                         </label>
-
-                        {key === 'price_range' ? (
-                            <div className={s.inputFilters__priceRange}>
-                                <Input
-                                    type="number"
-                                    value={filterInputs['price_min'] || ''}
-                                    placeholder="Минимальная цена"
-                                    onChange={(val) =>
-                                        handleInputChange('price_min', val)
-                                    }
-                                    disabled={!activeFilters[key]}
-                                />
-                                <Input
-                                    type="number"
-                                    value={filterInputs['price_max'] || ''}
-                                    placeholder="Максимальная цена"
-                                    onChange={(val) =>
-                                        handleInputChange('price_max', val)
-                                    }
-                                    disabled={!activeFilters[key]}
-                                />
-                            </div>
-                        ) : (
-                            <Input
-                                type="text"
-                                value={filterInputs[key] || ''}
-                                placeholder={value}
-                                onChange={(val) => handleInputChange(key, val)}
-                                disabled={!activeFilters[key]}
-                            />
-                        )}
+                        <Input
+                            type="text"
+                            value={category}
+                            placeholder="Категория"
+                            onChange={(val) => setCategory(val)}
+                        />
                     </div>
-                ))}
+
+                    <div className={s.inputFilters__item}>
+                        <label className={s.inputFilters__label}>
+                            Точная цена
+                        </label>
+                        <Input
+                            type="text"
+                            value={price}
+                            placeholder="Точная цена"
+                            onChange={(val) => setPrice(val)}
+                        />
+                    </div>
+
+                    <div className={s.inputFilters__item}>
+                        <label className={s.inputFilters__label}>
+                            Диапазон цен
+                        </label>
+                        <div className={s.inputFilters__priceRange}>
+                            <Input
+                                type="number"
+                                value={priceMin}
+                                placeholder="Минимальная цена"
+                                onChange={(val) => setPriceMin(val)}
+                            />
+                            <Input
+                                type="number"
+                                value={priceMax}
+                                placeholder="Максимальная цена"
+                                onChange={(val) => setPriceMax(val)}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className={s.totalProducts}>
+                    <Text
+                        tag="h2"
+                        weight="bold"
+                        className={s.totalProducts__title}
+                    >
+                        Total products
+                    </Text>
+                    <Text
+                        tag="span"
+                        weight="bold"
+                        view="p-20"
+                        className={s.totalProducts__subtitle}
+                    >
+                        {store.total}
+                    </Text>
+                </div>
             </div>
 
-            <div className={s.totalProducts}>
-                <Text tag="h2" weight="bold" className={s.totalProducts__title}>
-                    Total products
-                </Text>
-                <Text
-                    tag="span"
-                    weight="bold"
-                    view="p-20"
-                    className={s.totalProducts__subtitle}
-                >
-                    {store.data.length}
-                </Text>
-            </div>
+            <div></div>
         </div>
     );
 });

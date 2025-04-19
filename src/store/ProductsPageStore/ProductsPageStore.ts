@@ -1,4 +1,13 @@
-import { autorun, IReactionDisposer, reaction, runInAction } from 'mobx';
+import {
+    action,
+    autorun,
+    computed,
+    IReactionDisposer,
+    makeObservable,
+    observable,
+    reaction,
+    runInAction,
+} from 'mobx';
 import { ProductType } from '@/types/products';
 import { RootStore } from '@/store/RootStore';
 import { DataStore } from '@/store/DataStore';
@@ -14,7 +23,21 @@ interface LoadProps {
     limit?: string;
 }
 
-export default class ProductsPageStore extends DataStore<ProductType[]> {
+type PrivateFields = '_total';
+
+class ProductsStoreWithTotal extends DataStore<ProductType[]> {
+    protected _total: number | undefined;
+
+    get total() {
+        return this._total;
+    }
+
+    setTotal(total: number) {
+        this._total = total;
+    }
+}
+
+export default class ProductsPageStore extends ProductsStoreWithTotal {
     private readonly rootStore: RootStore;
     private readonly _searchReaction: IReactionDisposer;
 
@@ -22,6 +45,12 @@ export default class ProductsPageStore extends DataStore<ProductType[]> {
         super([]);
 
         this.rootStore = rootStore;
+
+        makeObservable<ProductsStoreWithTotal, PrivateFields>(this, {
+            _total: observable,
+            total: computed,
+            setTotal: action,
+        });
 
         this._searchReaction = reaction(
             () => [
@@ -55,8 +84,18 @@ export default class ProductsPageStore extends DataStore<ProductType[]> {
                     price_min: this.rootStore.query.getParam('price_min'),
                     price_max: this.rootStore.query.getParam('price_max'),
                 });
+
+                this.rootStore.apiClient
+                    .get<ProductType[]>('/products')
+                    .then((r) => {
+                        this.setTotal(r.data.length);
+                    });
             }
         });
+    }
+
+    setTotal(total: number) {
+        this._total = total;
     }
 
     get currentPage(): number {
@@ -76,6 +115,10 @@ export default class ProductsPageStore extends DataStore<ProductType[]> {
 
     get hasMore(): boolean {
         return this.data.length === this.limit;
+    }
+
+    get total(): number | undefined {
+        return this._total;
     }
 
     async load(params: LoadProps) {
