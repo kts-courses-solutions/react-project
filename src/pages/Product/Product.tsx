@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import s from './Product.module.scss';
 import { ProductPageStoreProvider } from '@/store/ProductPageStore';
 import { observer } from 'mobx-react-lite';
@@ -13,23 +13,22 @@ import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
 
 const ProductContent = observer(() => {
-    const paymentFormRef = useRef<HTMLDivElement>(null);
-
     const { productId } = useParams();
     const productNumber = productId ? Number(productId) : -1;
 
     const [buyNow, setBuyNow] = useState(false);
 
     const store = useProductPageStore();
+    const data = store.data;
 
     useEffect(() => {
         store.load(productNumber);
     }, [productNumber, store]);
 
     useEffect(() => {
-        if (store.data && buyNow) {
+        if (data && buyNow) {
             const checkout = new window.YooMoneyCheckoutWidget({
-                confirmation_token: 'ct-2f95814d-000f-5000-b000-1c036b66b80f',
+                confirmation_token: 'ct-2f95a644-000f-5000-b000-17d86e841ff9',
                 return_url: 'http://localhost:5173/#/products',
                 error_callback: function (error: Error) {
                     console.log(error);
@@ -42,13 +41,13 @@ const ProductContent = observer(() => {
                 checkout.destroy();
             };
         }
-    }, [store.data, buyNow]);
+    }, [data, buyNow]);
 
     if (store.meta === Meta.initial || store.meta === Meta.loading) {
         return <Loader />;
     }
 
-    if (!store.data) {
+    if (!data) {
         return <Text>Oups</Text>;
     }
 
@@ -57,10 +56,7 @@ const ProductContent = observer(() => {
             <BackButton />
 
             <div className={s.product}>
-                <ImagesCarousel
-                    images={store.data.images}
-                    alt={store.data.title}
-                />
+                <ImagesCarousel images={data.images} alt={data.title} />
 
                 <div className={s.productDesc}>
                     <div className={s.productDesc__text}>
@@ -69,7 +65,7 @@ const ProductContent = observer(() => {
                             weight="bold"
                             className={s.productDesc__title}
                         >
-                            {store.data.title}
+                            {data.title}
                         </Text>
                         <Text
                             tag="span"
@@ -77,7 +73,7 @@ const ProductContent = observer(() => {
                             view="p-20"
                             className={s.productDesc__subtitle}
                         >
-                            {store.data.description}
+                            {data.description}
                         </Text>
                     </div>
 
@@ -87,7 +83,7 @@ const ProductContent = observer(() => {
                             weight="bold"
                             className={s.productAction__title}
                         >
-                            ${store.data.price}
+                            ${data.price}
                         </Text>
                         {!buyNow ? (
                             <>
@@ -106,13 +102,13 @@ const ProductContent = observer(() => {
                                 </div>
                             </>
                         ) : (
-                            <div id="payment-form" ref={paymentFormRef}></div>
+                            <div id="payment-form"></div>
                         )}
                     </div>
                 </div>
             </div>
 
-            <Related product={store.data} />
+            <Related product={data} />
         </div>
     );
 });
