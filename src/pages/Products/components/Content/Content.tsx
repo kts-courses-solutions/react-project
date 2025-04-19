@@ -1,12 +1,12 @@
 import s from './Content.module.scss';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useProductsPageStore } from '@/store/ProductsPageStore';
 import { Meta } from '@/store/DataStore/types.ts';
 import { Text } from '@/components/ui/Text';
 import { Loader } from '@/components/ui/Loader';
 import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { PaymentDialog } from '@/components/shared/PaymentDialog';
 
 const Content = observer(() => {
     const [searchParams] = useSearchParams();
@@ -32,7 +32,6 @@ const Content = observer(() => {
     };
 
     if (store.meta === Meta.initial || store.meta === Meta.loading) {
-        console.log(store.meta);
         return <Loader />;
     }
 
@@ -40,30 +39,21 @@ const Content = observer(() => {
 
     return (
         <div className={s.productCards}>
-            {getContent().map((product) => (
-                <Link
-                    key={product.id}
-                    to={`/product/${product.id}`}
-                    className={s.productCards__card}
-                >
-                    <Card
-                        key={product.id}
-                        image={product.images[0]}
-                        title={product.title}
-                        subtitle={product.description}
-                        contentSlot={`$${product.price}`}
-                        actionSlot={
-                            <Button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    alert('Вы это купили! Поздравляю!');
-                                }}
-                            >
-                                Buy now
-                            </Button>
-                        }
-                    />
-                </Link>
+            {getContent().map((item) => (
+                <Card
+                    key={item.id}
+                    image={item.images[0]}
+                    title={item.title}
+                    subtitle={item.description}
+                    contentSlot={`$${item.price}`}
+                    actionSlot={
+                        <PaymentDialog
+                            price={item.price}
+                            description={item.title}
+                        />
+                    }
+                    link={`/product/${item.id}`}
+                />
             ))}
         </div>
     );

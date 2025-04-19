@@ -16,13 +16,6 @@ const Related = ({ product }: RelatedProps) => {
             </Text>
             <div className={s.related__cards}>
                 {product.related.slice(0, 3).map((item) => (
-                    // <Link
-                    //     key={item.id}
-                    //     to={`/product/${item.id}`}
-                    //     className={s.related__cards__card}
-                    // >
-                    //
-                    // </Link>
                     <Card
                         key={item.id}
                         image={item.images[0]}
