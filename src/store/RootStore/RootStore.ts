@@ -6,6 +6,9 @@ export default class RootStore {
     readonly apiClient = axios.create({
         baseURL: 'https://api.escuelajs.co/api/v1/',
     });
+    readonly paymentApiClient = axios.create({
+        baseURL: 'http://localhost:8000/',
+    });
 
     destroy() {}
 }

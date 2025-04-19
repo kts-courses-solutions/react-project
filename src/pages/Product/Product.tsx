@@ -11,9 +11,12 @@ import { ImagesCarousel } from './components/ImagesCarousel';
 import { Loader } from '@/components/ui/Loader';
 import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
+import useYooMoneyPayment from '@/hooks/useYooMoneyPayment.ts';
+import { YOOMONEY_CONTAINER_NAME } from '@/config/yoomoney';
 
 const ProductContent = observer(() => {
     const { productId } = useParams();
+    const { checkout } = useYooMoneyPayment();
     const productNumber = productId ? Number(productId) : -1;
 
     const [buyNow, setBuyNow] = useState(false);
@@ -27,19 +30,7 @@ const ProductContent = observer(() => {
 
     useEffect(() => {
         if (data && buyNow) {
-            const checkout = new window.YooMoneyCheckoutWidget({
-                confirmation_token: 'ct-2f95a644-000f-5000-b000-17d86e841ff9',
-                return_url: 'http://localhost:5173/#/products',
-                error_callback: function (error: Error) {
-                    console.log(error);
-                },
-            });
-
-            checkout.render('payment-form');
-
-            return () => {
-                checkout.destroy();
-            };
+            checkout(data.price, data.title);
         }
     }, [data, buyNow]);
 
@@ -102,7 +93,7 @@ const ProductContent = observer(() => {
                                 </div>
                             </>
                         ) : (
-                            <div id="payment-form"></div>
+                            <div id={YOOMONEY_CONTAINER_NAME}></div>
                         )}
                     </div>
                 </div>

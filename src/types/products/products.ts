@@ -2,7 +2,7 @@ export interface ProductType {
     id: null;
     title: string;
     slug: string;
-    price: null;
+    price: number;
     description: string;
     category: {
         id: number;
