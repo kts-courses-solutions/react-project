@@ -31,23 +31,27 @@ const ImagesCarousel = ({ images, alt }: ImagesCarouselProps) => {
 
     return (
         <div className={s.product__image__wrapper}>
-            <Button
-                className={s.product__image__btn__left}
-                onClick={handlerPrevImage}
-            >
-                <ArrowRightIcon color="white" />
-            </Button>
+            {images.length > 1 && (
+                <Button
+                    className={s.product__image__btn__left}
+                    onClick={handlerPrevImage}
+                >
+                    <ArrowRightIcon color="white" />
+                </Button>
+            )}
             <img
                 src={images[currentImage]}
                 alt={alt}
                 className={s.product__image__content}
             />
-            <Button
-                className={s.product__image__btn__right}
-                onClick={handlerNextImage}
-            >
-                <ArrowRightIcon color="white" />
-            </Button>
+            {images.length > 1 && (
+                <Button
+                    className={s.product__image__btn__right}
+                    onClick={handlerNextImage}
+                >
+                    <ArrowRightIcon color="white" />
+                </Button>
+            )}
         </div>
     );
 };
