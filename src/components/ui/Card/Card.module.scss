@@ -5,6 +5,7 @@
     flex-direction: column;
     background-color: $card-bg;
     width: 348px;
+    height: 100%;
 
     &:hover {
         box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
@@ -21,8 +22,10 @@
 
     &__data {
         padding: 24px 12px;
+        height: 100%;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
     }
 
     &__body {
