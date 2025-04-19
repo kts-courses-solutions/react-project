@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import s from './Product.module.scss';
 import { ProductPageStoreProvider } from '@/store/ProductPageStore';
 import { observer } from 'mobx-react-lite';
@@ -7,10 +7,10 @@ import { useProductPageStore } from '@/store/ProductPageStore';
 import { Meta } from '@/store/DataStore/types.ts';
 import { BackButton } from './components/BackButton';
 import { Related } from './components/Related';
+import { ImagesCarousel } from './components/ImagesCarousel';
 import { Loader } from '@/components/ui/Loader';
 import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
-import { ArrowRightIcon } from '@/components/ui/Icons/ArrowRightIcon';
 
 const ProductContent = observer(() => {
     const paymentFormRef = useRef<HTMLDivElement>(null);
@@ -19,7 +19,6 @@ const ProductContent = observer(() => {
     const productNumber = productId ? Number(productId) : -1;
 
     const [buyNow, setBuyNow] = useState(false);
-    const [currentImage, setCurrentImage] = useState(0);
 
     const store = useProductPageStore();
 
@@ -45,32 +44,6 @@ const ProductContent = observer(() => {
         }
     }, [store.data, buyNow]);
 
-    const handlerPrevImage = useCallback(() => {
-        if (!store.data) {
-            return;
-        }
-
-        if (currentImage === 0) {
-            setCurrentImage(store.data.images.length - 1);
-            return;
-        }
-
-        setCurrentImage(currentImage - 1);
-    }, [currentImage, store.data]);
-
-    const handlerNextImage = useCallback(() => {
-        if (!store.data) {
-            return;
-        }
-
-        if (currentImage === store.data.images.length - 1) {
-            setCurrentImage(0);
-            return;
-        }
-
-        setCurrentImage(currentImage + 1);
-    }, [currentImage, store.data]);
-
     if (store.meta === Meta.initial || store.meta === Meta.loading) {
         return <Loader />;
     }
@@ -84,25 +57,10 @@ const ProductContent = observer(() => {
             <BackButton />
 
             <div className={s.product}>
-                <div className={s.product__image__wrapper}>
-                    <Button
-                        className={s.product__image__btn__left}
-                        onClick={handlerPrevImage}
-                    >
-                        <ArrowRightIcon color="white" />
-                    </Button>
-                    <img
-                        src={store.data.images[currentImage]}
-                        alt={store.data.title}
-                        className={s.product__image__content}
-                    />
-                    <Button
-                        className={s.product__image__btn__right}
-                        onClick={handlerNextImage}
-                    >
-                        <ArrowRightIcon color="white" />
-                    </Button>
-                </div>
+                <ImagesCarousel
+                    images={store.data.images}
+                    alt={store.data.title}
+                />
 
                 <div className={s.productDesc}>
                     <div className={s.productDesc__text}>
