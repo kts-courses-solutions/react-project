@@ -23,10 +23,11 @@ interface LoadProps {
     limit?: string;
 }
 
-type PrivateFields = '_total';
+type PrivateFields = '_total' | '_sort';
 
 class ProductsStoreWithTotal extends DataStore<ProductType[]> {
     protected _total: number | undefined;
+    protected _sort: string | undefined;
 
     get total() {
         return this._total;
@@ -34,6 +35,14 @@ class ProductsStoreWithTotal extends DataStore<ProductType[]> {
 
     setTotal(total: number) {
         this._total = total;
+    }
+
+    get sort() {
+        return this._sort;
+    }
+
+    setSort(total: string) {
+        this._sort = total;
     }
 }
 
@@ -48,8 +57,11 @@ export default class ProductsPageStore extends ProductsStoreWithTotal {
 
         makeObservable<ProductsStoreWithTotal, PrivateFields>(this, {
             _total: observable,
+            _sort: observable,
             total: computed,
+            sort: computed,
             setTotal: action,
+            setSort: action,
         });
 
         this._searchReaction = reaction(
