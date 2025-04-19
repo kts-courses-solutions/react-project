@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import s from './Product.module.scss';
 import { ProductPageStoreProvider } from '@/store/ProductPageStore';
 import { observer } from 'mobx-react-lite';
@@ -13,9 +13,12 @@ import { Button } from '@/components/ui/Button';
 import { ArrowRightIcon } from '@/components/ui/Icons/ArrowRightIcon';
 
 const ProductContent = observer(() => {
+    const paymentFormRef = useRef<HTMLDivElement>(null);
+
     const { productId } = useParams();
     const productNumber = productId ? Number(productId) : -1;
 
+    const [buyNow, setBuyNow] = useState(false);
     const [currentImage, setCurrentImage] = useState(0);
 
     const store = useProductPageStore();
@@ -23,6 +26,24 @@ const ProductContent = observer(() => {
     useEffect(() => {
         store.load(productNumber);
     }, [productNumber, store]);
+
+    useEffect(() => {
+        if (store.data && buyNow) {
+            const checkout = new window.YooMoneyCheckoutWidget({
+                confirmation_token: 'ct-2f95814d-000f-5000-b000-1c036b66b80f',
+                return_url: 'http://localhost:5173/#/products',
+                error_callback: function (error: Error) {
+                    console.log(error);
+                },
+            });
+
+            checkout.render('payment-form');
+
+            return () => {
+                checkout.destroy();
+            };
+        }
+    }, [store.data, buyNow]);
 
     const handlerPrevImage = useCallback(() => {
         if (!store.data) {
@@ -110,14 +131,25 @@ const ProductContent = observer(() => {
                         >
                             ${store.data.price}
                         </Text>
-                        <div className={s.productAction__btn}>
-                            <Button className={s.productAction__btn__buy}>
-                                Buy now
-                            </Button>
-                            <Button className={s.productAction__btn__cart}>
-                                Add to cart
-                            </Button>
-                        </div>
+                        {!buyNow ? (
+                            <>
+                                <div className={s.productAction__btn}>
+                                    <Button
+                                        className={s.productAction__btn__buy}
+                                        onClick={() => setBuyNow(true)}
+                                    >
+                                        Buy now
+                                    </Button>
+                                    <Button
+                                        className={s.productAction__btn__cart}
+                                    >
+                                        Add to cart
+                                    </Button>
+                                </div>
+                            </>
+                        ) : (
+                            <div id="payment-form" ref={paymentFormRef}></div>
+                        )}
                     </div>
                 </div>
             </div>
