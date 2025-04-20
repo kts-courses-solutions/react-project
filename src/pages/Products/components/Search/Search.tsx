@@ -102,9 +102,9 @@ const Search = observer(() => {
             </div>
 
             <div className={s.searchFilters}>
-                <div className={s.inputFilters}>
-                    <div className={s.inputFilters__item}>
-                        <label className={s.inputFilters__label}>
+                <div className={s.searchFilters__input}>
+                    <div className={s.searchFilters__input__item}>
+                        <label className={s.searchFilters__input__item__label}>
                             Точная цена
                         </label>
                         <Input
@@ -115,11 +115,13 @@ const Search = observer(() => {
                         />
                     </div>
 
-                    <div className={s.inputFilters__item}>
-                        <label className={s.inputFilters__label}>
+                    <div className={s.searchFilters__input__item}>
+                        <label className={s.searchFilters__input__item__label}>
                             Диапазон цен
                         </label>
-                        <div className={s.inputFilters__priceRange}>
+                        <div
+                            className={s.searchFilters__input__item__priceRange}
+                        >
                             <Input
                                 type="number"
                                 value={priceMin}
@@ -136,9 +138,11 @@ const Search = observer(() => {
                     </div>
                 </div>
 
-                <div className={s.dropdownFilters}>
-                    <div className={s.inputFilters__item}>
-                        <label className={s.inputFilters__label}>
+                <div className={s.searchFilters__dropdown}>
+                    <div className={s.searchFilters__dropdown__item}>
+                        <label
+                            className={s.searchFilters__dropdown__item__label}
+                        >
                             Категория
                         </label>
                         <MultiDropdown
@@ -157,8 +161,10 @@ const Search = observer(() => {
                         />
                     </div>
 
-                    <div className={s.inputFilters__item}>
-                        <label className={s.inputFilters__label}>
+                    <div className={s.searchFilters__dropdown__item}>
+                        <label
+                            className={s.searchFilters__dropdown__item__label}
+                        >
                             Сортировка
                         </label>
                         <MultiDropdown
