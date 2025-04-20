@@ -5,7 +5,7 @@ import { useProductsPageStore } from '@/store/ProductsPageStore';
 import { Meta } from '@/store/DataStore/types.ts';
 import { Loader } from '@/components/ui/Loader';
 import { Card } from '@/components/ui/Card';
-import { PaymentDialog } from '@/components/shared/PaymentDialog';
+import { PaymentModal } from '@/components/shared/PaymentModal';
 
 const Content = observer(() => {
     const [searchParams] = useSearchParams();
@@ -46,7 +46,7 @@ const Content = observer(() => {
                     subtitle={item.description}
                     contentSlot={`$${item.price}`}
                     actionSlot={
-                        <PaymentDialog
+                        <PaymentModal
                             price={item.price}
                             description={item.title}
                         />

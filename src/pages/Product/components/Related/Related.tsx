@@ -2,7 +2,7 @@ import s from './Related.module.scss';
 import { ProductWithRelatedType } from '@/types/products';
 import { Text } from '@/components/ui/Text';
 import { Card } from '@/components/ui/Card';
-import { PaymentDialog } from '@/components/shared/PaymentDialog';
+import { PaymentModal } from '@/components/shared/PaymentModal';
 
 interface RelatedProps {
     product: ProductWithRelatedType;
@@ -23,7 +23,7 @@ const Related = ({ product }: RelatedProps) => {
                         subtitle={item.description}
                         contentSlot={`$${item.price}`}
                         actionSlot={
-                            <PaymentDialog
+                            <PaymentModal
                                 price={item.price}
                                 description={item.title}
                             />

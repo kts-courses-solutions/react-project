@@ -11,7 +11,7 @@ import { ImagesCarousel } from './components/ImagesCarousel';
 import { Loader } from '@/components/ui/Loader';
 import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
-import { PaymentDialog } from '@/components/shared/PaymentDialog';
+import { PaymentModal } from '@/components/shared/PaymentModal';
 
 const ProductContent = observer(() => {
     const { productId } = useParams();
@@ -68,7 +68,7 @@ const ProductContent = observer(() => {
                             ${data.price}
                         </Text>
                         <div className={s.productAction__btn}>
-                            <PaymentDialog
+                            <PaymentModal
                                 price={data.price}
                                 description={data.title}
                             />

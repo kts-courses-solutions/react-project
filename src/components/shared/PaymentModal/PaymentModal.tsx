@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { YOOMONEY_CONTAINER_NAME } from '@/config/yoomoney.ts';
-import useYooMoneyPayment from '@/hooks/useYooMoneyPayment.ts';
+import { YOOMONEY_CONTAINER_NAME } from '@/config/yoomoney';
+import useYooMoneyPayment from '@/hooks/useYooMoneyPayment';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { Loader } from '@/components/ui/Loader';
+import s from './PaymentModal.module.scss';
 
 interface PaymentDialogProps {
     price: number;
     description: string;
 }
 
-const PaymentDialog = ({ price, description }: PaymentDialogProps) => {
+const PaymentModal = ({ price, description }: PaymentDialogProps) => {
     const paymentFormRef = useRef<HTMLDivElement>(null);
 
     const { checkout, initialLoading } = useYooMoneyPayment(paymentFormRef);
@@ -40,15 +41,22 @@ const PaymentDialog = ({ price, description }: PaymentDialogProps) => {
                     e.stopPropagation();
                 }}
             >
-                {initialLoading && <Loader />}
-                <div
-                    id={YOOMONEY_CONTAINER_NAME}
-                    ref={paymentFormRef}
-                    style={{ width: '100%', height: '100%' }}
-                />
+                {initialLoading && (
+                    <div className={s.paymentModal__loader}>
+                        <Loader />
+                        {process.env.NODE_ENV === 'production' && (
+                            <span>
+                                Please, wait a bit... I am using free hosting
+                                for backend and it may be VERY slow.. If there
+                                is no error, then it is still loading.
+                            </span>
+                        )}
+                    </div>
+                )}
+                <div id={YOOMONEY_CONTAINER_NAME} ref={paymentFormRef} />
             </Modal>
         </>
     );
 };
 
-export default PaymentDialog;
+export default PaymentModal;
