@@ -99,12 +99,6 @@ export default class ProductsPageStore extends ProductsStoreWithTotal {
                     price_min: this.rootStore.query.getParam('price_min'),
                     price_max: this.rootStore.query.getParam('price_max'),
                 });
-
-                this.rootStore.apiClient
-                    .get<ProductType[]>('/products')
-                    .then((r) => {
-                        this.setTotal(r.data.length);
-                    });
             }
         });
     }
@@ -153,6 +147,17 @@ export default class ProductsPageStore extends ProductsStoreWithTotal {
                     this.setMeta(Meta.error);
                     this.notify();
                 });
+            });
+        const newParams = { ...params };
+        delete newParams['limit'];
+        delete newParams['offset'];
+
+        this.rootStore.apiClient
+            .get<ProductType[]>('/products', {
+                params: newParams,
+            })
+            .then((r) => {
+                this.setTotal(r.data.length);
             });
     }
 
