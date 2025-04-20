@@ -1,15 +1,11 @@
 import s from '@/pages/Product/Product.module.scss';
-import { Link, useNavigate } from 'react-router-dom';
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRightIcon } from '@/components/ui/Icons/ArrowRightIcon';
 
 const BackButton = () => {
     const navigate = useNavigate();
 
-    const handleCLick = (
-        e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    ) => {
-        e.preventDefault();
+    const handleClick = () => {
         if (window.history.length > 2) {
             navigate(-1);
         } else {
@@ -18,10 +14,10 @@ const BackButton = () => {
     };
 
     return (
-        <Link to="/products" onClick={handleCLick} className={s.back}>
+        <button onClick={handleClick} className={s.back}>
             <ArrowRightIcon />
             Back
-        </Link>
+        </button>
     );
 };
 
