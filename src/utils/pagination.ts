@@ -1,4 +1,6 @@
 export interface PaginationInfo {
+    offset: number;
+    limit: number;
     currentPage: number;
     totalPages: number;
     hasNextPage: boolean;
@@ -8,11 +10,12 @@ export interface PaginationInfo {
 
 export default function getPagination(
     totalItems: number,
-    itemsPerPage: number = 9,
-    currentPage: number = 1,
+    offset: number = 0,
+    limit: number = 9,
     maxVisiblePages: number = 5,
 ): PaginationInfo {
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const totalPages = Math.ceil(totalItems / limit);
+    let currentPage = Math.floor(offset / limit) + 1;
 
     if (currentPage < 1) {
         currentPage = 1;
@@ -36,6 +39,7 @@ export default function getPagination(
         if (startPage > 2) {
             visiblePages.push(null); // "..."
         }
+
         let endPage = Math.min(totalPages - 1, currentPage + sidePages);
 
         if (currentPage - sidePages < 2) {
@@ -60,6 +64,8 @@ export default function getPagination(
     }
 
     return {
+        offset,
+        limit,
         currentPage,
         totalPages,
         hasNextPage,

@@ -1,31 +1,45 @@
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
-import s from './Pagination.module.scss';
-import { observer } from 'mobx-react-lite';
-import { useProductsPageStore } from '@/store/ProductsPageStore';
+import { memo } from 'react';
+import s from './pagination.module.scss';
 import { ArrowRightIcon } from '@/components/ui/Icons/ArrowRightIcon';
+import { useProductsPageStore } from '@/store/ProductsPageStore';
+import { observer } from 'mobx-react-lite';
 
 const Pagination = observer(() => {
     const store = useProductsPageStore();
-    const [searchParams] = useSearchParams();
+    const pagination = store.pagination;
 
-    const limit = store.limit;
-    const offset = store.offset;
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
 
-    const createOffsetLink = (newOffset: number) => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set('offset', newOffset.toString());
-        params.set('limit', limit.toString());
-        return `/products?${params.toString()}`;
+    const buildLink = (page: number) => {
+        if (pagination) {
+            const params = new URLSearchParams(searchParams.toString());
+
+            // Remove old offset and limit
+            params.delete('offset');
+            params.delete('limit');
+
+            const offset = (page - 1) * pagination.limit;
+            const limit = pagination.limit;
+
+            params.set('offset', offset.toString());
+            params.set('limit', limit.toString());
+
+            return `/products?${params.toString()}`;
+        }
+
+        return '';
     };
 
-    const currentPage = Math.floor(offset / limit) + 1;
+    if (!pagination) return;
 
     return (
         <div className={s.pagination}>
-            {offset >= limit ? (
+            {pagination.hasPrevPage ? (
                 <Link
-                    to={createOffsetLink(offset - limit)}
+                    to={buildLink(pagination.currentPage - 1)}
                     className={s.pagination__arrowLeft}
                 >
                     <ArrowRightIcon />
@@ -36,13 +50,32 @@ const Pagination = observer(() => {
                 </div>
             )}
 
-            <div className={clsx(s.pagination__btn, s.pagination__btn_active)}>
-                {currentPage}
-            </div>
+            {pagination.visiblePages.map((page, index) =>
+                page === null ? (
+                    <div
+                        key={`ellipsis-${index}`}
+                        className={s.pagination__btn}
+                    >
+                        ...
+                    </div>
+                ) : (
+                    <Link
+                        key={`page-${page}`}
+                        to={buildLink(page)}
+                        className={clsx(
+                            s.pagination__btn,
+                            page === pagination.currentPage &&
+                                s.pagination__btn_active,
+                        )}
+                    >
+                        {page}
+                    </Link>
+                ),
+            )}
 
-            {store.hasMore ? (
+            {pagination.hasNextPage ? (
                 <Link
-                    to={createOffsetLink(offset + limit)}
+                    to={buildLink(pagination.currentPage + 1)}
                     className={s.pagination__arrowRight}
                 >
                     <ArrowRightIcon />
@@ -56,4 +89,4 @@ const Pagination = observer(() => {
     );
 });
 
-export default Pagination;
+export default memo(Pagination);

@@ -13,6 +13,7 @@ import { RootStore } from '@/store/RootStore';
 import { DataStore } from '@/store/DataStore';
 import { Meta } from '@/store/DataStore/types.ts';
 import { toast } from 'react-toastify';
+import getPagination from '../../utils/pagination.ts';
 
 interface LoadProps {
     title?: string;
@@ -34,7 +35,7 @@ class ProductsStoreWithTotal extends DataStore<ProductType[]> {
         return this._total;
     }
 
-    setTotal(total: number) {
+    setTotal(total: number | undefined) {
         this._total = total;
     }
 
@@ -103,7 +104,7 @@ export default class ProductsPageStore extends ProductsStoreWithTotal {
         });
     }
 
-    setTotal(total: number) {
+    setTotal(total: number | undefined) {
         this._total = total;
     }
 
@@ -130,8 +131,17 @@ export default class ProductsPageStore extends ProductsStoreWithTotal {
         return this._total;
     }
 
+    get pagination() {
+        if (this.total) {
+            return getPagination(this.total, this.offset, this.limit, 5);
+        }
+    }
+
     async load(params: LoadProps) {
-        this.setMeta(Meta.loading);
+        runInAction(() => {
+            this.setMeta(Meta.loading);
+            this.setTotal(undefined);
+        });
         this.rootStore.apiClient
             .get<ProductType[]>('/products', {
                 params: params,
@@ -157,7 +167,9 @@ export default class ProductsPageStore extends ProductsStoreWithTotal {
                 params: newParams,
             })
             .then((r) => {
-                this.setTotal(r.data.length);
+                runInAction(() => {
+                    this.setTotal(r.data.length);
+                });
             });
     }
 

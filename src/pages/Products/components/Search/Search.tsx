@@ -189,7 +189,7 @@ const Search = observer(() => {
                     view="p-20"
                     className={s.totalProducts__subtitle}
                 >
-                    {store.total}
+                    {store.total ?? '...'}
                 </Text>
             </div>
         </>
