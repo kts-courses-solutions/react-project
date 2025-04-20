@@ -69,11 +69,6 @@ export default class ProductsPageStore extends ProductsStoreWithTotal {
         this._total = total;
     }
 
-    get currentPage(): number {
-        const pageParam = this.rootStore.query.getParam('page');
-        return pageParam ? Number(pageParam) : 1;
-    }
-
     get offset(): number {
         const offset = Number(this.rootStore.query.getParam('offset'));
         return !isNaN(offset) && offset >= 0 ? offset : 0;

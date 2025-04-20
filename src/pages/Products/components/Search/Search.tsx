@@ -9,18 +9,18 @@ import { Button } from '@/components/ui/Button';
 import { MultiDropdown, Option } from '@/components/ui/MultiDropdown';
 import useCategoriesStore from '@/store/CategoriesStore/context/CategoriesStoreContext';
 
-const NO_CATEGORY_OPTION: Option = { key: 'no', value: 'Без категории' };
-const NO_SORT_OPTION: Option = { key: 'no', value: 'Без сортировки' };
+const NO_CATEGORY_OPTION: Option = { key: 'no', value: 'No category' };
+const NO_SORT_OPTION: Option = { key: 'no', value: 'No sort' };
 
 const SORT_MAP = [
     NO_SORT_OPTION,
     {
         key: 'name',
-        value: 'По имени',
+        value: 'By name',
     },
     {
         key: 'price',
-        value: 'По цене',
+        value: 'By price',
     },
 ];
 
@@ -117,19 +117,19 @@ const Search = observer(() => {
                 <div className={s.searchFilters__input}>
                     <div className={s.searchFilters__input__item}>
                         <label className={s.searchFilters__input__item__label}>
-                            Точная цена
+                            Exact price
                         </label>
                         <Input
                             type="text"
                             value={price}
-                            placeholder="Точная цена"
+                            placeholder="Exact price"
                             onChange={(val) => setPrice(val)}
                         />
                     </div>
 
                     <div className={s.searchFilters__input__item}>
                         <label className={s.searchFilters__input__item__label}>
-                            Диапазон цен
+                            Price range
                         </label>
                         <div
                             className={s.searchFilters__input__item__priceRange}
@@ -137,13 +137,13 @@ const Search = observer(() => {
                             <Input
                                 type="number"
                                 value={priceMin}
-                                placeholder="Минимальная цена"
+                                placeholder="Minimum price"
                                 onChange={(val) => setPriceMin(val)}
                             />
                             <Input
                                 type="number"
                                 value={priceMax}
-                                placeholder="Максимальная цена"
+                                placeholder="Maximum price"
                                 onChange={(val) => setPriceMax(val)}
                             />
                         </div>
@@ -155,7 +155,7 @@ const Search = observer(() => {
                         <label
                             className={s.searchFilters__dropdown__item__label}
                         >
-                            Категория
+                            Category
                         </label>
                         <MultiDropdown
                             options={categoriesOptions}
@@ -177,7 +177,7 @@ const Search = observer(() => {
                         <label
                             className={s.searchFilters__dropdown__item__label}
                         >
-                            Сортировка
+                            Sort
                         </label>
                         <MultiDropdown
                             options={SORT_MAP}
