@@ -3,6 +3,7 @@ import { Search } from './components/Search';
 import { Content } from './components/Content';
 import { Pagination } from './components/Pagination';
 import { Headline } from '@/components/shared/Headline';
+import CategoriesStoreProvider from '@/store/CategoriesStore/context/CategoriesStoreProvider.tsx';
 
 const Products = () => (
     <ProductsPageStoreProvider>
@@ -11,7 +12,9 @@ const Products = () => (
             subtitle="We display products based on the latest products we have, if you
                 want to see our old products please enter the name of the item"
         />
-        <Search />
+        <CategoriesStoreProvider>
+            <Search />
+        </CategoriesStoreProvider>
         <Content />
         <Pagination />
     </ProductsPageStoreProvider>
