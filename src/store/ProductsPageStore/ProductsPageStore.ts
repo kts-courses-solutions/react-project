@@ -1,11 +1,8 @@
 import {
     action,
-    autorun,
     computed,
-    IReactionDisposer,
     makeObservable,
     observable,
-    reaction,
     runInAction,
 } from 'mobx';
 import { ProductType } from '@/types/products';
@@ -50,7 +47,6 @@ class ProductsStoreWithTotal extends DataStore<ProductType[]> {
 
 export default class ProductsPageStore extends ProductsStoreWithTotal {
     private readonly rootStore: RootStore;
-    private readonly _searchReaction: IReactionDisposer;
     private notify = () =>
         toast.error('There was a problem in getting products...');
 
@@ -66,41 +62,6 @@ export default class ProductsPageStore extends ProductsStoreWithTotal {
             sort: computed,
             setTotal: action,
             setSort: action,
-        });
-
-        this._searchReaction = reaction(
-            () => [
-                this.rootStore.query.getParam('title'),
-                this.rootStore.query.getParam('category'),
-                this.rootStore.query.getParam('price'),
-                this.rootStore.query.getParam('price_min'),
-                this.rootStore.query.getParam('price_max'),
-            ],
-            ([title, category, price, price_min, price_max]) => {
-                this.load({
-                    offset: this.offset.toString(),
-                    limit: this.limit.toString(),
-                    price_min: price_min,
-                    price_max: price_max,
-                    price: price,
-                    categoryId: category,
-                    title: title,
-                });
-            },
-        );
-
-        autorun(() => {
-            if (this.meta === Meta.initial) {
-                this.load({
-                    offset: ((this.currentPage - 1) * this.limit).toString(),
-                    limit: this.limit.toString(),
-                    title: this.rootStore.query.getParam('title'),
-                    categoryId: this.rootStore.query.getParam('category'),
-                    price: this.rootStore.query.getParam('price'),
-                    price_min: this.rootStore.query.getParam('price_min'),
-                    price_max: this.rootStore.query.getParam('price_max'),
-                });
-            }
         });
     }
 
@@ -121,10 +82,6 @@ export default class ProductsPageStore extends ProductsStoreWithTotal {
     get limit(): number {
         const limit = Number(this.rootStore.query.getParam('limit'));
         return !isNaN(limit) && limit > 0 ? limit : 9;
-    }
-
-    get hasMore(): boolean {
-        return this.data.length === this.limit;
     }
 
     get total(): number | undefined {
@@ -173,7 +130,5 @@ export default class ProductsPageStore extends ProductsStoreWithTotal {
             });
     }
 
-    destroy() {
-        this._searchReaction?.();
-    }
+    destroy() {}
 }

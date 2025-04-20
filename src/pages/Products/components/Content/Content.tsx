@@ -6,22 +6,47 @@ import { Meta } from '@/store/DataStore/types.ts';
 import { Loader } from '@/components/ui/Loader';
 import { Card } from '@/components/ui/Card';
 import { PaymentModal } from '@/components/shared/PaymentModal';
+import { useEffect, useMemo } from 'react';
 
 const Content = observer(() => {
     const [searchParams] = useSearchParams();
-    const page = searchParams.get('page');
-    const pageNumber = page ? Number(page) : 1;
+    const title = searchParams.get('title') || undefined;
+    const categoryId = searchParams.get('category') || undefined;
+    const price = searchParams.get('price') || undefined;
+    const price_min = searchParams.get('price_min') || undefined;
+    const price_max = searchParams.get('price_max') || undefined;
 
     const store = useProductsPageStore();
 
+    const loadParams = useMemo(() => {
+        return {
+            offset: store.offset.toString(),
+            limit: store.limit.toString(),
+            title,
+            categoryId,
+            price,
+            price_min,
+            price_max,
+        };
+    }, [
+        store.offset,
+        store.limit,
+        title,
+        categoryId,
+        price,
+        price_min,
+        price_max,
+    ]);
+
+    useEffect(() => {
+        store.load(loadParams);
+    }, [store, loadParams]);
+
     const getContent = () => {
-        const newData = [...store.data].slice(
-            (pageNumber - 1) * 9,
-            (pageNumber - 1) * 9 + 9,
-        );
-        if (store.sort === 'name')
+        const newData = [...store.data];
+        if (searchParams.get('sort') === 'name')
             return newData.sort((a, b) => a.title.localeCompare(b.title));
-        if (store.sort === 'price')
+        if (searchParams.get('sort') === 'price')
             return newData.sort(
                 (a, b) => (a.price ? a.price : 0) - (b.price ? b.price : 0),
             );

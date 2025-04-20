@@ -44,7 +44,11 @@ const Search = observer(() => {
     const [priceMax, setPriceMax] = useState(
         searchParams.get('price_max') || '',
     );
-    const [sort, setSort] = useState<Option>(SORT_MAP[0]);
+    const [sort, setSort] = useState<Option>(() => {
+        const sortParam = searchParams.get('sort');
+        const found = SORT_MAP.find((s) => s.key === sortParam);
+        return found ?? SORT_MAP[0];
+    });
 
     useEffect(() => {
         categoriesStore.load();
@@ -82,8 +86,16 @@ const Search = observer(() => {
     };
 
     const handleSortChange = (option: Option[]) => {
-        setSort(option[1]);
-        store.setSort(option[1].key);
+        const selected = option[1];
+        setSort(selected);
+
+        const newParams = new URLSearchParams(searchParams);
+        if (selected.key === 'no') {
+            newParams.delete('sort');
+        } else {
+            newParams.set('sort', selected.key);
+        }
+        setSearchParams(newParams);
     };
 
     const handleCategoryChange = (option: Option[]) => {
