@@ -6,6 +6,10 @@ declare global {
             error_callback?: (error: Error) => void;
         }) => {
             render: (containerId: string) => void;
+            on: (
+                event: 'complete' | 'success' | 'fail',
+                callback: () => void,
+            ) => void;
             destroy: () => void;
         };
     }

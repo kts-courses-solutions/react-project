@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { YOOMONEY_CONTAINER_NAME } from '@/config/yoomoney';
 import useYooMoneyPayment from '@/hooks/useYooMoneyPayment';
 import { Button } from '@/components/ui/Button';
@@ -17,18 +17,13 @@ const PaymentModal = ({ price, description }: PaymentDialogProps) => {
     const { checkout, initialLoading } = useYooMoneyPayment(paymentFormRef);
     const [open, setOpen] = useState(false);
 
-    useEffect(() => {
-        if (open) {
-            checkout(price, description);
-        }
-    }, [price, description, open]);
-
     return (
         <>
             <Button
                 onClick={(e) => {
                     setOpen(true);
                     e.preventDefault();
+                    checkout(price, description);
                 }}
             >
                 Buy now

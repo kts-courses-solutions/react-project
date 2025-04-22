@@ -8,14 +8,15 @@ import {
 } from '@/config/yoomoney';
 import { toast } from 'react-toastify';
 
+const notify = () =>
+    toast.error(
+        'There was a problem in communication with the payment backend...',
+    );
+
 const useYooMoneyPayment = (
     paymentFormRef: RefObject<HTMLDivElement | null>,
 ) => {
     const rootStore = useRootStore();
-    const notify = () =>
-        toast.error(
-            'There was a problem in communication with the payment backend...',
-        );
 
     const [token, setToken] = useState<string | null>(null);
     const [initialLoading, setInitialLoading] = useState<boolean | null>(null);
@@ -44,6 +45,11 @@ const useYooMoneyPayment = (
                 error_callback: function (error: Error) {
                     console.log(error);
                 },
+            });
+
+            checkout.on('success', () => {
+                // TODO: create order at API if authorized
+                checkout.destroy();
             });
 
             const refCurrent = paymentFormRef?.current;
