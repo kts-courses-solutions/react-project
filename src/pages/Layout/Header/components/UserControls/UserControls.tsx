@@ -13,7 +13,7 @@ const UserControls = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/profile">
+                    <Link to="/user">
                         <UserIcon />
                     </Link>
                 </li>
