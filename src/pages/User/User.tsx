@@ -12,7 +12,7 @@ const UserContent = () => {
 
     useEffect(() => {
         if (!user) {
-            navigate('/');
+            navigate('/login');
             return;
         }
     }, [user]);
