@@ -10,7 +10,6 @@ import { Related } from './components/Related';
 import { ImagesCarousel } from './components/ImagesCarousel';
 import { Loader } from '@/components/ui/Loader';
 import { Text } from '@/components/ui/Text';
-import { Button } from '@/components/ui/Button';
 import { PaymentModal } from '@/components/shared/PaymentModal';
 
 const ProductContent = observer(() => {
@@ -72,10 +71,6 @@ const ProductContent = observer(() => {
                                 price={data.price}
                                 description={data.title}
                             />
-
-                            <Button className={s.productAction__btn__cart}>
-                                Add to cart
-                            </Button>
                         </div>
                     </div>
                 </div>
