@@ -1,0 +1,37 @@
+@use '@/styles/variables' as *;
+
+.icon_fill {
+    &_primary path {
+        color: $text-primary;
+    }
+
+    &_secondary path {
+        color: $text-secondary;
+    }
+
+    &_accent path {
+        color: $text-accent;
+    }
+
+    &_white path {
+        color: white;
+    }
+}
+
+.icon_stroke {
+    &_primary path {
+        stroke: $text-primary;
+    }
+
+    &_secondary path {
+        stroke: $text-secondary;
+    }
+
+    &_accent path {
+        stroke: $text-accent;
+    }
+
+    &_white path {
+        stroke: white;
+    }
+}

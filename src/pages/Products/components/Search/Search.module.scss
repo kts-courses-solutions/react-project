@@ -1,0 +1,75 @@
+@use '@/styles/variables' as *;
+
+.inputWithButton {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+
+    button {
+        white-space: nowrap;
+    }
+}
+
+.searchFilters {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 24px;
+    margin-bottom: 32px;
+
+    &__input,
+    &__dropdown {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: #fff;
+        border: 1px solid $input-placeholder;
+        padding: 24px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+        &__item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            &__label {
+                font-weight: 500;
+                font-size: 14px;
+                color: $text-primary;
+            }
+
+            &__priceRange {
+                display: flex;
+                gap: 12px;
+
+                input {
+                    flex: 1;
+                }
+            }
+        }
+    }
+}
+
+.totalProducts {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 24px;
+    background-color: #f9fafb;
+
+    &__title {
+        font-size: 28px;
+        line-height: 32px;
+        font-weight: 700;
+        color: $text-primary;
+    }
+
+    &__subtitle {
+        font-size: 20px;
+        font-weight: 600;
+        color: $text-accent;
+    }
+}
